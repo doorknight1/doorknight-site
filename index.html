@@ -169,7 +169,7 @@ section{padding-block:80px;border-top:1px solid var(--line)}
 .worlds{background:var(--night-2)}
 .corridor{display:flex;gap:14px;overflow-x:auto;padding-bottom:16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .corridor::-webkit-scrollbar{height:6px}.corridor::-webkit-scrollbar-thumb{background:var(--night-3);border-radius:3px}
-.world{flex:0 0 260px;scroll-snap-align:start;border-radius:18px;padding:22px 18px 18px;min-height:240px;display:grid;align-content:end;gap:6px;position:relative;overflow:hidden;border:1px solid var(--line);color:#fff;background:#0d0b1c var(--img) center 35%/cover no-repeat;box-shadow:0 14px 34px -12px rgba(0,0,0,.6)}
+.world{flex:0 0 260px;scroll-snap-align:start;border-radius:18px;padding:22px 18px 18px;min-height:270px;display:grid;align-content:end;gap:6px;position:relative;overflow:hidden;border:1px solid var(--line);color:#fff;background:#0d0b1c var(--img) center 35%/cover no-repeat;box-shadow:0 14px 34px -12px rgba(0,0,0,.6)}
 .world::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,18,0) 30%,rgba(8,6,18,.82))}
 .world h3,.world .n,.world p{text-shadow:0 2px 8px rgba(0,0,0,.7)}
 .world > *{position:relative}
@@ -413,6 +413,50 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
   .sec-head h2::after{transition:none}
 }
 
+/* monstres animés (planches de 8 images dessinées par le jeu) */
+.mon{display:block;width:var(--s,64px);aspect-ratio:1;background:var(--m) 0 0/800% 100% no-repeat;animation:monWalk .9s steps(8) infinite}
+@keyframes monWalk{to{background-position:114.2857% 0}}
+/* mondes : gardien et monstres */
+.world > img.wboss{position:absolute;top:14px;right:14px;width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid var(--gold);box-shadow:0 0 0 3px rgba(13,11,28,.55),0 8px 22px rgba(0,0,0,.6);z-index:1;transition:transform .3s}
+.world:hover > img.wboss{transform:scale(1.08) rotate(-4deg)}
+.world .wmons{display:flex;gap:0;margin:0 0 2px -6px}
+.world .wmons .mon{--s:60px;filter:drop-shadow(0 4px 6px rgba(0,0,0,.55))}
+.world .wmons .mon:nth-child(2){animation-delay:-.3s}.world .wmons .mon:nth-child(3){animation-delay:-.6s}
+/* gardiens */
+.g-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:14px}
+@media(max-width:1000px){.g-grid{grid-template-columns:repeat(3,1fr)}}
+@media(max-width:620px){.g-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+.gcard{position:relative;border-radius:18px;overflow:hidden;border:1px solid var(--line);background:var(--night-2);transition:transform .25s,box-shadow .25s,border-color .25s;min-width:0}
+.gcard:hover{transform:translateY(-5px);border-color:rgba(240,196,90,.5);box-shadow:0 18px 40px -12px rgba(240,196,90,.3)}
+.gport{position:relative;aspect-ratio:1;overflow:hidden;background:#000}
+.gport img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .6s}
+.gcard:hover .gport img{transform:scale(1.08)}
+.gdoor{position:absolute;left:10px;top:10px;font:700 .66rem/1 var(--font-display);letter-spacing:.12em;text-transform:uppercase;padding:6px 9px;border-radius:999px;background:rgba(13,11,28,.78);color:var(--gold);border:1px solid rgba(240,196,90,.45)}
+.gtxt{position:relative;padding:12px 14px 14px;display:grid;gap:3px;background:linear-gradient(rgba(13,11,28,.8),rgba(13,11,28,.93)),var(--img) center/cover}
+.gzone{font-size:.64rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--mint)}
+.gtxt h3{color:var(--gold);font-size:1.02rem}
+.gtxt p{font-size:.76rem;color:var(--ink-dim);display:flex;gap:6px;align-items:flex-start;line-height:1.35}
+.gtxt p svg{flex:0 0 13px;width:13px;height:13px;margin-top:2px;color:var(--gold)}
+/* bestiaire */
+.bestiary{margin-top:52px}
+.best-head{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 16px;margin-bottom:16px}
+.best-head h3{font-size:1.35rem;color:var(--gold)}
+.best-head p{color:var(--ink-dim);font-size:.95rem;max-width:62ch}
+.mq{overflow:hidden;-webkit-mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent);mask:linear-gradient(90deg,transparent,#000 5%,#000 95%,transparent)}
+.mq-track{display:flex;gap:10px;width:max-content;animation:mq 70s linear infinite}
+.mq:hover .mq-track{animation-play-state:paused}
+@keyframes mq{to{transform:translateX(calc(-50% - 5px))}}
+.beast{margin:0;display:grid;justify-items:center;gap:2px;width:124px;padding:8px 6px 10px;border-radius:14px;background:var(--night-2);border:1px solid var(--line)}
+.beast .mon{--s:108px;margin:-10px 0 -8px}
+.beast:nth-child(3n+2) .mon{animation-delay:-.3s}.beast:nth-child(3n) .mon{animation-delay:-.6s}
+.beast figcaption{font-size:.74rem;font-weight:600;text-align:center;line-height:1.2}
+.beast small{display:block;color:var(--ink-dim);font-weight:500;font-size:.62rem;margin-top:2px}
+@media(max-width:600px){.world > img.wboss{width:54px;height:54px}.world .wmons .mon{--s:52px}.gtxt h3{font-size:.92rem}.gtxt{padding:10px 11px 12px}.beast{width:108px}.beast .mon{--s:94px}}
+@media(prefers-reduced-motion:reduce){.mon{animation:none}.mq-track{animation:none;flex-wrap:wrap;width:auto}.mq-track .beast[aria-hidden]{display:none}.mq{-webkit-mask:none;mask:none}}
+/* icône du jeu (nouvelle) */
+.brand img{border-radius:8px}
+.dl .embleme{border-radius:28px;box-shadow:0 18px 50px -10px rgba(240,196,90,.45)}
+
 /* ===== Téléphone ===== */
 @media(max-width:600px){
   body{font-size:16px}
@@ -475,7 +519,7 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
 
 <nav>
   <div class="wrap">
-    <a class="brand" href="#top"><img src="img/embleme.webp" alt="">Door Knight</a>
+    <a class="brand" href="#top"><img src="img/icon.webp" alt="">Door Knight</a>
     <ul>
       <li><a href="#heros">Héros</a></li>
       <li><a href="#mondes">Mondes</a></li>
@@ -589,16 +633,16 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
       <p>Dix portes par monde, puis le monde suivant. Après l'Antre du Dragon, le Cercle II commence, plus redoutable, et ainsi de suite sans fin.</p>
     </div>
     <div class="corridor rv" id="corridor">
-      <div class="world" style="--img:url(img/zone-0.webp)"><span class="n">PORTES 1–10</span><h3>Forêt de Brume</h3><p>Chef Troll · Roi Gluant</p></div>
-      <div class="world" style="--img:url(img/zone-1.webp)"><span class="n">PORTES 11–20</span><h3>Grottes d'Écho</h3><p>Cristaux, échos et Seigneur des Os</p></div>
-      <div class="world" style="--img:url(img/zone-2.webp)"><span class="n">PORTES 21–30</span><h3>Marais Putride</h3><p>Brume, vase et choses qui se divisent</p></div>
-      <div class="world" style="--img:url(img/zone-3.webp)"><span class="n">PORTES 31–40</span><h3>Désert d'Ambre</h3><p>Gardien Anubis · Pharaon Maudit</p></div>
-      <div class="world" style="--img:url(img/zone-4.webp)"><span class="n">PORTES 41–50</span><h3>Pics Gelés</h3><p>Gel, blizzard et Loup Alpha</p></div>
-      <div class="world" style="--img:url(img/zone-5.webp)"><span class="n">PORTES 51–60</span><h3>Forge Volcanique</h3><p>Minotaure de Lave</p></div>
-      <div class="world" style="--img:url(img/zone-6.webp)"><span class="n">PORTES 61–70</span><h3>Cité Engloutie</h3><p>Kraken des Abysses</p></div>
-      <div class="world" style="--img:url(img/zone-7.webp)"><span class="n">PORTES 71–80</span><h3>Château Hanté</h3><p>Chevalier Noir, à la bougie</p></div>
-      <div class="world" style="--img:url(img/zone-8.webp)"><span class="n">PORTES 81–90</span><h3>Cieux d'Orage</h3><p>Éclairs et pluies de projectiles</p></div>
-      <div class="world" style="--img:url(img/zone-9.webp)"><span class="n">PORTES 91–100</span><h3>Antre du Dragon</h3><p>Puis le Cercle II commence</p></div>
+      <div class="world" style="--img:url(img/zone-0.webp)"><img class="wboss" src="img/boss-0.webp" alt="Roi Gluant" loading="lazy"><div class="wmons"><i class="mon" style="--m:url(img/mon/slime.webp)" title="Slime"></i><i class="mon" style="--m:url(img/mon/goblin.webp)" title="Gobelin"></i><i class="mon" style="--m:url(img/mon/mushroom.webp)" title="Champignon vénéneux"></i></div><span class="n">PORTES 1–10</span><h3>Forêt de Brume</h3><p>Mini-boss : Chef Troll · Gardien : Roi Gluant</p></div>
+      <div class="world" style="--img:url(img/zone-1.webp)"><img class="wboss" src="img/boss-1.webp" alt="Seigneur des Os" loading="lazy"><div class="wmons"><i class="mon" style="--m:url(img/mon/bat.webp)" title="Chauve-souris"></i><i class="mon" style="--m:url(img/mon/skeleton.webp)" title="Squelette"></i><i class="mon" style="--m:url(img/mon/cavEye.webp)" title="Œil des cavernes"></i></div><span class="n">PORTES 11–20</span><h3>Grottes d'Écho</h3><p>Mini-boss : Capitaine Squelette · Gardien : Seigneur des Os</p></div>
+      <div class="world" style="--img:url(img/zone-2.webp)"><img class="wboss" src="img/boss-2.webp" alt="Mère des Crapauds" loading="lazy"><div class="wmons"><i class="mon" style="--m:url(img/mon/toad.webp)" title="Crapaud"></i><i class="mon" style="--m:url(img/mon/bog.webp)" title="Gluant des marais"></i><i class="mon" style="--m:url(img/mon/witch.webp)" title="Sorcière"></i></div><span class="n">PORTES 21–30</span><h3>Marais Putride</h3><p>Mini-boss : Sorcière des Marais · Gardien : Mère des Crapauds</p></div>
+      <div class="world" style="--img:url(img/zone-3.webp)"><img class="wboss" src="img/boss-3.webp" alt="Pharaon Maudit" loading="lazy"><div class="wmons"><i class="mon" style="--m:url(img/mon/scorpion.webp)" title="Scorpion"></i><i class="mon" style="--m:url(img/mon/mummy.webp)" title="Momie"></i><i class="mon" style="--m:url(img/mon/sandWisp.webp)" title="Feu follet des sables"></i></div><span class="n">PORTES 31–40</span><h3>Désert d'Ambre</h3><p>Mini-boss : Gardien Anubis · Gardien : Pharaon Maudit</p></div>
+      <div class="world" style="--img:url(img/zone-4.webp)"><img class="wboss" src="img/boss-4.webp" alt="Colosse des Cimes" loading="lazy"><div class="wmons"><i class="mon" style="--m:url(img/mon/wolf.webp)" title="Loup des neiges"></i><i class="mon" style="--m:url(img/mon/iceMage.webp)" title="Mage de givre"></i><i class="mon" style="--m:url(img/mon/iceGolem.webp)" title="Golem de glace"></i></div><span class="n">PORTES 41–50</span><h3>Pics Gelés</h3><p>Mini-boss : Loup Alpha · Gardien : Colosse des Cimes</p></div>
+      <div class="world" style="--img:url(img/zone-5.webp)"><img class="wboss" src="img/boss-5.webp" alt="Minotaure de Lave" loading="lazy"><div class="wmons"><i class="mon" style="--m:url(img/mon/imp.webp)" title="Diablotin"></i><i class="mon" style="--m:url(img/mon/fireWisp.webp)" title="Feu follet"></i><i class="mon" style="--m:url(img/mon/magma.webp)" title="Golem de magma"></i></div><span class="n">PORTES 51–60</span><h3>Forge Volcanique</h3><p>Mini-boss : Colosse de Magma · Gardien : Minotaure de Lave</p></div>
+      <div class="world" style="--img:url(img/zone-6.webp)"><img class="wboss" src="img/boss-6.webp" alt="Kraken des Abysses" loading="lazy"><div class="wmons"><i class="mon" style="--m:url(img/mon/crab.webp)" title="Crabe géant"></i><i class="mon" style="--m:url(img/mon/wraith.webp)" title="Spectre"></i><i class="mon" style="--m:url(img/mon/siren.webp)" title="Sirène"></i></div><span class="n">PORTES 61–70</span><h3>Cité Engloutie</h3><p>Mini-boss : Sirène Noire · Gardien : Kraken des Abysses</p></div>
+      <div class="world" style="--img:url(img/zone-7.webp)"><img class="wboss" src="img/boss-7.webp" alt="Chevalier Noir" loading="lazy"><div class="wmons"><i class="mon" style="--m:url(img/mon/ghost.webp)" title="Fantôme"></i><i class="mon" style="--m:url(img/mon/gargoyle.webp)" title="Gargouille"></i><i class="mon" style="--m:url(img/mon/darkKnight.webp)" title="Chevalier maudit"></i></div><span class="n">PORTES 71–80</span><h3>Château Hanté</h3><p>Mini-boss : Gargouille Ancienne · Gardien : Chevalier Noir</p></div>
+      <div class="world" style="--img:url(img/zone-8.webp)"><img class="wboss" src="img/boss-8.webp" alt="Griffon Tonnerre" loading="lazy"><div class="wmons"><i class="mon" style="--m:url(img/mon/harpy.webp)" title="Harpie"></i><i class="mon" style="--m:url(img/mon/cloud.webp)" title="Nuage d'orage"></i><i class="mon" style="--m:url(img/mon/stormEye.webp)" title="Œil de tempête"></i></div><span class="n">PORTES 81–90</span><h3>Cieux d'Orage</h3><p>Mini-boss : Reine Déchue · Gardien : Griffon Tonnerre</p></div>
+      <div class="world" style="--img:url(img/zone-9.webp)"><img class="wboss" src="img/boss-9.webp" alt="Dragon Ancestral" loading="lazy"><div class="wmons"><i class="mon" style="--m:url(img/mon/demon.webp)" title="Démon"></i><i class="mon" style="--m:url(img/mon/drake.webp)" title="Drake"></i><i class="mon" style="--m:url(img/mon/voidEye.webp)" title="Œil du néant"></i></div><span class="n">PORTES 91–100</span><h3>Antre du Dragon</h3><p>Mini-boss : Drake Écarlate · Gardien : Dragon Ancestral</p></div>
     </div>
     <div class="cycle rv"><b>Cercles</b> jour, crépuscule, nuit, lune de sang : chaque Cercle change l'ambiance de tous les mondes.</div>
   </div>
@@ -609,15 +653,53 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
     <div class="sec-head rv">
       <p class="eyebrow">Mini-boss et gardiens</p>
       <h2>Ils attendent derrière la porte</h2>
-      <p>Un mini-boss toutes les 5 portes, un gardien toutes les 10. Chacun a ses attaques : charges, pluies de projectiles, invocations. Sa première défaite rapporte un coffre d'or et des potions.</p>
+      <p>Un mini-boss toutes les 5 portes, un gardien toutes les 10. Chacun a ses attaques : charges, pluies de projectiles, invocations. Sa première défaite rapporte un coffre d'or et des potions. Voici les dix gardiens, tels que le jeu les présente avant le combat.</p>
     </div>
-    <div class="boss-grid">
-      <article class="boss rv"><span class="porte">PORTE<b>5</b></span><h3>Chef Troll</h3><p>Mini-boss. Lent, massif, et sa massue balaie la salle. Reste derrière lui.</p></article>
-      <article class="boss rv"><svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg><span class="porte">PORTE<b>10</b></span><h3>Roi Gluant</h3><p>Gardien. Il se divise à chaque coup. Finis les petits avant qu'ils ne fusionnent.</p></article>
-      <article class="boss rv"><svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg><span class="porte">PORTE<b>20</b></span><h3>Seigneur des Os</h3><p>Gardien. Il invoque des squelettes tant qu'il reste dans l'ombre des Grottes d'Écho.</p></article>
-      <article class="boss rv"><span class="porte">PORTE<b>35</b></span><h3>Gardien Anubis</h3><p>Mini-boss du Désert d'Ambre. Charge en ligne droite : esquive sur le côté, puis frappe.</p></article>
-      <article class="boss rv"><svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg><span class="porte">PORTE<b>60</b></span><h3>Minotaure de Lave</h3><p>Gardien de la Forge. Le sol brûle derrière lui ; le chevalier renvoie ses braises.</p></article>
-      <article class="boss rv"><svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg><span class="porte">PORTE<b>80</b></span><h3>Chevalier Noir</h3><p>Gardien du Château Hanté. Il copie ta classe. Change d'approche à chaque tentative.</p></article>
+    <div class="g-grid">
+      <article class="gcard rv" style="--img:url(img/zone-0.webp)">
+        <div class="gport"><img src="img/boss-0.webp" alt="Portrait peint : Roi Gluant" loading="lazy"><span class="gdoor">Porte 10</span></div>
+        <div class="gtxt"><span class="gzone">Forêt de Brume</span><h3>Roi Gluant</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 5 : Chef Troll</p></div>
+      </article>
+      <article class="gcard rv" style="--img:url(img/zone-1.webp)">
+        <div class="gport"><img src="img/boss-1.webp" alt="Portrait peint : Seigneur des Os" loading="lazy"><span class="gdoor">Porte 20</span></div>
+        <div class="gtxt"><span class="gzone">Grottes d'Écho</span><h3>Seigneur des Os</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 15 : Capitaine Squelette</p></div>
+      </article>
+      <article class="gcard rv" style="--img:url(img/zone-2.webp)">
+        <div class="gport"><img src="img/boss-2.webp" alt="Portrait peint : Mère des Crapauds" loading="lazy"><span class="gdoor">Porte 30</span></div>
+        <div class="gtxt"><span class="gzone">Marais Putride</span><h3>Mère des Crapauds</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 25 : Sorcière des Marais</p></div>
+      </article>
+      <article class="gcard rv" style="--img:url(img/zone-3.webp)">
+        <div class="gport"><img src="img/boss-3.webp" alt="Portrait peint : Pharaon Maudit" loading="lazy"><span class="gdoor">Porte 40</span></div>
+        <div class="gtxt"><span class="gzone">Désert d'Ambre</span><h3>Pharaon Maudit</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 35 : Gardien Anubis</p></div>
+      </article>
+      <article class="gcard rv" style="--img:url(img/zone-4.webp)">
+        <div class="gport"><img src="img/boss-4.webp" alt="Portrait peint : Colosse des Cimes" loading="lazy"><span class="gdoor">Porte 50</span></div>
+        <div class="gtxt"><span class="gzone">Pics Gelés</span><h3>Colosse des Cimes</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 45 : Loup Alpha</p></div>
+      </article>
+      <article class="gcard rv" style="--img:url(img/zone-5.webp)">
+        <div class="gport"><img src="img/boss-5.webp" alt="Portrait peint : Minotaure de Lave" loading="lazy"><span class="gdoor">Porte 60</span></div>
+        <div class="gtxt"><span class="gzone">Forge Volcanique</span><h3>Minotaure de Lave</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 55 : Colosse de Magma</p></div>
+      </article>
+      <article class="gcard rv" style="--img:url(img/zone-6.webp)">
+        <div class="gport"><img src="img/boss-6.webp" alt="Portrait peint : Kraken des Abysses" loading="lazy"><span class="gdoor">Porte 70</span></div>
+        <div class="gtxt"><span class="gzone">Cité Engloutie</span><h3>Kraken des Abysses</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 65 : Sirène Noire</p></div>
+      </article>
+      <article class="gcard rv" style="--img:url(img/zone-7.webp)">
+        <div class="gport"><img src="img/boss-7.webp" alt="Portrait peint : Chevalier Noir" loading="lazy"><span class="gdoor">Porte 80</span></div>
+        <div class="gtxt"><span class="gzone">Château Hanté</span><h3>Chevalier Noir</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 75 : Gargouille Ancienne</p></div>
+      </article>
+      <article class="gcard rv" style="--img:url(img/zone-8.webp)">
+        <div class="gport"><img src="img/boss-8.webp" alt="Portrait peint : Griffon Tonnerre" loading="lazy"><span class="gdoor">Porte 90</span></div>
+        <div class="gtxt"><span class="gzone">Cieux d'Orage</span><h3>Griffon Tonnerre</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 85 : Reine Déchue</p></div>
+      </article>
+      <article class="gcard rv" style="--img:url(img/zone-9.webp)">
+        <div class="gport"><img src="img/boss-9.webp" alt="Portrait peint : Dragon Ancestral" loading="lazy"><span class="gdoor">Porte 100</span></div>
+        <div class="gtxt"><span class="gzone">Antre du Dragon</span><h3>Dragon Ancestral</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 95 : Drake Écarlate</p></div>
+      </article>
+    </div>
+    <div class="bestiary rv">
+      <div class="best-head"><h3>Le bestiaire</h3><p>30 monstres, trois par monde. Certains foncent sur toi, d'autres chargent, tirent de loin ou se divisent en deux.</p></div>
+      <div class="mq"><div class="mq-track"><figure class="beast"><i class="mon" style="--m:url(img/mon/slime.webp)"></i><figcaption>Slime<small>Forêt de Brume</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/goblin.webp)"></i><figcaption>Gobelin<small>Forêt de Brume</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/mushroom.webp)"></i><figcaption>Champignon vénéneux<small>Forêt de Brume</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/bat.webp)"></i><figcaption>Chauve-souris<small>Grottes d'Écho</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/skeleton.webp)"></i><figcaption>Squelette<small>Grottes d'Écho</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/cavEye.webp)"></i><figcaption>Œil des cavernes<small>Grottes d'Écho</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/toad.webp)"></i><figcaption>Crapaud<small>Marais Putride</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/bog.webp)"></i><figcaption>Gluant des marais<small>Marais Putride</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/witch.webp)"></i><figcaption>Sorcière<small>Marais Putride</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/scorpion.webp)"></i><figcaption>Scorpion<small>Désert d'Ambre</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/mummy.webp)"></i><figcaption>Momie<small>Désert d'Ambre</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/sandWisp.webp)"></i><figcaption>Feu follet des sables<small>Désert d'Ambre</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/wolf.webp)"></i><figcaption>Loup des neiges<small>Pics Gelés</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/iceMage.webp)"></i><figcaption>Mage de givre<small>Pics Gelés</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/iceGolem.webp)"></i><figcaption>Golem de glace<small>Pics Gelés</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/imp.webp)"></i><figcaption>Diablotin<small>Forge Volcanique</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/fireWisp.webp)"></i><figcaption>Feu follet<small>Forge Volcanique</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/magma.webp)"></i><figcaption>Golem de magma<small>Forge Volcanique</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/crab.webp)"></i><figcaption>Crabe géant<small>Cité Engloutie</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/wraith.webp)"></i><figcaption>Spectre<small>Cité Engloutie</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/siren.webp)"></i><figcaption>Sirène<small>Cité Engloutie</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/ghost.webp)"></i><figcaption>Fantôme<small>Château Hanté</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/gargoyle.webp)"></i><figcaption>Gargouille<small>Château Hanté</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/darkKnight.webp)"></i><figcaption>Chevalier maudit<small>Château Hanté</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/harpy.webp)"></i><figcaption>Harpie<small>Cieux d'Orage</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/cloud.webp)"></i><figcaption>Nuage d'orage<small>Cieux d'Orage</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/stormEye.webp)"></i><figcaption>Œil de tempête<small>Cieux d'Orage</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/demon.webp)"></i><figcaption>Démon<small>Antre du Dragon</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/drake.webp)"></i><figcaption>Drake<small>Antre du Dragon</small></figcaption></figure><figure class="beast"><i class="mon" style="--m:url(img/mon/voidEye.webp)"></i><figcaption>Œil du néant<small>Antre du Dragon</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/slime.webp)"></i><figcaption>Slime<small>Forêt de Brume</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/goblin.webp)"></i><figcaption>Gobelin<small>Forêt de Brume</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/mushroom.webp)"></i><figcaption>Champignon vénéneux<small>Forêt de Brume</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/bat.webp)"></i><figcaption>Chauve-souris<small>Grottes d'Écho</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/skeleton.webp)"></i><figcaption>Squelette<small>Grottes d'Écho</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/cavEye.webp)"></i><figcaption>Œil des cavernes<small>Grottes d'Écho</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/toad.webp)"></i><figcaption>Crapaud<small>Marais Putride</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/bog.webp)"></i><figcaption>Gluant des marais<small>Marais Putride</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/witch.webp)"></i><figcaption>Sorcière<small>Marais Putride</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/scorpion.webp)"></i><figcaption>Scorpion<small>Désert d'Ambre</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/mummy.webp)"></i><figcaption>Momie<small>Désert d'Ambre</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/sandWisp.webp)"></i><figcaption>Feu follet des sables<small>Désert d'Ambre</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/wolf.webp)"></i><figcaption>Loup des neiges<small>Pics Gelés</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/iceMage.webp)"></i><figcaption>Mage de givre<small>Pics Gelés</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/iceGolem.webp)"></i><figcaption>Golem de glace<small>Pics Gelés</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/imp.webp)"></i><figcaption>Diablotin<small>Forge Volcanique</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/fireWisp.webp)"></i><figcaption>Feu follet<small>Forge Volcanique</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/magma.webp)"></i><figcaption>Golem de magma<small>Forge Volcanique</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/crab.webp)"></i><figcaption>Crabe géant<small>Cité Engloutie</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/wraith.webp)"></i><figcaption>Spectre<small>Cité Engloutie</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/siren.webp)"></i><figcaption>Sirène<small>Cité Engloutie</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/ghost.webp)"></i><figcaption>Fantôme<small>Château Hanté</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/gargoyle.webp)"></i><figcaption>Gargouille<small>Château Hanté</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/darkKnight.webp)"></i><figcaption>Chevalier maudit<small>Château Hanté</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/harpy.webp)"></i><figcaption>Harpie<small>Cieux d'Orage</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/cloud.webp)"></i><figcaption>Nuage d'orage<small>Cieux d'Orage</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/stormEye.webp)"></i><figcaption>Œil de tempête<small>Cieux d'Orage</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/demon.webp)"></i><figcaption>Démon<small>Antre du Dragon</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/drake.webp)"></i><figcaption>Drake<small>Antre du Dragon</small></figcaption></figure><figure class="beast" aria-hidden="true"><i class="mon" style="--m:url(img/mon/voidEye.webp)"></i><figcaption>Œil du néant<small>Antre du Dragon</small></figcaption></figure></div></div>
     </div>
   </div>
 </section>
@@ -701,7 +783,7 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
 
 <section id="telecharger" class="dl">
   <div class="wrap">
-    <img class="embleme rv" src="img/embleme.webp" alt="">
+    <img class="embleme rv" src="img/icon.webp" alt="Icône de Door Knight">
     <p class="eyebrow"><span class="beta-pill">Bêta</span> iPhone et iPad · TestFlight</p>
     <h2>Door Knight est en bêta</h2>
     <p>Le jeu n'est pas encore sur l'App Store. En attendant, on l'ouvre à nos amis avec TestFlight, l'application d'Apple pour tester les jeux avant leur sortie. Tu joues à la vraie version, et tes retours nous aident à la finir.</p>
