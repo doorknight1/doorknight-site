@@ -1,0 +1,556 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Door Knight, jeu d'action-aventure mobile : chevalier, archer, mage ou samouraï, des portes à l'infini, un mini-boss toutes les 5 portes. Bêta ouverte sur iPhone et iPad via TestFlight.">
+<meta name="theme-color" content="#0d0b1c">
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="canonical" href="https://doorknight.games/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://doorknight.games/">
+<meta property="og:title" content="Door Knight · Bêta ouverte">
+<meta property="og:description" content="Derrière chaque porte, une horde de monstres. Rejoins la bêta sur iPhone et iPad.">
+<meta property="og:image" content="https://doorknight.games/img/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<title>Door Knight</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;500;600;800&display=swap">
+<style>
+/* Layout : la nuit du jeu (indigo profond, rayons du splash, or de l'emblème). On descend la page comme on descend les portes : accueil, héros, mondes, gardiens, campement, communauté, téléchargement. */
+:root{
+  color-scheme:dark;
+  --night:#0d0b1c;        /* fond du jeu */
+  --night-2:#161330;      /* cartes */
+  --night-3:#221c48;      /* bordures, surfaces actives */
+  --line:rgba(190,170,255,.14);
+  --ink:#f3eefc;          /* texte */
+  --ink-dim:#a9a2c8;
+  --gold:#f0c45a;         /* accent, or de l'emblème */
+  --gold-deep:#c0862a;
+  --violet:#9b86ff;       /* gemme de la porte */
+  --mint:#5fe0d0;         /* éclat de l'emblème */
+  --font-display:"Cinzel",Georgia,"Times New Roman",serif;
+  --font-body:"Inter",system-ui,-apple-system,"Segoe UI",sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--night);color:var(--ink);font-family:var(--font-body);font-size:17px;line-height:1.6;overflow-x:hidden}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:20;background:var(--night)}
+a{color:var(--gold)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+img{max-width:100%;display:block}
+.wrap{max-width:1100px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1,h2,h3{font-family:var(--font-display);text-wrap:balance;margin:0;line-height:1.1}
+h2{font-size:clamp(1.7rem,4vw,2.5rem);font-weight:700}
+h3{font-size:1.1rem;font-weight:700}
+p{margin:0}
+.eyebrow{font-weight:600;font-size:.76rem;letter-spacing:.22em;text-transform:uppercase;color:var(--mint)}
+.gold{background:linear-gradient(180deg,#fff4cf,#f0c45a 45%,#c0862a 80%,#7a4c12);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* reveal on scroll (visible au repos, animé quand on arrive dessus) */
+.rv{transition:transform .7s cubic-bezier(.2,.7,.2,1),opacity .7s}
+.rv.pre{opacity:0;transform:translateY(26px)}
+@media(prefers-reduced-motion:reduce){.rv{transition:none}.rv.pre{opacity:1;transform:none}}
+
+/* nav */
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:9;background:rgba(13,11,28,.78);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:var(--font-display);font-weight:700;letter-spacing:.06em;font-size:.95rem}
+.brand img{width:34px;height:auto}
+nav ul{list-style:none;margin:0;padding:0;display:flex;gap:22px}
+nav ul a{text-decoration:none;color:var(--ink-dim);font-size:.92rem;font-weight:500}
+nav ul a:hover{color:var(--ink)}
+nav .mini{font-family:var(--font-display);font-weight:700;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;padding:9px 14px;background:var(--gold);color:#2a1a08;text-decoration:none;border-radius:10px}
+@media(max-width:700px){nav ul{display:none}}
+
+/* hero */
+.hero{position:relative;overflow:hidden;padding-block:48px 80px;isolation:isolate}
+.hero .rays{position:absolute;inset:-20%;background:url(img/splash.webp) center/cover no-repeat;opacity:.9;z-index:-2;animation:spin 140s linear infinite}
+.hero .fade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(13,11,28,.2),rgba(13,11,28,.55) 60%,var(--night))}
+.hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
+@keyframes spin{to{transform:rotate(360deg)}}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:36px;align-items:center}
+@media(max-width:860px){.hero .wrap{grid-template-columns:1fr;text-align:center}.hero .cta{justify-content:center}.hero .lede{margin-inline:auto}}
+.logo{width:min(520px,100%);height:auto;filter:drop-shadow(0 10px 40px rgba(240,196,90,.25))}
+.lede{font-size:1.15rem;max-width:36ch;color:var(--ink-dim);margin-top:16px}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px}
+.btn{font-family:var(--font-display);font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:15px 24px;border-radius:14px;display:inline-flex;align-items:center;gap:10px;color:#2a1a08;background:linear-gradient(180deg,#ffe9a8,#f0c45a 55%,#d19a33);box-shadow:0 8px 24px rgba(240,196,90,.25),inset 0 1px 0 #fff6d6;transition:transform .15s,box-shadow .15s}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 34px rgba(240,196,90,.4),inset 0 1px 0 #fff6d6}
+.btn.ghost{background:rgba(22,19,48,.7);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn svg{width:18px;height:18px}
+.counter{display:flex;gap:26px;margin-top:34px;flex-wrap:wrap}
+@media(max-width:860px){.counter{justify-content:center}}
+.counter div{display:grid;gap:2px}
+.counter b{font-family:var(--font-display);font-size:1.6rem;color:var(--gold);font-variant-numeric:tabular-nums;line-height:1}
+.counter span{font-size:.76rem;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-dim)}
+
+/* phone */
+.phone{position:relative;width:min(300px,78vw);margin:0 auto;aspect-ratio:9/19.5;border-radius:38px;background:#07060f;padding:10px;box-shadow:0 30px 80px rgba(0,0,0,.6),0 0 0 1px rgba(255,255,255,.08),0 0 60px rgba(155,134,255,.15);animation:float 6s ease-in-out infinite}
+.phone::before{content:"";position:absolute;top:18px;left:50%;transform:translateX(-50%);width:90px;height:22px;border-radius:12px;background:#07060f;z-index:2}
+.phone .screen{position:relative;width:100%;height:100%;border-radius:30px;overflow:hidden;background:var(--night-2)}
+.phone .screen img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .9s}
+.phone .screen img.on{opacity:1}
+@keyframes float{0%,100%{transform:translateY(0) rotate(-2deg)}50%{transform:translateY(-12px) rotate(-2deg)}}
+@media(prefers-reduced-motion:reduce){.phone,.hero .rays{animation:none}}
+
+/* sections */
+section{padding-block:80px;border-top:1px solid var(--line)}
+.sec-head{display:grid;gap:12px;max-width:60ch;margin-bottom:40px}
+.sec-head p{color:var(--ink-dim);font-size:1.05rem}
+
+/* heroes */
+.heroes{display:grid;grid-template-columns:380px 1fr;gap:40px;align-items:start}
+@media(max-width:900px){.heroes{grid-template-columns:1fr}}
+.tabs{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tab{background:var(--night-2);border:1px solid var(--line);border-radius:16px;padding:10px 6px 8px;display:grid;justify-items:center;gap:4px;cursor:pointer;color:var(--ink);font-family:var(--font-display);font-weight:700;font-size:.78rem;transition:transform .2s,border-color .2s,box-shadow .2s}
+.tab img{width:64px;height:auto;border-radius:10px}
+.tab:hover{transform:translateY(-3px)}
+.tab.on{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold),0 10px 30px rgba(240,196,90,.2);color:var(--gold)}
+.hero-panel{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:center;background:var(--night-2);border:1px solid var(--line);border-radius:22px;padding:28px;margin-top:18px}
+@media(max-width:560px){.hero-panel{grid-template-columns:1fr}}
+.hero-panel .portrait{width:120px;height:auto;border-radius:18px;box-shadow:0 10px 30px rgba(0,0,0,.5)}
+.hero-panel h3{font-size:1.5rem;color:var(--gold);margin-top:14px}
+.hero-panel p{color:var(--ink-dim);margin-top:8px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.chip{font-size:.78rem;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--night-3);color:var(--ink)}
+.hero-panel .shot{width:min(230px,100%);margin:0 auto;border-radius:22px;overflow:hidden;aspect-ratio:9/19.5;box-shadow:0 20px 50px rgba(0,0,0,.6);position:relative}
+.hero-panel .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
+.hero-panel .shot img.on{opacity:1}
+.mech{display:grid;gap:14px}
+.mech article{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:rgba(22,19,48,.5)}
+.mech svg{width:44px;height:44px;color:var(--gold)}
+.mech h3{margin-bottom:4px}
+.mech p{color:var(--ink-dim);font-size:.95rem}
+
+/* worlds corridor */
+.worlds{background:var(--night-2)}
+.corridor{display:flex;gap:14px;overflow-x:auto;padding-bottom:16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.corridor::-webkit-scrollbar{height:6px}.corridor::-webkit-scrollbar-thumb{background:var(--night-3);border-radius:3px}
+.world{flex:0 0 220px;scroll-snap-align:start;border-radius:18px;padding:22px 18px 18px;min-height:220px;display:grid;align-content:end;gap:6px;position:relative;overflow:hidden;border:1px solid var(--line);color:#fff;background:var(--w)}
+.world::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.55))}
+.world > *{position:relative}
+.world .n{font-family:var(--font-display);font-size:.72rem;letter-spacing:.2em;opacity:.85}
+.world h3{font-size:1.1rem}
+.world p{font-size:.82rem;opacity:.85}
+.world .orb{position:absolute;top:18px;right:18px;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,var(--o) 40%,transparent 72%);filter:blur(.5px);animation:pulse 3s ease-in-out infinite}
+@keyframes pulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.15);opacity:1}}
+.cycle{margin-top:22px;color:var(--ink-dim);font-size:.95rem;display:flex;gap:10px;align-items:center}
+.cycle b{color:var(--gold);font-family:var(--font-display)}
+
+/* bosses */
+.boss-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+@media(max-width:860px){.boss-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.boss-grid{grid-template-columns:1fr}}
+.boss{border:1px solid var(--line);border-radius:18px;padding:20px;background:var(--night-2);display:grid;gap:8px;position:relative;overflow:hidden;transition:transform .2s,border-color .2s}
+.boss:hover{transform:translateY(-4px);border-color:var(--violet)}
+.boss .porte{font-family:var(--font-display);font-size:.72rem;letter-spacing:.18em;color:var(--violet)}
+.boss .porte b{font-size:1.4rem;color:var(--ink);letter-spacing:0;margin-left:6px;font-variant-numeric:tabular-nums}
+.boss h3{color:var(--gold)}
+.boss p{color:var(--ink-dim);font-size:.92rem}
+.boss .crown{position:absolute;right:16px;top:14px;width:28px;height:28px;color:var(--gold);opacity:.8}
+
+/* camp + arena */
+.two{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+@media(max-width:800px){.two{grid-template-columns:1fr}}
+.panel{border:1px solid var(--line);border-radius:22px;padding:28px;background:var(--night-2);display:grid;gap:12px;align-content:start}
+.panel h3{font-size:1.35rem;color:var(--gold)}
+.panel p{color:var(--ink-dim)}
+.panel ul{margin:6px 0 0;padding:0;list-style:none;display:grid;gap:8px}
+.panel li{display:flex;gap:10px;align-items:start;font-size:.95rem}
+.panel li::before{content:"";flex:0 0 8px;height:8px;margin-top:9px;border-radius:50%;background:var(--gold)}
+.timer{font-family:var(--font-display);font-size:2.4rem;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:.04em;line-height:1}
+.timer small{display:block;font-family:var(--font-body);font-size:.74rem;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-dim);margin-top:6px}
+.bar{height:8px;border-radius:4px;background:var(--night-3);overflow:hidden}
+.bar i{display:block;height:100%;width:30%;background:linear-gradient(90deg,var(--gold-deep),var(--gold));transition:width 1s linear}
+
+/* gallery */
+.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:860px){.gallery{grid-template-columns:repeat(2,1fr)}}
+.gallery figure{margin:0;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--night-2);transition:transform .25s}
+.gallery figure:hover{transform:translateY(-6px) scale(1.02)}
+.gallery figcaption{padding:10px 12px;font-size:.82rem;color:var(--ink-dim)}
+
+/* community */
+.community .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
+@media(max-width:820px){.community .wrap{grid-template-columns:1fr}}
+.channels{display:grid;gap:10px}
+.channel{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:14px 16px;border:1px solid var(--line);border-radius:16px;background:var(--night-2);text-decoration:none;color:inherit;transition:border-color .2s,transform .2s}
+.channel:hover{border-color:var(--gold);transform:translateX(4px)}
+.channel svg{width:28px;height:28px;color:var(--gold)}
+.channel b{font-family:var(--font-display);font-size:.95rem;display:block}
+.channel span{color:var(--ink-dim);font-size:.9rem}
+
+/* download */
+.dl{text-align:center;position:relative;overflow:hidden}
+.dl .embleme{width:150px;margin:0 auto 10px;animation:float 5s ease-in-out infinite}
+.dl .wrap{display:grid;gap:14px;justify-items:center}
+.dl > .wrap > p{color:var(--ink-dim);max-width:56ch}
+.beta-pill{display:inline-block;font-size:.68rem;letter-spacing:.14em;padding:4px 9px;margin-right:8px;border-radius:999px;background:var(--gold);color:#2a1a08;font-weight:800;vertical-align:1px}
+.steps{list-style:none;counter-reset:s;margin:30px 0 0;padding:0;display:grid;grid-template-columns:repeat(4,1fr);gap:14px;text-align:left;width:100%}
+@media(max-width:900px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:520px){.steps{grid-template-columns:1fr}}
+.steps.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:760px){.steps.three{grid-template-columns:1fr}}
+.dl .places{font-size:.85rem;color:var(--mint);margin-top:4px}
+.steps li{counter-increment:s;position:relative;background:var(--night-2);border:1px solid var(--line);border-radius:18px;padding:52px 20px 20px;display:grid;gap:8px;align-content:start;min-width:0}
+.steps li::before{content:counter(s);position:absolute;top:16px;left:20px;width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-family:var(--font-display);font-weight:700;font-size:.9rem;background:var(--gold);color:#2a1a08}
+.steps h3{color:var(--gold)}
+.steps p{color:var(--ink-dim);font-size:.93rem}
+.step-link{font-weight:600;font-size:.9rem;text-decoration:none;margin-top:4px}
+.step-link:hover{text-decoration:underline}
+.beta-notes{display:grid;grid-template-columns:repeat(2,1fr);gap:10px 28px;text-align:left;width:100%;margin-top:22px;padding:22px;border:1px dashed var(--line);border-radius:18px}
+@media(max-width:620px){.beta-notes{grid-template-columns:1fr}}
+.beta-notes div{display:grid;gap:2px;min-width:0}
+.beta-notes b{font-size:.9rem}
+.beta-notes span{color:var(--ink-dim);font-size:.9rem}
+
+footer{border-top:1px solid var(--line);padding-block:28px 40px;color:var(--ink-dim);font-size:.9rem}
+footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
+footer .wrap > div{min-width:0}
+footer a{color:var(--ink-dim);text-decoration:none}
+footer a:hover{color:var(--ink)}
+</style>
+</head>
+<body>
+
+
+<nav>
+  <div class="wrap">
+    <a class="brand" href="#top"><img src="img/embleme.webp" alt="">Door Knight</a>
+    <ul>
+      <li><a href="#heros">Héros</a></li>
+      <li><a href="#mondes">Mondes</a></li>
+      <li><a href="#gardiens">Gardiens</a></li>
+      <li><a href="#camp">Campement</a></li>
+      <li><a href="#communaute">Communauté</a></li>
+    </ul>
+    <a class="mini" href="#telecharger">Bêta</a>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="rays" aria-hidden="true"></div>
+  <div class="fade" aria-hidden="true"></div>
+  <canvas id="dust" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <div>
+      <p class="eyebrow"><span class="beta-pill">Bêta ouverte</span> Aventure · Portes infinies</p>
+      <img class="logo" src="img/logo.svg" alt="Door Knight" width="1280" height="804">
+      <p class="lede">Chevalier, archer, mage ou samouraï : derrière chaque porte, une horde de monstres. Toutes les 5 portes, un mini-boss ; toutes les 10, un gardien. Les portes ne s'arrêtent jamais.</p>
+      <div class="cta">
+        <a class="btn" href="#telecharger">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+          Rejoindre la bêta
+        </a>
+        <a class="btn ghost" href="#heros">Découvrir les héros</a>
+      </div>
+      <div class="counter">
+        <div><b>4</b><span>Héros</span></div>
+        <div><b>10</b><span>Mondes</span></div>
+        <div><b>96</b><span>Sorts</span></div>
+        <div><b id="doorN">1</b><span>Portes</span></div>
+      </div>
+    </div>
+    <div class="phone" aria-label="Captures d'écran du jeu">
+      <div class="screen" id="heroShots">
+        <img src="img/shot-knight.webp" class="on" alt="Le chevalier combat des slimes dans la Forêt de Brume">
+        <img src="img/shot-mage.webp" alt="Le mage lance un orbe arcanique">
+        <img src="img/shot-map.webp" alt="La carte des portes de la Forêt de Brume">
+        <img src="img/shot-samurai.webp" alt="Le samouraï au katana">
+        <img src="img/shot-title.webp" alt="L'écran titre de Door Knight">
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="heros">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Quatre classes</p>
+      <h2>Chacun ouvre les portes à sa manière</h2>
+      <p>Chaque héros a son niveau, son or, son armurerie et ses trois écoles de sorts. Tu peux en jouer jusqu'à quatre.</p>
+    </div>
+    <div class="heroes">
+      <div class="rv">
+        <div class="tabs" id="tabs">
+          <button class="tab on" data-h="0"><img src="img/cls-chevalier.webp" alt="">Chevalier</button>
+          <button class="tab" data-h="1"><img src="img/cls-archer.webp" alt="">Archer</button>
+          <button class="tab" data-h="2"><img src="img/cls-mage.webp" alt="">Mage</button>
+          <button class="tab" data-h="3"><img src="img/cls-samourai.webp" alt="">Samouraï</button>
+        </div>
+        <div class="hero-panel">
+          <div>
+            <img class="portrait" id="hPortrait" src="img/cls-chevalier.webp" alt="">
+            <h3 id="hName">Le Chevalier</h3>
+            <p id="hDesc">Corps à corps. Frappe en arc de cercle et renvoie les projectiles. Le plus robuste.</p>
+            <div class="chips" id="hChips"></div>
+          </div>
+          <div class="shot" id="hShot">
+            <img src="img/shot-knight.webp" class="on" alt="">
+            <img src="img/shot-archer.webp" alt="">
+            <img src="img/shot-mage.webp" alt="">
+            <img src="img/shot-samurai.webp" alt="">
+          </div>
+        </div>
+      </div>
+      <div class="mech rv">
+        <article>
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="20" cy="30" r="10"/><circle cx="20" cy="30" r="3" fill="currentColor"/><path d="M30 14h8l-4 6"/><path d="M34 14v12"/></svg>
+          <div><h3>Un pouce pour bouger, un pour frapper</h3><p>Pose le pouce n'importe où et glisse. Maintiens le bouton d'attaque pour enchaîner : ton héros vise seul l'ennemi le plus proche.</p></div>
+        </article>
+        <article>
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M24 6c6 8 12 14 12 22a12 12 0 0 1-24 0c0-8 6-14 12-22z"/><path d="M24 20c3 4 6 7 6 11a6 6 0 0 1-12 0c0-4 3-7 6-11z"/></svg>
+          <div><h3>24 sorts par héros, dès le niveau 10</h3><p>Choisis ton école et ouvre le Grimoire. Boule de feu, Blizzard, Phénix, Jugement céleste : chaque sort a sa propre animation.</p></div>
+        </article>
+        <article>
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 38 34 14"/><path d="M30 10l8 8-4 4-8-8z" fill="currentColor"/><path d="M8 40l6-2-4-4z"/><path d="M14 20l-6 2v6"/></svg>
+          <div><h3>Une armurerie par classe</h3><p>8 rangs d'armes par héros : de l'arc court à l'arc de givre, du bokken au nodachi. Chaque rang augmente l'attaque.</p></div>
+        </article>
+        <article>
+          <svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="24" cy="18" r="8"/><path d="M10 40c2-8 8-12 14-12s12 4 14 12"/><path d="M16 8l4 4M32 8l-4 4"/></svg>
+          <div><h3>Ton héros, ton style</h3><p>Héros ou héroïne, teint, cheveux, coiffe, armure et cape. Couronne, diadème elfique ou halo arcanique se débloquent en jouant.</p></div>
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="mondes" class="worlds">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Dix mondes</p>
+      <h2>Le couloir ne finit jamais</h2>
+      <p>Dix portes par monde, puis le monde suivant. Après l'Antre du Dragon, le Cercle II commence, plus redoutable, et ainsi de suite sans fin.</p>
+    </div>
+    <div class="corridor rv" id="corridor">
+      <div class="world" style="--w:linear-gradient(160deg,#1f3a2a,#0b1a12);--o:#7fd68a"><div class="orb"></div><span class="n">PORTES 1–10</span><h3>Forêt de Brume</h3><p>Chef Troll · Roi Gluant</p></div>
+      <div class="world" style="--w:linear-gradient(160deg,#2a2550,#120f26);--o:#9b86ff"><div class="orb"></div><span class="n">PORTES 11–20</span><h3>Grottes d'Écho</h3><p>Cristaux, échos et Seigneur des Os</p></div>
+      <div class="world" style="--w:linear-gradient(160deg,#2f3a1a,#141a08);--o:#b7d14e"><div class="orb"></div><span class="n">PORTES 21–30</span><h3>Marais Putride</h3><p>Brume, vase et choses qui se divisent</p></div>
+      <div class="world" style="--w:linear-gradient(160deg,#6b4a14,#2a1c06);--o:#f0c45a"><div class="orb"></div><span class="n">PORTES 31–40</span><h3>Désert d'Ambre</h3><p>Gardien Anubis · Pharaon Maudit</p></div>
+      <div class="world" style="--w:linear-gradient(160deg,#1e3f5a,#0a1a28);--o:#8fdcff"><div class="orb"></div><span class="n">PORTES 41–50</span><h3>Pics Gelés</h3><p>Gel, blizzard et Loup Alpha</p></div>
+      <div class="world" style="--w:linear-gradient(160deg,#5a1e14,#200806);--o:#ff6b3d"><div class="orb"></div><span class="n">PORTES 51–60</span><h3>Forge Volcanique</h3><p>Minotaure de Lave</p></div>
+      <div class="world" style="--w:linear-gradient(160deg,#143f4a,#071a20);--o:#5fe0d0"><div class="orb"></div><span class="n">PORTES 61–70</span><h3>Cité Engloutie</h3><p>Kraken des Abysses</p></div>
+      <div class="world" style="--w:linear-gradient(160deg,#2c1e3f,#100a18);--o:#d7a4ff"><div class="orb"></div><span class="n">PORTES 71–80</span><h3>Château Hanté</h3><p>Chevalier Noir, à la bougie</p></div>
+      <div class="world" style="--w:linear-gradient(160deg,#20304a,#0a1020);--o:#ffe97a"><div class="orb"></div><span class="n">PORTES 81–90</span><h3>Cieux d'Orage</h3><p>Éclairs et pluies de projectiles</p></div>
+      <div class="world" style="--w:linear-gradient(160deg,#4a1414,#1a0606);--o:#ff3d3d"><div class="orb"></div><span class="n">PORTES 91–100</span><h3>Antre du Dragon</h3><p>Puis le Cercle II commence</p></div>
+    </div>
+    <div class="cycle rv"><b>Cercles</b> jour, crépuscule, nuit, lune de sang : chaque Cercle change l'ambiance de tous les mondes.</div>
+  </div>
+</section>
+
+<section id="gardiens">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Mini-boss et gardiens</p>
+      <h2>Ils attendent derrière la porte</h2>
+      <p>Un mini-boss toutes les 5 portes, un gardien toutes les 10. Chacun a ses attaques : charges, pluies de projectiles, invocations. Sa première défaite rapporte un coffre d'or et des potions.</p>
+    </div>
+    <div class="boss-grid">
+      <article class="boss rv"><span class="porte">PORTE<b>5</b></span><h3>Chef Troll</h3><p>Mini-boss. Lent, massif, et sa massue balaie la salle. Reste derrière lui.</p></article>
+      <article class="boss rv"><svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg><span class="porte">PORTE<b>10</b></span><h3>Roi Gluant</h3><p>Gardien. Il se divise à chaque coup. Finis les petits avant qu'ils ne fusionnent.</p></article>
+      <article class="boss rv"><svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg><span class="porte">PORTE<b>20</b></span><h3>Seigneur des Os</h3><p>Gardien. Il invoque des squelettes tant qu'il reste dans l'ombre des Grottes d'Écho.</p></article>
+      <article class="boss rv"><span class="porte">PORTE<b>35</b></span><h3>Gardien Anubis</h3><p>Mini-boss du Désert d'Ambre. Charge en ligne droite : esquive sur le côté, puis frappe.</p></article>
+      <article class="boss rv"><svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg><span class="porte">PORTE<b>60</b></span><h3>Minotaure de Lave</h3><p>Gardien de la Forge. Le sol brûle derrière lui ; le chevalier renvoie ses braises.</p></article>
+      <article class="boss rv"><svg class="crown" viewBox="0 0 24 24" fill="currentColor"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg><span class="porte">PORTE<b>80</b></span><h3>Chevalier Noir</h3><p>Gardien du Château Hanté. Il copie ta classe. Change d'approche à chaque tentative.</p></article>
+    </div>
+  </div>
+</section>
+
+<section id="camp" class="worlds">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">Entre deux portes</p>
+      <h2>Ton campement, ton arène</h2>
+    </div>
+    <div class="two">
+      <div class="panel rv">
+        <h3>Le campement</h3>
+        <p>Grand hall, scierie, carrière, mine de cristal, tours de guet, caserne, armurerie. Il produit même quand tu ne joues pas et renforce tous tes héros.</p>
+        <ul>
+          <li>Décore-le : bannières, fontaine, statue, terrain enneigé ou arcanique.</li>
+          <li>Toutes les 3 heures, des monstres l'attaquent : défends le Grand hall vague après vague.</li>
+          <li>Ton trésor de campement t'attend chaque jour.</li>
+        </ul>
+        <div style="margin-top:8px"><div class="timer" id="raidTimer">2:59:59<small>Prochaine attaque du camp</small></div></div>
+      </div>
+      <div class="panel rv">
+        <h3>L'arène</h3>
+        <p>Affronte en direct des joueurs de ton niveau dans des combats de 90 secondes. Les statistiques sont équilibrées : c'est ton talent qui compte.</p>
+        <ul>
+          <li>Classement de l'arène et tournoi de la semaine.</li>
+          <li>Chaque jour : un cadeau, trois quêtes, une roue.</li>
+          <li>Chaque saison : un Pass de 30 niveaux avec des styles exclusifs.</li>
+        </ul>
+        <div style="margin-top:8px"><div class="timer" id="arenaTimer">1:30<small>Combat d'arène en cours</small></div><div class="bar" style="margin-top:10px"><i id="arenaBar"></i></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="galerie">
+  <div class="wrap">
+    <div class="sec-head rv">
+      <p class="eyebrow">En jeu</p>
+      <h2>Quelques portes plus loin</h2>
+    </div>
+    <div class="gallery">
+      <figure class="rv"><img src="img/shot-hero.webp" alt="Création du héros" loading="lazy"><figcaption>Crée ton héros : classe, allure, pseudo</figcaption></figure>
+      <figure class="rv"><img src="img/shot-map.webp" alt="Carte des portes" loading="lazy"><figcaption>Dix portes par monde, mini-boss et gardien</figcaption></figure>
+      <figure class="rv"><img src="img/shot-archer.webp" alt="L'archer en combat" loading="lazy"><figcaption>L'archer tire de loin des flèches qui transpercent</figcaption></figure>
+      <figure class="rv"><img src="img/shot-forge.webp" alt="La forge" loading="lazy"><figcaption>La Forge : puissance, armure, cœur de lion</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="communaute" class="community">
+  <div class="wrap">
+    <div class="sec-head rv" style="margin-bottom:0">
+      <p class="eyebrow">Communauté Discord</p>
+      <h2>Les chevaliers se retrouvent sur Discord</h2>
+      <p>Annonces, signalement de bugs, idées pour le jeu et discussions entre joueurs : tout se passe sur le serveur Discord officiel de Door Knight.</p>
+      <div class="cta" style="margin-top:22px"><a class="btn" href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.5 5.3A17 17 0 0 0 15.4 4l-.5 1a16 16 0 0 0-5.8 0l-.5-1a17 17 0 0 0-4.1 1.3C1.9 9.2 1.2 13 1.5 16.7A17 17 0 0 0 6.6 19l1-1.6a11 11 0 0 1-1.7-.8l.4-.3a12 12 0 0 0 11.4 0l.4.3a11 11 0 0 1-1.7.8l1 1.6a17 17 0 0 0 5.1-2.3c.4-4.3-.7-8-3-11.4zM8.7 14.4c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2zm6.6 0c-1 0-1.8-.9-1.8-2s.8-2 1.8-2 1.8.9 1.8 2-.8 2-1.8 2z"/></svg>Rejoindre le Discord</a></div>
+    </div>
+    <div class="channels rv">
+      <a class="channel" href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11v2a2 2 0 0 0 2 2h2l5 4V5L7 9H5a2 2 0 0 0-2 2z"/><path d="M16 9a4 4 0 0 1 0 6"/></svg>
+        <div><b>#annonces</b><span>Mises à jour, événements, nouveaux gardiens.</span></div>
+      </a>
+      <a class="channel" href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 7a4 4 0 0 1 8 0v6a4 4 0 0 1-8 0z"/><path d="M4 11h4M16 11h4M6 6l2 2M18 6l-2 2M4 17l4-2M20 17l-4-2"/></svg>
+        <div><b>#bugs</b><span>Un souci ? Capture, modèle de téléphone, pseudo.</span></div>
+      </a>
+      <a class="channel" href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4"/><path d="M12 2a7 7 0 0 0-4 12.7V17h8v-2.3A7 7 0 0 0 12 2z"/></svg>
+        <div><b>#idées</b><span>Héros, armes, boss, équilibrage : propose.</span></div>
+      </a>
+      <a class="channel" href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 21V8l8-5 8 5v13"/><path d="M9 21v-6h6v6"/></svg>
+        <div><b>#taverne</b><span>Stratégies, classement, arène, entre joueurs.</span></div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<section id="telecharger" class="dl">
+  <div class="wrap">
+    <img class="embleme rv" src="img/embleme.webp" alt="">
+    <p class="eyebrow"><span class="beta-pill">Bêta</span> iPhone et iPad · TestFlight</p>
+    <h2>Door Knight est en bêta</h2>
+    <p>Le jeu n'est pas encore sur l'App Store. En attendant, on l'ouvre à nos amis avec TestFlight, l'application d'Apple pour tester les jeux avant leur sortie. Tu joues à la vraie version, et tes retours nous aident à la finir.</p>
+
+    <div class="cta" style="justify-content:center;margin-top:18px">
+      <a class="btn" href="https://testflight.apple.com/join/Jhxx6gj1" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="2" width="10" height="20" rx="2"/><path d="M11 18h2"/></svg>
+        Installer la bêta
+      </a>
+      <a class="btn ghost" href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Rejoindre le Discord</a>
+    </div>
+    <p class="places">1 000 places pour cette première vague. Ouvre le lien depuis ton iPhone ou ton iPad.</p>
+
+    <ol class="steps three">
+      <li class="rv">
+        <h3>Installe TestFlight</h3>
+        <p>Télécharge l'application gratuite TestFlight sur l'App Store. C'est l'application d'Apple pour les bêtas.</p>
+        <a class="step-link" href="https://apps.apple.com/app/testflight/id899247664" target="_blank" rel="noopener">TestFlight sur l'App Store →</a>
+      </li>
+      <li class="rv">
+        <h3>Ouvre le lien de la bêta</h3>
+        <p>Sur ton iPhone, touche « Installer la bêta » ci-dessus. TestFlight s'ouvre sur Door Knight : touche « Accepter ».</p>
+        <a class="step-link" href="https://testflight.apple.com/join/Jhxx6gj1" target="_blank" rel="noopener">testflight.apple.com/join/Jhxx6gj1 →</a>
+      </li>
+      <li class="rv">
+        <h3>Installe et joue</h3>
+        <p>Touche « Installer ». Door Knight apparaît sur ton écran d'accueil avec un petit point orange : c'est la version bêta.</p>
+      </li>
+    </ol>
+
+    <div class="beta-notes rv">
+      <div><b>Mises à jour</b><span>TestFlight t'avertit à chaque nouvelle version. Installe-la pour continuer à jouer : chaque version de test dure 90 jours.</span></div>
+      <div><b>Achats gratuits</b><span>Les achats faits dans la bêta sont en mode test : rien n'est débité.</span></div>
+      <div><b>Un bug ?</b><span>Fais une capture d'écran dans le jeu et envoie-la depuis TestFlight, ou poste-la dans #bugs sur le Discord.</span></div>
+      <div><b>Sur Android ?</b><span>La bêta est pour l'instant réservée à l'iPhone et à l'iPad. Dis-le-nous sur le Discord, on te préviendra.</span></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div>© <span id="year">2026</span> Door Knight · Tous droits réservés</div>
+    <div><a href="#communaute">Support</a> · <a href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Discord</a> · <a href="politique-confidentialite.html">Confidentialité</a> · <a href="#top">Haut de page</a></div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.getElementById('year').textContent=new Date().getFullYear();
+
+  // compteur de portes
+  var n=1,dn=document.getElementById('doorN');
+  if(!reduce)setInterval(function(){n=n>=999?1:n+1;dn.textContent=n;},700);
+
+  // diaporama du téléphone
+  var shots=[].slice.call(document.querySelectorAll('#heroShots img')),si=0;
+  if(!reduce)setInterval(function(){shots[si].classList.remove('on');si=(si+1)%shots.length;shots[si].classList.add('on');},3200);
+
+  // héros
+  var H=[
+    {n:'Le Chevalier',d:"Corps à corps. Frappe en arc de cercle et renvoie les projectiles. Le plus robuste.",c:['Sacré','Guerre','Terre','Spéciale : Tourbillon','Épée → Marteau'],img:'img/cls-chevalier.webp'},
+    {n:"L'Archer",d:"Tire de loin des flèches qui transpercent les ennemis alignés. Jamais à portée.",c:['Nature','Vent','Ombre','Spéciale : Volée',"Arc court → Arc de givre"],img:'img/cls-archer.webp'},
+    {n:'Le Mage',d:"Lance des orbes arcaniques qui explosent en zone. Fragile, mais dévastateur.",c:['Feu','Glace','Foudre','Spéciale : Nova',"Bâton d'apprenti → Bâton stellaire"],img:'img/cls-mage.webp'},
+    {n:'Le Samouraï',d:"Enchaîne les coups de katana et traverse les hordes d'une ruée Iaijutsu.",c:['Lame','Ki','Sakura','Spéciale : Ruée Iaijutsu','Bokken → Nodachi'],img:'img/cls-samourai.webp'}
+  ];
+  var tabs=[].slice.call(document.querySelectorAll('.tab')),hs=[].slice.call(document.querySelectorAll('#hShot img'));
+  function pick(i){
+    tabs.forEach(function(t,k){t.classList.toggle('on',k===i)});
+    hs.forEach(function(s,k){s.classList.toggle('on',k===i)});
+    document.getElementById('hName').textContent=H[i].n;
+    document.getElementById('hDesc').textContent=H[i].d;
+    document.getElementById('hPortrait').src=H[i].img;
+    document.getElementById('hChips').innerHTML=H[i].c.map(function(x){return '<span class="chip">'+x+'</span>'}).join('');
+  }
+  tabs.forEach(function(t){t.addEventListener('click',function(){pick(+t.dataset.h)})});
+  pick(0);
+
+  // minuteurs
+  var raid=2*3600+59*60+59,rt=document.getElementById('raidTimer');
+  var arena=90,at=document.getElementById('arenaTimer'),ab=document.getElementById('arenaBar');
+  function fmt(s){var h=Math.floor(s/3600),m=Math.floor(s%3600/60),x=s%60;return (h?h+':':'')+(h?String(m).padStart(2,'0'):m)+':'+String(x).padStart(2,'0')}
+  setInterval(function(){
+    raid=raid>0?raid-1:3*3600;rt.firstChild.nodeValue=fmt(raid);
+    arena=arena>0?arena-1:90;at.firstChild.nodeValue=fmt(arena);ab.style.width=(100-arena/90*100)+'%';
+  },1000);
+
+  // apparitions au défilement
+  var els=[].slice.call(document.querySelectorAll('.rv'));
+  if(!reduce&&'IntersectionObserver' in window){
+    els.forEach(function(e){var r=e.getBoundingClientRect();if(r.top>innerHeight)e.classList.add('pre');});
+    var io=new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){x.target.classList.remove('pre');io.unobserve(x.target);}})},{threshold:.12});
+    els.forEach(function(e){io.observe(e)});
+  }
+
+  // poussière magique
+  var c=document.getElementById('dust'),ctx=c.getContext('2d'),P=[],W,H2;
+  function size(){W=c.width=c.offsetWidth*devicePixelRatio;H2=c.height=c.offsetHeight*devicePixelRatio;}
+  size();addEventListener('resize',size);
+  function spawn(){return{x:Math.random()*W,y:H2+10,r:(.8+Math.random()*1.8)*devicePixelRatio,v:(.15+Math.random()*.4)*devicePixelRatio,d:(Math.random()-.5)*.3,a:.3+Math.random()*.6,g:Math.random()<.3};}
+  for(var i=0;i<70;i++){var p=spawn();p.y=Math.random()*H2;P.push(p);}
+  function tick(){
+    ctx.clearRect(0,0,W,H2);
+    for(var i=0;i<P.length;i++){var p=P[i];
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,6.28);
+      ctx.fillStyle=p.g?'rgba(240,196,90,'+p.a+')':'rgba(200,190,255,'+p.a+')';ctx.fill();
+      p.y-=p.v;p.x+=p.d;p.a-=.001;
+      if(p.y<-10||p.a<=0)P[i]=spawn();
+    }
+    if(!reduce)requestAnimationFrame(tick);
+  }
+  tick();
+})();
+</script>
+
+</body>
+</html>
