@@ -895,7 +895,7 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
       '<path class="gem" d="M50 0l6 7.5-6 7.5-6-7.5z" fill="url(#pj)" stroke="#120a20" stroke-width=".8"/></svg>'+
       '</div></div><div class="flash"></div><div class="wave"></div><div class="wave w2"></div><div class="plogo"></div></div>'+
       '<div class="prompt"><b>'+(matchMedia('(hover:hover)').matches?'Clique sur la porte pour entrer':'Touche la porte pour entrer')+'</b>'+
-      '<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>Monte le son</span></div>'+
+      '</div>'+
       '<button class="pskip" type="button">Passer</button>';
     var src=document.querySelector('.logo svg');if(src)o.querySelector('.plogo').appendChild(src.cloneNode(true));
     document.body.appendChild(o);document.body.classList.add('intro-on');
