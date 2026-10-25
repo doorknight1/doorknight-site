@@ -274,22 +274,27 @@ footer a:hover{color:var(--ink)}
 @keyframes dkSpark{0%,100%{opacity:1}50%{opacity:.25}}
 @keyframes dkShine{0%{transform:translateX(0)}35%,100%{transform:translateX(760px)}}
 
-/* porte d'entrée */
-#gate{position:fixed;inset:0;z-index:50;display:flex;perspective:1400px;pointer-events:none}
-#gate .leaf{flex:1;background:repeating-linear-gradient(90deg,#4a2f1b 0 34px,#3a2414 34px 37px);border:3px solid #1a0e08;box-shadow:inset 0 0 80px rgba(0,0,0,.6);position:relative}
-#gate .leaf::before,#gate .leaf::after{content:"";position:absolute;left:0;right:0;height:18px;background:#2b2a36;border-block:2px solid #0d0b16}
-#gate .leaf::before{top:24%}#gate .leaf::after{bottom:24%}
-#gate .l{transform-origin:left center;border-right-color:var(--gold)}
-#gate .r{transform-origin:right center;border-left-color:var(--gold)}
-#gate .ring{position:absolute;top:50%;width:26px;height:26px;margin-top:-13px;border-radius:50%;border:4px solid var(--gold);box-shadow:0 0 18px var(--gold)}
-#gate .l .ring{right:22px}#gate .r .ring{left:22px}
-#gate .glow{position:absolute;left:50%;top:0;bottom:0;width:6px;margin-left:-3px;background:#fff6d2;box-shadow:0 0 40px 18px rgba(255,220,140,.8);opacity:0}
-#gate.open .l{animation:gateL 1.15s cubic-bezier(.6,0,.2,1) forwards}
-#gate.open .r{animation:gateR 1.15s cubic-bezier(.6,0,.2,1) forwards}
-#gate.open .glow{animation:gateGlow 1.15s ease-out forwards}
-@keyframes gateL{to{transform:rotateY(-100deg);opacity:.2}}
-@keyframes gateR{to{transform:rotateY(100deg);opacity:.2}}
-@keyframes gateGlow{0%{opacity:1}60%{opacity:.9;width:60vw;margin-left:-30vw;box-shadow:0 0 120px 60px rgba(255,220,140,.6)}100%{opacity:0;width:100vw;margin-left:-50vw}}
+/* cinématique d'ouverture */
+#intro{position:fixed;inset:0;z-index:60;background:#05040b;display:grid;place-items:center;transition:opacity .7s ease}
+#intro.out{opacity:0;pointer-events:none}
+#intro video{width:100%;height:100%;object-fit:cover;background:#05040b}
+#intro .ib{position:absolute;display:inline-flex;align-items:center;gap:8px;font:600 .85rem/1 var(--font-body);color:#fff;background:rgba(10,8,22,.55);
+  border:1px solid rgba(255,255,255,.25);border-radius:999px;padding:10px 16px;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+#intro .ib:hover{background:rgba(10,8,22,.8)}
+#intro .ib svg{width:16px;height:16px}
+#intro .skip{top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px))}
+#intro .snd{bottom:calc(16px + env(safe-area-inset-bottom,0px));left:calc(14px + env(safe-area-inset-left,0px))}
+#intro .snd.on{border-color:var(--gold);color:var(--gold)}
+#intro .ibar{position:absolute;left:0;bottom:0;height:3px;width:0;background:linear-gradient(90deg,var(--violet),var(--gold))}
+#intro .start{position:absolute;display:none;flex-direction:column;align-items:center;gap:14px}
+#intro.blocked .start{display:flex}
+#intro.blocked video{filter:brightness(.45)}
+body.intro-on{overflow:hidden}
+body.intro-on .hero *{animation-play-state:paused!important}
+.replay{display:inline-flex;align-items:center;gap:8px;margin-top:16px;background:none;border:0;color:var(--ink-dim);font:600 .85rem var(--font-body);cursor:pointer;padding:6px 0}
+.replay:hover{color:var(--gold)}
+.replay svg{width:18px;height:18px}
+@media(max-width:860px){.replay{margin-inline:auto}}
 
 /* barre de progression sous le menu */
 nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc(var(--prog,0) * 100%);background:linear-gradient(90deg,var(--violet),var(--gold));box-shadow:0 0 10px var(--gold)}
@@ -421,6 +426,7 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
         </a>
         <a class="btn ghost" href="#heros">Découvrir les héros</a>
       </div>
+      <button class="replay" id="replayIntro" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m10 8 6 4-6 4z" fill="currentColor"/></svg>Voir la cinématique</button>
       <div class="counter">
         <div><b>4</b><span>Héros</span></div>
         <div><b>10</b><span>Mondes</span></div>
@@ -765,22 +771,47 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
   }
   tick();
 
-  // porte d'entrée : une fois par visite
-  var seen=false;try{seen=sessionStorage.getItem('dkGate')==='1';sessionStorage.setItem('dkGate','1');}catch(e){}
-  if(!reduce&&!seen){
-    var g=document.createElement('div');g.id='gate';g.setAttribute('aria-hidden','true');
-    g.innerHTML='<div class="leaf l"><span class="ring"></span></div><div class="leaf r"><span class="ring"></span></div><div class="glow"></div>';
-    document.body.appendChild(g);
-    setTimeout(function(){g.classList.add('open');},250);
-    setTimeout(function(){g.remove();},1500);
+  // cinématique d'ouverture : une fois par visite (bouton « Voir la cinématique » pour la revoir)
+  var done=[];function introDone(){var f=done;done=null;if(f)f.forEach(function(fn){fn()});}
+  function afterIntro(fn){if(done)done.push(fn);else fn();}
+  function playIntro(){
+    var r=innerWidth/innerHeight,k=r<.52?'tall':(r<1?'portrait':'landscape');
+    var o=document.createElement('div');o.id='intro';o.setAttribute('role','dialog');o.setAttribute('aria-label','Cinématique Door Knight');
+    o.innerHTML='<video playsinline muted autoplay preload="auto" poster="vid/intro-'+k+'.jpg" src="vid/intro-'+k+'.mp4"></video>'+
+      '<button class="ib skip" type="button">Passer <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="m6 6 6 6-6 6M13 6l6 6-6 6"/></svg></button>'+
+      '<button class="ib snd" type="button" aria-pressed="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path class="w" d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg><span>Activer le son</span></button>'+
+      '<div class="start"><button class="btn" type="button">Lancer la cinématique</button><button class="ib" type="button" style="position:static">Entrer sur le site</button></div>'+
+      '<div class="ibar"></div>';
+    document.body.appendChild(o);document.body.classList.add('intro-on');
+    var v=o.querySelector('video'),bar=o.querySelector('.ibar'),snd=o.querySelector('.snd'),closed=false;
+    function close(){if(closed)return;closed=true;v.pause();o.classList.add('out');document.body.classList.remove('intro-on');
+      setTimeout(function(){o.remove();},750);introDone();}
+    function go(){o.classList.remove('blocked');var pr=v.play();if(pr&&pr.catch)pr.catch(function(){o.classList.add('blocked');});}
+    o.querySelector('.skip').addEventListener('click',close);
+    o.querySelector('.start .btn').addEventListener('click',go);
+    o.querySelector('.start .ib').addEventListener('click',close);
+    snd.addEventListener('click',function(){v.muted=!v.muted;snd.classList.toggle('on',!v.muted);snd.setAttribute('aria-pressed',String(!v.muted));
+      snd.querySelector('span').textContent=v.muted?'Activer le son':'Son activé';if(v.paused)go();});
+    v.addEventListener('timeupdate',function(){if(v.duration)bar.style.width=(v.currentTime/v.duration*100)+'%';});
+    v.addEventListener('ended',function(){setTimeout(close,500);});
+    v.addEventListener('click',function(){if(v.duration&&v.currentTime>v.duration-4)close();});
+    v.addEventListener('error',close);
+    addEventListener('keydown',function esc(e){if(e.key==='Escape'){close();removeEventListener('keydown',esc);}});
+    go();
+    // si la vidéo ne démarre pas (mode économie d'énergie), proposer de la lancer
+    setTimeout(function(){if(!closed&&v.paused&&v.currentTime===0)o.classList.add('blocked');},1800);
   }
+  var seen=false;try{seen=sessionStorage.getItem('dkIntro')==='1';sessionStorage.setItem('dkIntro','1');}catch(e){}
+  if(!reduce&&!seen)playIntro();else introDone();
+  var rp=document.getElementById('replayIntro');
+  if(rp)rp.addEventListener('click',function(){if(!document.getElementById('intro')){done=[];playIntro();}});
 
   // compteurs qui défilent
   if(!reduce){
     [].slice.call(document.querySelectorAll('.counter b:not(#doorN)')).forEach(function(b,k){
       var to=+b.textContent,t0=null;b.textContent='0';
       function step(ts){if(!t0)t0=ts;var q=Math.min(1,(ts-t0)/(1100+k*250));b.textContent=Math.round(to*(1-Math.pow(1-q,3)));if(q<1)requestAnimationFrame(step);}
-      setTimeout(function(){requestAnimationFrame(step);},700);
+      afterIntro(function(){setTimeout(function(){requestAnimationFrame(step);},500);});
     });
   }
 
