@@ -17,8 +17,15 @@
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Door Knight</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Inter:wght@400;500;600;800&display=swap">
 <style>
+@font-face{font-family:"Cinzel";font-weight:500;font-display:swap;src:url(fonts/cinzel-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Cinzel";font-weight:700;font-display:swap;src:url(fonts/cinzel-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Cinzel";font-weight:900;font-display:swap;src:url(fonts/cinzel-latin-900-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:500;font-display:swap;src:url(fonts/inter-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:600;font-display:swap;src:url(fonts/inter-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:800;font-display:swap;src:url(fonts/inter-latin-800-normal.woff2) format("woff2")}
+
 /* Layout : la nuit du jeu (indigo profond, rayons du splash, or de l'emblème). On descend la page comme on descend les portes : accueil, héros, mondes, gardiens, campement, communauté, téléchargement. */
 :root{
   color-scheme:dark;
@@ -245,6 +252,7 @@ footer{border-top:1px solid var(--line);padding-block:28px 40px;color:var(--ink-
 footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-between;align-items:center}
 footer .wrap > div{min-width:0}
 footer a{color:var(--ink-dim);text-decoration:none}
+footer .legal-id{font-size:.78rem;opacity:.8}
 footer a:hover{color:var(--ink)}
 @media(min-width:861px){.hero{--ry:42%}.hero .rays{left:28%}}
 
@@ -649,8 +657,8 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
 
 <footer>
   <div class="wrap">
-    <div>© <span id="year">2026</span> Door Knight · Tous droits réservés</div>
-    <div><a href="#communaute">Support</a> · <a href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Discord</a> · <a href="politique-confidentialite.html">Confidentialité</a> · <a href="#top">Haut de page</a></div>
+    <div>© <span id="year">2026</span> FDA · Door Knight<br><span class="legal-id">Édité par FDA, SARL au capital de 10 000 € · RCS Tours 889 822 300</span></div>
+    <div><a href="mailto:contact@doorknight.games">Contact</a> · <a href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Discord</a> · <a href="mentions-legales.html">Mentions légales</a> · <a href="politique-confidentialite.html">Confidentialité</a></div>
   </div>
 </footer>
 

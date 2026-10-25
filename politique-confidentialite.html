@@ -2,55 +2,132 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Door Knight · Politique de confidentialité</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Confidentialité · Door Knight</title>
+<meta name="description" content="Politique de confidentialité du site doorknight.games et du jeu Door Knight : données traitées, bases légales, durées de conservation et droits RGPD.">
+<meta name="theme-color" content="#0d0b1c">
+<link rel="icon" type="image/png" href="favicon.png">
 <style>
-  body{font-family:Georgia,'Times New Roman',serif;max-width:68ch;margin:0 auto;padding:32px 18px 64px;line-height:1.6;color:#1d1830;background:#faf7f0}
-  h1{font-size:2rem;line-height:1.1;margin:0 0 4px}
-  h2{font-size:1.2rem;margin:2em 0 .4em}
-  .maj{color:#6b6480;margin:0 0 2em}
-  a{color:#7a2a2a}
-  .todo{background:#ffe9a8;padding:0 4px}
+@font-face{font-family:"Cinzel";font-weight:700;font-display:swap;src:url(fonts/cinzel-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:600;font-display:swap;src:url(fonts/inter-latin-600-normal.woff2) format("woff2")}
+:root{color-scheme:dark;--night:#0d0b1c;--night-2:#161330;--night-3:#221c48;--line:rgba(190,170,255,.14);--ink:#f3eefc;--ink-dim:#a9a2c8;--gold:#f0c45a;--mint:#5fe0d0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);color:var(--ink);font:16px/1.65 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:780px;margin:0 auto;padding-block:28px 64px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.back{display:inline-flex;gap:8px;align-items:center;color:var(--ink-dim);text-decoration:none;font-size:.9rem}
+.back:hover{color:var(--ink)}
+h1{font-family:"Cinzel",Georgia,serif;font-size:clamp(1.7rem,5vw,2.3rem);margin:22px 0 4px;color:var(--gold)}
+.upd{color:var(--ink-dim);font-size:.88rem;margin:0 0 24px}
+h2{font-family:"Cinzel",Georgia,serif;font-size:1.25rem;margin:40px 0 10px;color:var(--ink)}
+h3{font-size:1rem;margin:24px 0 6px;color:var(--ink)}
+p,li{color:var(--ink-dim)}
+ul{padding-left:20px}
+a{color:var(--gold)}
+.box{padding:16px 20px;background:var(--night-2);border:1px solid var(--line);border-radius:14px}
+.box p{margin:0}
+.tbl{overflow-x:auto;border:1px solid var(--line);border-radius:14px;margin-top:12px}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:.88rem}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+th{background:var(--night-3);color:var(--ink);font-weight:600}
+td{color:var(--ink-dim)}
+tr:last-child td{border-bottom:0}
+nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
+nav.toc a{font-size:.85rem;text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
+footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-dim);display:flex;flex-wrap:wrap;gap:8px 18px}
+footer a{color:var(--ink-dim)}
 </style>
 </head>
 <body>
-<!-- À COMPLÉTER : remplace les passages surlignés, puis supprime ce commentaire. -->
-<h1>Politique de confidentialité de Door Knight</h1>
-<p class="maj">Dernière mise à jour : <span class="todo">[date]</span></p>
+<div class="wrap">
+  <a class="back" href="./">← Retour au site</a>
+  <h1>Politique de confidentialité</h1>
+  <p class="upd">Dernière mise à jour : 25 octobre 2026</p>
 
-<p>Door Knight est un jeu édité par <span class="todo">[ton nom ou ta micro-entreprise, numéro SIREN]</span>, joignable à <span class="todo">[adresse e-mail de contact]</span>. Cette page explique quelles données sont traitées quand tu joues.</p>
+  <nav class="toc" aria-label="Sommaire">
+    <a href="#responsable">Responsable</a><a href="#site">Le site</a><a href="#jeu">Le jeu</a><a href="#communaute">Communauté et bêta</a><a href="#tableau">Récapitulatif</a><a href="#droits">Tes droits</a>
+  </nav>
 
-<h2>Ce que le jeu enregistre lui-même</h2>
-<p>Ta progression (portes franchies, niveau, or, améliorations, apparence du héros, quêtes, Pass, réglages) est enregistrée uniquement sur ton appareil. Le jeu n'a pas de compte joueur et ne nous envoie aucune de ces informations. Désinstaller le jeu efface cette sauvegarde.</p>
+  <h2 id="responsable">Qui est responsable de tes données ?</h2>
+  <div class="box"><p>La société <strong>FDA</strong>, société à responsabilité limitée à associé unique au capital de 10 000 €, immatriculée au RCS de Tours sous le n° 889 822 300, dont le siège est situé La Bonde, 37230 Fondettes, France, éditrice du jeu Door Knight. Contact : <a href="mailto:contact@doorknight.games">contact@doorknight.games</a>.</p></div>
+  <p>Nous n'avons pas désigné de délégué à la protection des données ; toutes les demandes sont traitées à cette adresse.</p>
 
-<h2>Publicités (Google AdMob)</h2>
-<p>Le jeu affiche des publicités fournies par Google AdMob. Pour cela, Google peut collecter l'identifiant publicitaire de ton appareil, ton adresse IP, des informations techniques sur l'appareil et des données sur l'affichage des annonces. Ces données servent à diffuser, mesurer et, si tu l'acceptes, personnaliser les annonces.</p>
-<p>Si tu te trouves dans l'Espace économique européen, au Royaume-Uni ou en Suisse, un formulaire de consentement s'affiche au premier lancement. Tu peux modifier ton choix à tout moment avec le lien « Confidentialité et publicités » de l'écran d'accueil. Sur iPhone, le suivi publicitaire n'a lieu que si tu l'autorises dans la fenêtre d'Apple.</p>
-<p>Politique de Google : <a href="https://policies.google.com/privacy">policies.google.com/privacy</a> · Fonctionnement des annonces : <a href="https://policies.google.com/technologies/ads">policies.google.com/technologies/ads</a></p>
+  <h2 id="site">Le site doorknight.games</h2>
+  <ul>
+    <li><strong>Aucun cookie, aucune mesure d'audience, aucune publicité.</strong> Le site ne dépose aucun traceur soumis à consentement, c'est pourquoi aucun bandeau cookies ne s'affiche.</li>
+    <li><strong>Hébergement.</strong> Le site est hébergé par GitHub Pages (GitHub, Inc., États-Unis). Comme tout hébergeur, GitHub reçoit ton adresse IP et les informations techniques de ta visite (navigateur, page demandée) pour afficher le site et le protéger contre les abus. Voir la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener" target="_blank">déclaration de confidentialité de GitHub</a>.</li>
+    <li><strong>Polices, images et vidéos</strong> sont hébergées sur le site lui-même : aucune donnée n'est envoyée à Google Fonts ou à un autre service tiers pendant ta visite.</li>
+    <li><strong>Mémoire de ton navigateur.</strong> Le site garde dans ton navigateur, le temps de la visite (sessionStorage), une simple indication pour ne pas rejouer l'animation d'ouverture. Elle ne quitte jamais ton appareil et s'efface à la fermeture de l'onglet.</li>
+    <li><strong>Liens externes.</strong> Les boutons vers TestFlight, l'App Store et Discord t'emmènent sur ces services, qui appliquent leurs propres politiques de confidentialité.</li>
+  </ul>
 
-<h2>Achats intégrés (Google Play, App Store, RevenueCat)</h2>
-<p>Les paiements sont traités par Google Play ou l'App Store ; nous n'avons jamais accès à tes coordonnées bancaires. Pour vérifier les achats et permettre leur restauration, le service RevenueCat reçoit un identifiant anonyme généré par l'application et l'historique des achats effectués dans le jeu.</p>
-<p>Politique de RevenueCat : <a href="https://www.revenuecat.com/privacy">revenuecat.com/privacy</a></p>
-<p>Le Club royal est un abonnement mensuel renouvelé automatiquement jusqu'à résiliation. Tu peux le résilier à tout moment dans les réglages de ton compte App Store ou Google Play.</p>
+  <h2 id="jeu">Le jeu Door Knight</h2>
+  <h3>Ce que le jeu enregistre sur ton appareil</h3>
+  <p>Ta progression (portes franchies, niveau, or, améliorations, apparence du héros, quêtes, Pass, réglages) est enregistrée uniquement sur ton appareil. Le jeu n'a pas de compte joueur avec e-mail ou nom réel et ne nous envoie pas ces informations. Désinstaller le jeu efface cette sauvegarde.</p>
 
-<h2>Statistiques (Firebase Analytics)</h2>
-<p>Si tu l'acceptes (la question est posée dans le jeu en Europe ; ailleurs, c'est activé par défaut et tu peux le désactiver depuis l'écran d'accueil), le jeu envoie à Google Firebase des statistiques d'utilisation : portes jouées, écrans affichés, achats effectués, modèle d'appareil et pays approximatif. Elles servent uniquement à améliorer le jeu, ne sont pas liées à ton identité et ne sont pas utilisées pour la publicité. Politique de Google : <a href="https://policies.google.com/privacy">policies.google.com/privacy</a></p>
+  <h3>Publicités (Google AdMob)</h3>
+  <p>Le jeu affiche des publicités fournies par Google AdMob. Google peut collecter l'identifiant publicitaire de ton appareil, ton adresse IP, des informations techniques et des données sur l'affichage des annonces, pour diffuser et mesurer les annonces et, si tu l'acceptes, les personnaliser. En Europe, au Royaume-Uni et en Suisse, un formulaire de consentement s'affiche au premier lancement ; tu peux changer d'avis à tout moment avec le lien « Confidentialité et publicités » de l'écran d'accueil. Sur iPhone, le suivi publicitaire n'a lieu que si tu l'autorises dans la fenêtre d'Apple. <a href="https://policies.google.com/technologies/ads" rel="noopener" target="_blank">Fonctionnement des annonces Google</a>.</p>
 
-<h2>Pseudo et classement</h2>
-<p>Pour le classement, le jeu crée un compte anonyme Firebase (sans adresse e-mail ni nom réel) et enregistre sur les serveurs de Google Firebase : ton pseudo, son numéro, ton niveau, ta porte record, tes points de la semaine, l'apparence de ton héros et ton statut Club royal. Ces informations sont visibles par les autres joueurs dans le classement. Tu peux demander leur suppression à l'adresse de contact ci-dessus. Les signalements de pseudos sont conservés pour la modération.</p>
-<h2>Arène en ligne</h2>
-<p>Pendant un combat d'arène, le jeu échange avec ton adversaire, via Google Firebase Realtime Database et le même compte anonyme : ton pseudo, ton niveau, ta classe, l'apparence de ton héros, ta cote d'arène et ton état de combat (position, points de vie, attaques). Ces données de combat sont effacées à la fin de la partie ou à la déconnexion.</p>
+  <h3>Achats intégrés (App Store, Google Play, RevenueCat)</h3>
+  <p>Les paiements sont traités par l'App Store ou Google Play : nous n'avons jamais accès à tes coordonnées bancaires. Pour vérifier les achats et permettre leur restauration, le service RevenueCat reçoit un identifiant anonyme généré par l'application et l'historique des achats faits dans le jeu. <a href="https://www.revenuecat.com/privacy" rel="noopener" target="_blank">Politique de RevenueCat</a>. Le Club royal est un abonnement mensuel renouvelé automatiquement jusqu'à résiliation dans les réglages de ton compte App Store ou Google Play.</p>
 
-<h2>Notifications</h2>
-<p>Si tu l'acceptes, le jeu programme sur ton appareil des rappels locaux (trésor du campement plein, cadeau du jour). Ils sont créés par l'application elle-même, sans serveur ni identifiant envoyé. Tu peux les désactiver dans les réglages de ton téléphone.</p>
+  <h3>Statistiques (Firebase Analytics)</h3>
+  <p>Si tu l'acceptes (la question est posée dans le jeu en Europe ; ailleurs, c'est activé par défaut et désactivable depuis l'écran d'accueil), le jeu envoie à Google Firebase des statistiques d'utilisation : portes jouées, écrans affichés, achats, modèle d'appareil et pays approximatif. Elles servent uniquement à améliorer le jeu et ne sont pas utilisées pour la publicité.</p>
 
-<h2>Enfants</h2>
-<p>Door Knight s'adresse aux joueurs de 13 ans et plus. Nous ne collectons pas sciemment de données concernant des enfants de moins de 13 ans.</p>
+  <h3>Pseudo, classement et arène</h3>
+  <p>Pour le classement, le jeu crée un compte anonyme Firebase (sans e-mail ni nom réel) et enregistre sur les serveurs de Google Firebase : ton pseudo et son numéro, ton niveau, ta porte record, tes points de la semaine, l'apparence de ton héros et ton statut Club royal. Ces informations sont visibles par les autres joueurs. Pendant un combat d'arène, le jeu échange avec ton adversaire ton pseudo, ton niveau, ta classe, l'apparence de ton héros, ta cote et ton état de combat ; ces données de combat sont effacées à la fin de la partie. Les signalements de pseudos sont conservés pour la modération.</p>
 
-<h2>Tes droits</h2>
-<p>Conformément au RGPD, tu peux demander l'accès, la rectification ou l'effacement des données te concernant, ou t'opposer à leur traitement, en écrivant à <span class="todo">[adresse e-mail de contact]</span>. Comme le jeu ne crée pas de compte, la plupart des données publicitaires se gèrent directement auprès de Google, et l'identifiant publicitaire peut être réinitialisé dans les réglages de ton téléphone. Tu peux aussi adresser une réclamation à la CNIL (<a href="https://www.cnil.fr">cnil.fr</a>).</p>
+  <h3>Notifications</h3>
+  <p>Si tu l'acceptes, le jeu programme des rappels locaux (trésor du campement, cadeau du jour). Ils sont créés par l'application elle-même, sans serveur ni identifiant envoyé, et se désactivent dans les réglages du téléphone.</p>
 
-<h2>Modifications</h2>
-<p>Cette politique peut évoluer avec le jeu. La date de mise à jour en haut de page indique la dernière version.</p>
+  <h2 id="communaute">Communauté Discord, bêta TestFlight et contact</h2>
+  <ul>
+    <li><strong>Discord.</strong> Sur le serveur Door Knight, tes messages sont traités par Discord selon sa propre politique. Les posts des forums #bugs, #idées, #gameplay, #classes et #décors sont recopiés automatiquement, avec ton pseudo Discord, la date et les pièces jointes, dans des tickets de suivi privés sur GitHub, pour corriger les bugs et étudier les idées.</li>
+    <li><strong>Bêta TestFlight.</strong> Si tu rejoins la bêta, Apple nous transmet des informations sur ton test : appareil et version d'iOS, installations, sessions, rapports de plantage et retours que tu envoies depuis TestFlight. Voir la <a href="https://www.apple.com/fr/legal/privacy/" rel="noopener" target="_blank">politique de confidentialité d'Apple</a>.</li>
+    <li><strong>E-mails.</strong> Si tu nous écris, nous utilisons ton adresse et ton message uniquement pour te répondre.</li>
+  </ul>
+
+  <h2 id="tableau">Récapitulatif : finalités, bases légales et durées</h2>
+  <div class="tbl">
+  <table>
+    <thead><tr><th>Traitement</th><th>Données</th><th>Base légale (RGPD, art. 6)</th><th>Durée de conservation</th></tr></thead>
+    <tbody>
+      <tr><td>Hébergement du site</td><td>Adresse IP, données techniques de connexion</td><td>Intérêt légitime : afficher et sécuriser le site</td><td>Selon la politique de GitHub</td></tr>
+      <tr><td>Publicités personnalisées</td><td>Identifiant publicitaire, IP, données d'annonces</td><td>Consentement</td><td>Jusqu'au retrait du consentement ; durées de Google</td></tr>
+      <tr><td>Publicités non personnalisées</td><td>Données techniques, IP</td><td>Intérêt légitime : financer le jeu gratuit</td><td>Durées de Google</td></tr>
+      <tr><td>Statistiques Firebase</td><td>Événements de jeu, appareil, pays approximatif</td><td>Consentement</td><td>14 mois</td></tr>
+      <tr><td>Achats et restauration</td><td>Identifiant anonyme, historique d'achats</td><td>Exécution du contrat</td><td>Tant que l'application est utilisée</td></tr>
+      <tr><td>Classement et arène</td><td>Pseudo, niveau, scores, apparence</td><td>Exécution du contrat (fonctions en ligne)</td><td>Jusqu'à ta demande de suppression ou 2 ans sans partie</td></tr>
+      <tr><td>Modération des pseudos</td><td>Pseudo signalé, motif</td><td>Intérêt légitime : protéger les joueurs</td><td>1 an</td></tr>
+      <tr><td>Retours Discord en tickets</td><td>Pseudo Discord, message, pièces jointes</td><td>Intérêt légitime : corriger et améliorer le jeu</td><td>Jusqu'à 1 an après la clôture du ticket</td></tr>
+      <tr><td>Bêta TestFlight</td><td>Données de test transmises par Apple</td><td>Intérêt légitime : tester le jeu avant sa sortie</td><td>Durée de la bêta</td></tr>
+      <tr><td>Réponses aux e-mails</td><td>Adresse e-mail, message</td><td>Intérêt légitime : te répondre</td><td>3 ans après le dernier échange</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <h3>Qui reçoit ces données ?</h3>
+  <p>Uniquement la société FDA et ses sous-traitants techniques : GitHub (hébergement du site et des tickets), Google (AdMob, Firebase), RevenueCat (achats), Apple (App Store, TestFlight) et Discord (communauté). Nous ne vendons aucune donnée.</p>
+
+  <h3>Transferts hors de l'Union européenne</h3>
+  <p>Certains de ces prestataires sont situés aux États-Unis. Ces transferts sont encadrés par le cadre de protection des données UE–États-Unis (Data Privacy Framework) pour les sociétés certifiées, ou à défaut par les clauses contractuelles types de la Commission européenne.</p>
+
+  <h3>Mineurs</h3>
+  <p>Door Knight s'adresse aux joueurs de 13 ans et plus. En France, si tu as moins de 15 ans, ton accord pour les publicités personnalisées et les statistiques doit être donné avec un parent ou un tuteur. Nous ne collectons pas sciemment de données sur des enfants de moins de 13 ans ; si c'est le cas, écris-nous et nous les supprimerons.</p>
+
+  <h2 id="droits">Tes droits</h2>
+  <p>Conformément au RGPD et à la loi Informatique et Libertés, tu peux demander l'accès à tes données, leur rectification, leur effacement, la limitation de leur traitement ou leur portabilité, t'opposer à un traitement fondé sur l'intérêt légitime, retirer ton consentement à tout moment, et définir des directives sur le sort de tes données après ton décès.</p>
+  <p>Écris à <a href="mailto:contact@doorknight.games">contact@doorknight.games</a> en indiquant ton pseudo (et son numéro) ou ton pseudo Discord. Nous répondons dans un délai d'un mois. Comme le jeu ne crée pas de compte nominatif, les données publicitaires se gèrent aussi directement auprès de Google, et l'identifiant publicitaire peut être réinitialisé dans les réglages du téléphone.</p>
+  <p>Si tu estimes que tes droits ne sont pas respectés, tu peux adresser une réclamation à la CNIL : <a href="https://www.cnil.fr/fr/plaintes" rel="noopener" target="_blank">cnil.fr/fr/plaintes</a>.</p>
+
+  <h2>Modifications</h2>
+  <p>Cette politique peut évoluer avec le jeu et le site. La date en haut de page indique la dernière version.</p>
+
+  <footer>
+    <span>© 2026 FDA · Door Knight</span>
+    <a href="./">Accueil</a>
+    <a href="mentions-legales.html">Mentions légales</a>
+  </footer>
+</div>
 </body>
 </html>
