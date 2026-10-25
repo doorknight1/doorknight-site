@@ -123,9 +123,35 @@ section{padding-block:80px;border-top:1px solid var(--line)}
 .hero-panel p{color:var(--ink-dim);margin-top:8px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
 .chip{font-size:.78rem;font-weight:600;padding:6px 11px;border-radius:999px;border:1px solid var(--line);background:var(--night-3);color:var(--ink)}
-.hero-panel .shot{width:min(230px,100%);margin:0 auto;border-radius:22px;overflow:hidden;aspect-ratio:9/19.5;box-shadow:0 20px 50px rgba(0,0,0,.6);position:relative}
-.hero-panel .shot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s}
-.hero-panel .shot img.on{opacity:1}
+/* présentation du héros : en-tête + sorts filmés */
+@media(min-width:901px){.heroes{grid-template-columns:minmax(0,430px) 1fr}}
+.hero-panel{grid-template-columns:1fr;gap:16px;align-items:start}
+.hp-head{display:grid;grid-template-columns:92px 1fr;gap:16px;align-items:center}
+.hp-head .portrait{width:92px}
+.hero-panel h3{margin-top:0}
+.hero-panel .chips{margin-top:0}
+.spells{display:grid;gap:10px;--sc:var(--gold)}
+.spells-t{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--mint);margin:4px 0 0!important}
+.spells-t span{font-weight:500;letter-spacing:.04em;text-transform:none;color:var(--ink-dim);margin-left:6px}
+.stage{position:relative;aspect-ratio:1;max-width:100%;border-radius:18px;overflow:hidden;background:#07060f;
+  box-shadow:0 0 0 1px var(--line),0 18px 50px rgba(0,0,0,.55),0 0 60px -14px var(--sc);transition:box-shadow .5s}
+.stage video{display:block;width:100%;height:100%;object-fit:cover}
+.stage::after{content:"";position:absolute;inset:auto 0 0 0;height:42%;background:linear-gradient(transparent,rgba(7,6,15,.85));pointer-events:none}
+.stage .cap{position:absolute;left:16px;right:16px;bottom:18px;z-index:1;display:grid;gap:2px;text-shadow:0 2px 8px #000}
+.stage .sch{font-size:.68rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--sc)}
+.stage .cap b{font-family:var(--font-display);font-size:1.35rem;color:#fff;line-height:1.15}
+.stage .cap.swap{animation:capIn .45s ease-out}
+@keyframes capIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.pbar{position:absolute;left:0;right:0;bottom:0;height:3px;background:rgba(255,255,255,.12);z-index:1}
+.pbar i{display:block;height:100%;width:0;background:var(--sc);box-shadow:0 0 8px var(--sc)}
+.spick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.spick button{--sc:var(--gold);display:grid;gap:6px;padding:6px 6px 8px;border-radius:12px;background:var(--night-3);border:1px solid var(--line);color:var(--ink);
+  font:600 .74rem/1.2 var(--font-body);cursor:pointer;text-align:center;transition:border-color .2s,transform .2s,box-shadow .2s;min-width:0}
+.spick button:hover{transform:translateY(-2px)}
+.spick img{width:100%;aspect-ratio:1;object-fit:cover;border-radius:8px;opacity:.75;transition:opacity .2s}
+.spick small{display:block;font-size:.6rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--sc)}
+.spick button.on{border-color:var(--sc);box-shadow:0 0 0 1px var(--sc),0 6px 20px -6px var(--sc)}
+.spick button.on img{opacity:1}
 .mech{display:grid;gap:14px}
 .mech article{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start;padding:16px 18px;border:1px solid var(--line);border-radius:16px;background:rgba(22,19,48,.5)}
 .mech svg{width:44px;height:44px;color:var(--gold)}
@@ -323,10 +349,13 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
   .tabs{gap:8px}
   .tab{padding:8px 4px 6px;font-size:.68rem;border-radius:14px}
   .tab img{width:100%;max-width:60px}
-  .hero-panel{padding:20px;gap:20px;text-align:center}
-  .hero-panel .portrait{width:96px;margin:0 auto}
-  .hero-panel .chips{justify-content:center}
-  .hero-panel .shot{width:min(190px,62%)}
+  .hero-panel{padding:16px;gap:14px}
+  .hp-head{grid-template-columns:72px 1fr;gap:12px}
+  .hp-head .portrait{width:72px}
+  .hero-panel h3{font-size:1.25rem}
+  .hero-panel p{font-size:.92rem;margin-top:4px}
+  .stage .cap b{font-size:1.15rem}
+  .spick button{font-size:.68rem;padding:5px 5px 7px}
   .mech article{grid-template-columns:36px 1fr;padding:14px}
   .mech svg{width:36px;height:36px}
 
@@ -419,17 +448,22 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
           <button class="tab" data-h="3"><img src="img/cls-samourai.webp" alt="">Samouraï</button>
         </div>
         <div class="hero-panel">
-          <div>
+          <div class="hp-head">
             <img class="portrait" id="hPortrait" src="img/cls-chevalier.webp" alt="">
-            <h3 id="hName">Le Chevalier</h3>
-            <p id="hDesc">Corps à corps. Frappe en arc de cercle et renvoie les projectiles. Le plus robuste.</p>
-            <div class="chips" id="hChips"></div>
+            <div>
+              <h3 id="hName">Le Chevalier</h3>
+              <p id="hDesc">Corps à corps. Frappe en arc de cercle et renvoie les projectiles. Le plus robuste.</p>
+            </div>
           </div>
-          <div class="shot" id="hShot">
-            <img src="img/shot-knight.webp" class="on" alt="">
-            <img src="img/shot-archer.webp" alt="">
-            <img src="img/shot-mage.webp" alt="">
-            <img src="img/shot-samurai.webp" alt="">
+          <div class="chips" id="hChips"></div>
+          <div class="spells">
+            <p class="spells-t">Sorts en action <span>filmés dans le jeu</span></p>
+            <div class="stage" id="spStage">
+              <video id="spVid" muted playsinline autoplay preload="auto" poster="vid/knight-s8.jpg" aria-label="Animation du sort"></video>
+              <div class="cap"><span class="sch" id="spSch">Sacré</span><b id="spName">Jugement dernier</b></div>
+              <div class="pbar"><i id="spBar"></i></div>
+            </div>
+            <div class="spick" id="spPick"></div>
           </div>
         </div>
       </div>
@@ -640,10 +674,44 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
     {n:'Le Mage',d:"Lance des orbes arcaniques qui explosent en zone. Fragile, mais dévastateur.",c:['Feu','Glace','Foudre','Spéciale : Nova',"Bâton d'apprenti → Bâton stellaire"],img:'img/cls-mage.webp'},
     {n:'Le Samouraï',d:"Enchaîne les coups de katana et traverse les hordes d'une ruée Iaijutsu.",c:['Lame','Ki','Sakura','Spéciale : Ruée Iaijutsu','Bokken → Nodachi'],img:'img/cls-samourai.webp'}
   ];
-  var tabs=[].slice.call(document.querySelectorAll('.tab')),hs=[].slice.call(document.querySelectorAll('#hShot img'));
+  // sorts filmés dans le jeu : [fichier, nom, école, couleur]
+  var SPELLS=[
+    [['knight-s8','Jugement dernier','Sacré','#ffe28a'],['knight-w4','Lames tournoyantes','Guerre','#ff8a6a'],['knight-t4','Séisme','Terre','#d9b27a']],
+    [['archer-n8','Colère de Gaïa','Nature','#8fe39a'],['archer-v7','Ouragan','Vent','#a8e8ff'],['archer-o7','Fléau','Ombre','#c4a8ff']],
+    [['mage-f6','Phénix','Feu','#ff9a4a'],['mage-g5','Blizzard','Glace','#8fdcff'],['mage-l8','Dieu de l’orage','Foudre','#ffe14a']],
+    [['samurai-b8','Mille coupes','Lame','#f2f5fb'],['samurai-k7','Ki rebondissant','Ki','#8ff0d8'],['samurai-y6','Danse des cerisiers','Sakura','#ffb3d4']]
+  ];
+  var vid=document.getElementById('spVid'),spPick=document.getElementById('spPick'),spBar=document.getElementById('spBar'),
+      spWrap=document.querySelector('.spells'),cap=document.querySelector('.stage .cap'),hero=0,cur=0;
+  function spell(j,user){
+    cur=j;var s=SPELLS[hero][j];
+    spWrap.style.setProperty('--sc',s[3]);
+    document.getElementById('spName').textContent=s[1];document.getElementById('spSch').textContent=s[2];
+    cap.classList.remove('swap');void cap.offsetWidth;cap.classList.add('swap');
+    [].forEach.call(spPick.children,function(b,k){b.classList.toggle('on',k===j)});
+    vid.poster='vid/'+s[0]+'.jpg';vid.src='vid/'+s[0]+'.mp4';spBar.style.width='0';
+    if(!reduce||user){var pr=vid.play();if(pr&&pr.catch)pr.catch(function(){});}
+  }
+  function renderSpells(){
+    spPick.innerHTML='';
+    SPELLS[hero].forEach(function(s,j){
+      var b=document.createElement('button');b.type='button';b.style.setProperty('--sc',s[3]);
+      b.innerHTML='<img src="vid/'+s[0]+'.jpg" alt="" loading="lazy"><span><small>'+s[2]+'</small>'+s[1]+'</span>';
+      b.addEventListener('click',function(){spell(j,true)});spPick.appendChild(b);
+    });
+    spell(0);
+  }
+  vid.addEventListener('timeupdate',function(){if(vid.duration)spBar.style.width=(vid.currentTime/vid.duration*100)+'%';});
+  vid.addEventListener('ended',function(){spell((cur+1)%3);});
+  // ne lancer les vidéos que lorsqu'elles sont visibles
+  if('IntersectionObserver' in window){
+    new IntersectionObserver(function(en){en.forEach(function(x){if(x.isIntersecting){if(!reduce){var p=vid.play();if(p&&p.catch)p.catch(function(){});}}else vid.pause();});},{threshold:.25}).observe(vid);
+  }
+
+  var tabs=[].slice.call(document.querySelectorAll('.tab'));
   function pick(i){
     tabs.forEach(function(t,k){t.classList.toggle('on',k===i)});
-    hs.forEach(function(s,k){s.classList.toggle('on',k===i)});
+    hero=i;renderSpells();
     document.getElementById('hName').textContent=H[i].n;
     document.getElementById('hDesc').textContent=H[i].d;
     var hp=document.getElementById('hPortrait');hp.src=H[i].img;
@@ -715,7 +783,7 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
 
   // cartes qui s'inclinent sous la souris
   if(!reduce&&matchMedia('(hover:hover)').matches){
-    [].slice.call(document.querySelectorAll('.world,.boss,.hero-panel .shot')).forEach(function(el){
+    [].slice.call(document.querySelectorAll('.world,.boss,.stage')).forEach(function(el){
       el.addEventListener('pointermove',function(e){var r=el.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;
         el.style.transform='perspective(700px) rotateY('+(x*10)+'deg) rotateX('+(-y*10)+'deg) translateY(-4px)';});
       el.addEventListener('pointerleave',function(){el.style.transform='';});
