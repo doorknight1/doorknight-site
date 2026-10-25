@@ -169,12 +169,15 @@ section{padding-block:80px;border-top:1px solid var(--line)}
 .worlds{background:var(--night-2)}
 .corridor{display:flex;gap:14px;overflow-x:auto;padding-bottom:16px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .corridor::-webkit-scrollbar{height:6px}.corridor::-webkit-scrollbar-thumb{background:var(--night-3);border-radius:3px}
-.world{flex:0 0 220px;scroll-snap-align:start;border-radius:18px;padding:22px 18px 18px;min-height:220px;display:grid;align-content:end;gap:6px;position:relative;overflow:hidden;border:1px solid var(--line);color:#fff;background:var(--w)}
-.world::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.55))}
+.world{flex:0 0 260px;scroll-snap-align:start;border-radius:18px;padding:22px 18px 18px;min-height:240px;display:grid;align-content:end;gap:6px;position:relative;overflow:hidden;border:1px solid var(--line);color:#fff;background:#0d0b1c var(--img) center 35%/cover no-repeat;box-shadow:0 14px 34px -12px rgba(0,0,0,.6)}
+.world::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,6,18,0) 30%,rgba(8,6,18,.82))}
+.world h3,.world .n,.world p{text-shadow:0 2px 8px rgba(0,0,0,.7)}
 .world > *{position:relative}
 .world .n{font-family:var(--font-display);font-size:.72rem;letter-spacing:.2em;opacity:.85}
 .world h3{font-size:1.1rem}
 .world p{font-size:.82rem;opacity:.85}
+.world:hover{background-size:112%}
+.world{transition:transform .25s,box-shadow .25s,border-color .25s,background-size .6s}
 .world .orb{position:absolute;top:18px;right:18px;width:46px;height:46px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#fff,var(--o) 40%,transparent 72%);filter:blur(.5px);animation:pulse 3s ease-in-out infinite}
 @keyframes pulse{0%,100%{transform:scale(1);opacity:.8}50%{transform:scale(1.15);opacity:1}}
 .cycle{margin-top:22px;color:var(--ink-dim);font-size:.95rem;display:flex;gap:10px;align-items:center}
@@ -207,7 +210,7 @@ section{padding-block:80px;border-top:1px solid var(--line)}
 .bar i{display:block;height:100%;width:30%;background:linear-gradient(90deg,var(--gold-deep),var(--gold));transition:width 1s linear}
 
 /* gallery */
-.gallery{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.gallery{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:860px){.gallery{grid-template-columns:repeat(2,1fr)}}
 .gallery figure{margin:0;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--night-2);transition:transform .25s}
 .gallery figure:hover{transform:translateY(-6px) scale(1.02)}
@@ -510,10 +513,11 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
     </div>
     <div class="phone" aria-label="Captures d'écran du jeu">
       <div class="screen" id="heroShots">
-        <img src="img/shot-knight.webp" class="on" alt="Le chevalier combat des slimes dans la Forêt de Brume">
-        <img src="img/shot-mage.webp" alt="Le mage lance un orbe arcanique">
-        <img src="img/shot-map.webp" alt="La carte des portes de la Forêt de Brume">
-        <img src="img/shot-samurai.webp" alt="Le samouraï au katana">
+        <img src="img/shot-door.webp" class="on" alt="Entrée de la porte 72 au Château Hanté">
+        <img src="img/shot-knight.webp" alt="Le chevalier au combat dans le Château Hanté">
+        <img src="img/shot-mage.webp" alt="Le mage dans la Forge Volcanique">
+        <img src="img/shot-map.webp" alt="La carte des portes et ses zones peintes">
+        <img src="img/shot-samurai.webp" alt="Le samouraï dans les Pics Gelés">
         <img src="img/shot-title.webp" alt="L'écran titre de Door Knight">
       </div>
     </div>
@@ -585,16 +589,16 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
       <p>Dix portes par monde, puis le monde suivant. Après l'Antre du Dragon, le Cercle II commence, plus redoutable, et ainsi de suite sans fin.</p>
     </div>
     <div class="corridor rv" id="corridor">
-      <div class="world" style="--w:linear-gradient(160deg,#1f3a2a,#0b1a12);--o:#7fd68a"><div class="orb"></div><span class="n">PORTES 1–10</span><h3>Forêt de Brume</h3><p>Chef Troll · Roi Gluant</p></div>
-      <div class="world" style="--w:linear-gradient(160deg,#2a2550,#120f26);--o:#9b86ff"><div class="orb"></div><span class="n">PORTES 11–20</span><h3>Grottes d'Écho</h3><p>Cristaux, échos et Seigneur des Os</p></div>
-      <div class="world" style="--w:linear-gradient(160deg,#2f3a1a,#141a08);--o:#b7d14e"><div class="orb"></div><span class="n">PORTES 21–30</span><h3>Marais Putride</h3><p>Brume, vase et choses qui se divisent</p></div>
-      <div class="world" style="--w:linear-gradient(160deg,#6b4a14,#2a1c06);--o:#f0c45a"><div class="orb"></div><span class="n">PORTES 31–40</span><h3>Désert d'Ambre</h3><p>Gardien Anubis · Pharaon Maudit</p></div>
-      <div class="world" style="--w:linear-gradient(160deg,#1e3f5a,#0a1a28);--o:#8fdcff"><div class="orb"></div><span class="n">PORTES 41–50</span><h3>Pics Gelés</h3><p>Gel, blizzard et Loup Alpha</p></div>
-      <div class="world" style="--w:linear-gradient(160deg,#5a1e14,#200806);--o:#ff6b3d"><div class="orb"></div><span class="n">PORTES 51–60</span><h3>Forge Volcanique</h3><p>Minotaure de Lave</p></div>
-      <div class="world" style="--w:linear-gradient(160deg,#143f4a,#071a20);--o:#5fe0d0"><div class="orb"></div><span class="n">PORTES 61–70</span><h3>Cité Engloutie</h3><p>Kraken des Abysses</p></div>
-      <div class="world" style="--w:linear-gradient(160deg,#2c1e3f,#100a18);--o:#d7a4ff"><div class="orb"></div><span class="n">PORTES 71–80</span><h3>Château Hanté</h3><p>Chevalier Noir, à la bougie</p></div>
-      <div class="world" style="--w:linear-gradient(160deg,#20304a,#0a1020);--o:#ffe97a"><div class="orb"></div><span class="n">PORTES 81–90</span><h3>Cieux d'Orage</h3><p>Éclairs et pluies de projectiles</p></div>
-      <div class="world" style="--w:linear-gradient(160deg,#4a1414,#1a0606);--o:#ff3d3d"><div class="orb"></div><span class="n">PORTES 91–100</span><h3>Antre du Dragon</h3><p>Puis le Cercle II commence</p></div>
+      <div class="world" style="--img:url(img/zone-0.webp)"><span class="n">PORTES 1–10</span><h3>Forêt de Brume</h3><p>Chef Troll · Roi Gluant</p></div>
+      <div class="world" style="--img:url(img/zone-1.webp)"><span class="n">PORTES 11–20</span><h3>Grottes d'Écho</h3><p>Cristaux, échos et Seigneur des Os</p></div>
+      <div class="world" style="--img:url(img/zone-2.webp)"><span class="n">PORTES 21–30</span><h3>Marais Putride</h3><p>Brume, vase et choses qui se divisent</p></div>
+      <div class="world" style="--img:url(img/zone-3.webp)"><span class="n">PORTES 31–40</span><h3>Désert d'Ambre</h3><p>Gardien Anubis · Pharaon Maudit</p></div>
+      <div class="world" style="--img:url(img/zone-4.webp)"><span class="n">PORTES 41–50</span><h3>Pics Gelés</h3><p>Gel, blizzard et Loup Alpha</p></div>
+      <div class="world" style="--img:url(img/zone-5.webp)"><span class="n">PORTES 51–60</span><h3>Forge Volcanique</h3><p>Minotaure de Lave</p></div>
+      <div class="world" style="--img:url(img/zone-6.webp)"><span class="n">PORTES 61–70</span><h3>Cité Engloutie</h3><p>Kraken des Abysses</p></div>
+      <div class="world" style="--img:url(img/zone-7.webp)"><span class="n">PORTES 71–80</span><h3>Château Hanté</h3><p>Chevalier Noir, à la bougie</p></div>
+      <div class="world" style="--img:url(img/zone-8.webp)"><span class="n">PORTES 81–90</span><h3>Cieux d'Orage</h3><p>Éclairs et pluies de projectiles</p></div>
+      <div class="world" style="--img:url(img/zone-9.webp)"><span class="n">PORTES 91–100</span><h3>Antre du Dragon</h3><p>Puis le Cercle II commence</p></div>
     </div>
     <div class="cycle rv"><b>Cercles</b> jour, crépuscule, nuit, lune de sang : chaque Cercle change l'ambiance de tous les mondes.</div>
   </div>
@@ -656,9 +660,11 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
       <h2>Quelques portes plus loin</h2>
     </div>
     <div class="gallery">
+      <figure class="rv"><img src="img/shot-home.webp" alt="Accueil du jeu" loading="lazy"><figcaption>L'accueil : cadeau du jour, quêtes, tournoi et campement</figcaption></figure>
+      <figure class="rv"><img src="img/shot-map.webp" alt="Carte des portes avec les zones illustrées" loading="lazy"><figcaption>Dix zones peintes, dix portes chacune</figcaption></figure>
+      <figure class="rv"><img src="img/shot-door.webp" alt="Entrée de la porte 72 au Château Hanté" loading="lazy"><figcaption>Porte 72 : le Château Hanté</figcaption></figure>
+      <figure class="rv"><img src="img/shot-mage.webp" alt="Le mage dans la Forge Volcanique" loading="lazy"><figcaption>La Forge Volcanique et ses coulées de lave</figcaption></figure>
       <figure class="rv"><img src="img/shot-hero.webp" alt="Création du héros" loading="lazy"><figcaption>Crée ton héros : classe, allure, pseudo</figcaption></figure>
-      <figure class="rv"><img src="img/shot-map.webp" alt="Carte des portes" loading="lazy"><figcaption>Dix portes par monde, mini-boss et gardien</figcaption></figure>
-      <figure class="rv"><img src="img/shot-archer.webp" alt="L'archer en combat" loading="lazy"><figcaption>L'archer tire de loin des flèches qui transpercent</figcaption></figure>
       <figure class="rv"><img src="img/shot-forge.webp" alt="La forge" loading="lazy"><figcaption>La Forge : puissance, armure, cœur de lion</figcaption></figure>
     </div>
   </div>
