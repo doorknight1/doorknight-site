@@ -335,11 +335,15 @@ body.intro-on .hero *{animation-play-state:paused!important}
 #portal.s-leak .seam{opacity:1;width:4px;margin-left:-2px;box-shadow:0 0 30px 10px rgba(255,220,140,.75)}
 #portal.s-open .seam{opacity:0}
 #portal svg.frame{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-#portal .trace{stroke-dasharray:330;stroke-dashoffset:330;animation:pTrace 1.1s cubic-bezier(.5,0,.3,1) .45s forwards}
+#portal .trace{stroke-dasharray:330;stroke-dashoffset:330}
+#portal.s-go .trace{animation:pTrace 1s cubic-bezier(.5,0,.3,1) .05s forwards}
 @keyframes pTrace{to{stroke-dashoffset:0}}
-#portal .rune{opacity:.15;animation:pRune .35s ease-out forwards;animation-delay:var(--d)}
+#portal .rune{opacity:.15}
+#portal.s-go .rune{animation:pRune .35s ease-out forwards;animation-delay:var(--d)}
 @keyframes pRune{0%{opacity:.15}50%{opacity:1;transform:scale(1.8)}100%{opacity:1;transform:scale(1)}}
-#portal .gem{transform-box:fill-box;transform-origin:center;animation:pGem .7s ease-out 1.35s both}
+#portal .gem{transform-box:fill-box;transform-origin:center;animation:pGemIdle 2.4s ease-in-out infinite}
+#portal.s-go .gem{animation:pGem .7s ease-out .85s both}
+@keyframes pGemIdle{0%,100%{filter:brightness(1)}50%{filter:brightness(1.5) drop-shadow(0 0 3px #9b86ff)}}
 @keyframes pGem{0%{filter:brightness(1)}40%{filter:brightness(3) drop-shadow(0 0 6px #c7b8ff);transform:scale(1.6)}100%{filter:brightness(1.3) drop-shadow(0 0 3px #9b86ff);transform:scale(1)}}
 #portal .flash{position:absolute;inset:0;background:radial-gradient(circle at 50% 55%,#fff,#fff6d2 35%,rgba(255,214,130,0) 75%);opacity:0;pointer-events:none}
 #portal.s-open .flash{animation:pFlash .9s ease-out .25s}
@@ -352,6 +356,16 @@ body.intro-on .hero *{animation-play-state:paused!important}
 #portal.s-logo .wave{animation:pWave 1.1s ease-out forwards}
 #portal.s-logo .wave.w2{animation-delay:.18s}
 @keyframes pWave{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(60)}}
+#portal .prompt{position:absolute;left:0;right:0;bottom:calc(9vh + env(safe-area-inset-bottom,0px));display:grid;justify-items:center;gap:10px;text-align:center;
+  padding-inline:max(16px,env(safe-area-inset-left,0px));transition:opacity .4s,transform .4s;pointer-events:none}
+#portal .prompt b{font:700 clamp(1.05rem,4.4vw,1.5rem)/1.2 var(--font-display);letter-spacing:.08em;color:#ffe7a0;text-shadow:0 0 18px rgba(240,196,90,.6);animation:pPrompt 1.8s ease-in-out infinite}
+#portal .prompt span{display:inline-flex;align-items:center;gap:8px;font:600 .8rem var(--font-body);color:var(--ink-dim);letter-spacing:.04em}
+#portal .prompt svg{width:16px;height:16px}
+@keyframes pPrompt{0%,100%{opacity:.65;transform:scale(1)}50%{opacity:1;transform:scale(1.04)}}
+#portal.s-go .prompt{opacity:0;transform:translateY(12px)}
+#portal:not(.s-go) .pstage{cursor:pointer}
+#portal:not(.s-go) .shk{animation:pIdle 2.6s ease-in-out 1.1s infinite}
+@keyframes pIdle{0%,100%{filter:drop-shadow(0 0 0 rgba(240,196,90,0))}50%{filter:drop-shadow(0 0 26px rgba(240,196,90,.45))}}
 #portal .pskip{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:calc(14px + env(safe-area-inset-right,0px));z-index:2;
   display:inline-flex;align-items:center;gap:6px;font:600 .82rem/1 var(--font-body);color:#fff;background:rgba(10,8,22,.5);border:1px solid rgba(255,255,255,.22);
   border-radius:999px;padding:9px 14px;cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
@@ -880,7 +894,9 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
       '<rect x="0" y="141" width="100" height="5" rx="1.5" fill="url(#pg)" stroke="#120a20" stroke-width=".6"/>'+
       '<path class="gem" d="M50 0l6 7.5-6 7.5-6-7.5z" fill="url(#pj)" stroke="#120a20" stroke-width=".8"/></svg>'+
       '</div></div><div class="flash"></div><div class="wave"></div><div class="wave w2"></div><div class="plogo"></div></div>'+
-      '<button class="pskip" type="button" aria-hidden="false">Passer</button>';
+      '<div class="prompt"><b>'+(matchMedia('(hover:hover)').matches?'Clique sur la porte pour entrer':'Touche la porte pour entrer')+'</b>'+
+      '<span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 5 6 9H3v6h3l5 4z"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/></svg>Monte le son</span></div>'+
+      '<button class="pskip" type="button">Passer</button>';
     var src=document.querySelector('.logo svg');if(src)o.querySelector('.plogo').appendChild(src.cloneNode(true));
     document.body.appendChild(o);document.body.classList.add('intro-on');
     // particules : braises qui montent, puis explosion de lumière à l'ouverture
@@ -895,16 +911,74 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
         if(p.l<=0||p.y<-20){if(!p.drag&&parts.length<400){parts[k]=ember();}else parts.splice(k,1);continue;}
         x.globalAlpha=Math.max(0,p.l);x.fillStyle=p.g?'#ffcf6a':'#b9a8ff';x.beginPath();x.arc(p.x,p.y,p.r,0,6.283);x.fill();}
       x.globalAlpha=1;requestAnimationFrame(loop);})();
-    var T=[],ended=false;function at(ms,fn){T.push(setTimeout(fn,ms));}
-    function finish(){if(ended)return;ended=true;T.forEach(clearTimeout);o.classList.add('s-open','s-logo','s-fly');
-      document.body.classList.remove('intro-on');introDone();setTimeout(function(){alive=false;o.remove();},1100);}
-    at(1500,function(){o.classList.add('s-leak','s-shake');});
-    at(2150,function(){o.classList.remove('s-shake');o.classList.add('s-open');burst();});
-    at(2650,function(){o.classList.add('s-logo');});
-    at(4200,finish);
-    o.querySelector('.pskip').addEventListener('click',finish);
-    o.addEventListener('click',function(e){if(e.target===o||o.contains(e.target))finish();});
-    addEventListener('keydown',function esc(ev){if(ev.key==='Escape'||ev.key==='Enter'||ev.key===' '){finish();removeEventListener('keydown',esc);}});
+    var T=[],ended=false,started=false,snd=null;function at(ms,fn){T.push(setTimeout(fn,ms));}
+    function finish(skip){if(ended)return;ended=true;T.forEach(clearTimeout);o.classList.add('s-go','s-open','s-logo','s-fly');
+      if(snd){if(skip)snd.stop();else setTimeout(snd.stop,1800);}document.body.classList.remove('intro-on');introDone();setTimeout(function(){alive=false;o.remove();},1100);}
+    function start(){if(started||ended)return;started=true;
+      try{var AC=window.AudioContext||window.webkitAudioContext;if(AC){var ac=new AC();if(ac.resume)ac.resume();snd=epicSound(ac);}}catch(e){}
+      o.classList.add('s-go');
+      at(1100,function(){o.classList.add('s-leak','s-shake');});
+      at(1750,function(){o.classList.remove('s-shake');o.classList.add('s-open');burst();});
+      at(2250,function(){o.classList.add('s-logo');});
+      at(3900,finish);}
+    o.querySelector('.pskip').addEventListener('click',function(e){e.stopPropagation();finish(true);});
+    o.addEventListener('click',function(){if(!started)start();});
+    addEventListener('keydown',function key(ev){if(ended){removeEventListener('keydown',key);return;}
+      if(ev.key==='Escape')finish(true);else if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();start();}});
+  }
+
+  // son épique de l'ouverture, composé en Web Audio (se cale sur l'animation, t = 0 au toucher)
+  function epicSound(ac,offline){
+    var t0=ac.currentTime+(offline?0:.03),out=ac.createGain(),comp=ac.createDynamicsCompressor();
+    comp.threshold.value=-14;comp.ratio.value=4;comp.attack.value=.004;comp.release.value=.25;
+    out.gain.value=.44;var lim=ac.createDynamicsCompressor();lim.threshold.value=-3;lim.ratio.value=20;lim.attack.value=.001;lim.release.value=.1;out.connect(comp);comp.connect(lim);lim.connect(ac.destination);
+    // réverbération de cathédrale
+    var rv=ac.createConvolver(),len=ac.sampleRate*2.8,ir=ac.createBuffer(2,len,ac.sampleRate);
+    for(var c=0;c<2;c++){var d=ir.getChannelData(c);for(var i=0;i<len;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/len,3.2);}
+    rv.buffer=ir;var wet=ac.createGain();wet.gain.value=.38;rv.connect(wet);wet.connect(out);
+    var noiseBuf=ac.createBuffer(1,ac.sampleRate*2,ac.sampleRate),nd=noiseBuf.getChannelData(0);for(var n=0;n<nd.length;n++)nd[n]=Math.random()*2-1;
+    function bus(g,dry,send){var a=ac.createGain();a.gain.value=g;var b=ac.createGain();b.gain.value=dry;a.connect(b);b.connect(out);if(send){var s2=ac.createGain();s2.gain.value=send;a.connect(s2);s2.connect(rv);}return a;}
+    function env(g,t,a,peak,hold,rel){g.gain.setValueAtTime(0.0001,t);g.gain.exponentialRampToValueAtTime(peak,t+a);g.gain.setValueAtTime(peak,t+a+hold);g.gain.exponentialRampToValueAtTime(0.0001,t+a+hold+rel);}
+    function osc(type,f,t,a,peak,hold,rel,dst,f2,ft){var o2=ac.createOscillator(),g=ac.createGain();o2.type=type;o2.frequency.setValueAtTime(f,t);
+      if(f2)o2.frequency.exponentialRampToValueAtTime(f2,t+(ft||a+hold+rel));env(g,t,a,peak,hold,rel);o2.connect(g);g.connect(dst);o2.start(t);o2.stop(t+a+hold+rel+.05);return o2;}
+    function noise(t,dur,type,f,q,peak,a,rel,dst,f2){var s3=ac.createBufferSource(),fl=ac.createBiquadFilter(),g=ac.createGain();s3.buffer=noiseBuf;s3.loop=true;
+      fl.type=type;fl.frequency.setValueAtTime(f,t);if(f2)fl.frequency.exponentialRampToValueAtTime(f2,t+dur);fl.Q.value=q;env(g,t,a,peak,Math.max(0,dur-a-rel),rel);
+      s3.connect(fl);fl.connect(g);g.connect(dst);s3.start(t);s3.stop(t+dur+.1);}
+    var fx=bus(1,1,.5),low=bus(1,1,.15),pad=bus(1,.8,.9);
+    // 1. grondement sourd qui monte
+    noise(t0,2.1,'lowpass',90,.7,.55,1.2,.5,low,180);
+    osc('sine',38,t0,1.3,.5,.3,.5,low,52);
+    // 2. carillons des runes (gamme de ré mineur qui monte)
+    var notes=[587,659,698,880,988,1047,1175,1319,1397,1760];
+    notes.forEach(function(f,i){var t=t0+.15+i*.075;osc('triangle',f,t,.004,.16,.02,.7,fx);osc('sine',f*2,t,.004,.05,.0,.5,fx);});
+    // 3. la gemme s'embrase
+    [1319,1976,2637,3520].forEach(function(f,i){osc('sine',f,t0+.85+i*.02,.03,.07,.25,1.1,fx);});
+    // 4. la porte tremble : souffle qui monte + craquement du bois
+    noise(t0+1.05,.75,'bandpass',300,1.2,.28,.6,.1,fx,2400);
+    var cr=ac.createOscillator(),crf=ac.createBiquadFilter(),crg=ac.createGain(),lfo=ac.createOscillator(),lg=ac.createGain();
+    cr.type='sawtooth';cr.frequency.setValueAtTime(70,t0+1.1);cr.frequency.linearRampToValueAtTime(140,t0+1.75);lfo.frequency.value=23;lg.gain.value=25;lfo.connect(lg);lg.connect(cr.frequency);
+    crf.type='bandpass';crf.frequency.value=900;crf.Q.value=3;env(crg,t0+1.1,.1,.18,.45,.12);cr.connect(crf);crf.connect(crg);crg.connect(fx);cr.start(t0+1.1);lfo.start(t0+1.1);cr.stop(t0+1.9);lfo.stop(t0+1.9);
+    // 5. ouverture : impact + timbales
+    var T1=t0+1.75;
+    noise(T1,.9,'lowpass',2600,.5,.9,.005,.85,fx,180);
+    osc('sine',95,T1,.004,1,.05,1.2,low,32,1.1);
+    [0,.25,.5].forEach(function(dt,i){var t=T1+dt;osc('sine',[73,82,73][i],t,.003,.75,.02,.6,low,[48,55,48][i],.5);noise(t,.18,'lowpass',900,.7,.35,.002,.16,low);});
+    // 6. chœur et cuivres (ré mineur puis ré majeur héroïque à l'apparition du logo)
+    function choir(freqs,t,dur,peak){freqs.forEach(function(f){[-7,0,7].forEach(function(dt){var o3=ac.createOscillator(),g=ac.createGain();o3.type='sawtooth';o3.frequency.value=f;o3.detune.value=dt;
+      env(g,t,.35,peak,dur-.35-.9,.9);[[800,6],[1150,7],[2900,9]].forEach(function(fq){var bp=ac.createBiquadFilter();bp.type='bandpass';bp.frequency.value=fq[0];bp.Q.value=fq[1];o3.connect(bp);bp.connect(g);});
+      g.connect(pad);o3.start(t);o3.stop(t+dur+.1);});});}
+    function brass(freqs,t,dur,peak){freqs.forEach(function(f){var o4=ac.createOscillator(),lp=ac.createBiquadFilter(),g=ac.createGain();o4.type='sawtooth';o4.frequency.value=f;
+      lp.type='lowpass';lp.Q.value=2;lp.frequency.setValueAtTime(300,t);lp.frequency.exponentialRampToValueAtTime(2600,t+.25);lp.frequency.exponentialRampToValueAtTime(900,t+dur);
+      env(g,t,.06,peak,dur-.06-.7,.7);o4.connect(lp);lp.connect(g);g.connect(pad);o4.start(t);o4.stop(t+dur+.1);});}
+    choir([146.8,220,293.7,349.2],T1+.02,1.2,.06);
+    brass([73.4,146.8,220],T1,1.0,.07);
+    var T2=t0+2.25;
+    choir([146.8,220,293.7,370,440,587.3],T2,2.1,.12);
+    brass([73.4,146.8,185,220,293.7],T2,2.0,.13);
+    osc('sine',73.4,T2,.004,.8,.05,1.3,low,46,1.2);noise(T2,.25,'lowpass',1200,.7,.45,.002,.22,low);
+    [2637,3136,3520,4186].forEach(function(f,i){osc('sine',f,T2+.05+i*.06,.01,.04,.1,1.4,fx);});
+    return {stop:function(){try{var now=ac.currentTime;out.gain.cancelScheduledValues(now);out.gain.setValueAtTime(out.gain.value,now);out.gain.linearRampToValueAtTime(0,now+.6);
+      setTimeout(function(){try{ac.close&&ac.close();}catch(e){}},900);}catch(e){}}};
   }
   var seen=false;try{seen=sessionStorage.getItem('dkPortal')==='1';sessionStorage.setItem('dkPortal','1');}catch(e){}
   if(!reduce&&!seen)playPortal();else introDone();
