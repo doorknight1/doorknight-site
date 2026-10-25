@@ -68,7 +68,11 @@ nav .mini{font-family:var(--font-display);font-weight:700;font-size:.78rem;lette
 
 /* hero */
 .hero{position:relative;overflow:hidden;padding-block:48px 80px;isolation:isolate}
-.hero .rays{position:absolute;inset:-20%;background:url(img/splash.webp) center/cover no-repeat;opacity:.9;z-index:-2;animation:spin 140s linear infinite}
+.hero{background:radial-gradient(ellipse 90% 70% at 50% var(--ry,40%),#33276e 0%,#1c1745 45%,var(--night) 85%)}
+.hero .rays{position:absolute;left:50%;top:var(--ry,40%);width:max(170vmax,1500px);aspect-ratio:1;translate:-50% -50%;z-index:-2;pointer-events:none;
+  background:repeating-conic-gradient(from 0deg,rgba(170,150,255,.12) 0deg 6deg,transparent 6deg 18deg);
+  -webkit-mask:radial-gradient(circle,#000 0,#000 12%,transparent 42%);mask:radial-gradient(circle,#000 0,#000 12%,transparent 42%);
+  animation:spin 140s linear infinite}
 .hero .fade{position:absolute;inset:0;z-index:-1;background:linear-gradient(180deg,rgba(13,11,28,.2),rgba(13,11,28,.55) 60%,var(--night))}
 .hero canvas{position:absolute;inset:0;width:100%;height:100%;z-index:-1}
 @keyframes spin{to{transform:rotate(360deg)}}
@@ -172,6 +176,7 @@ section{padding-block:80px;border-top:1px solid var(--line)}
 .gallery figure{margin:0;border-radius:20px;overflow:hidden;border:1px solid var(--line);background:var(--night-2);transition:transform .25s}
 .gallery figure:hover{transform:translateY(-6px) scale(1.02)}
 .gallery figcaption{padding:10px 12px;font-size:.82rem;color:var(--ink-dim)}
+.gallery img{width:100%;aspect-ratio:9/19.5;object-fit:cover;object-position:top;background:var(--night-3)}
 
 /* community */
 .community .wrap{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:start}
@@ -212,6 +217,60 @@ footer .wrap{display:flex;flex-wrap:wrap;gap:12px 28px;justify-content:space-bet
 footer .wrap > div{min-width:0}
 footer a{color:var(--ink-dim);text-decoration:none}
 footer a:hover{color:var(--ink)}
+@media(min-width:861px){.hero{--ry:42%}.hero .rays{left:28%}}
+
+/* ===== Téléphone ===== */
+@media(max-width:600px){
+  body{font-size:16px}
+  section{padding-block:56px}
+  .sec-head{margin-bottom:28px}
+  nav .wrap{padding-block:10px}
+  .brand img{width:28px}
+
+  .hero{--ry:150px;padding-block:20px 44px}
+  .hero .wrap{gap:28px}
+  .hero .eyebrow{font-size:.66rem;letter-spacing:.14em;flex-wrap:wrap;justify-content:center;row-gap:6px}
+  .hero .eyebrow .beta-pill{margin-right:6px}
+  .logo{width:min(330px,94%);margin:6px auto 0}
+  .lede{font-size:1rem;max-width:32ch;margin-top:10px}
+  .hero .cta{flex-direction:column;align-items:stretch;max-width:320px;margin:22px auto 0;gap:10px}
+  .btn{justify-content:center;padding:14px 18px;font-size:.84rem}
+  .counter{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin-top:26px;text-align:center}
+  .counter b{font-size:1.35rem}
+  .counter span{font-size:.6rem;letter-spacing:.08em}
+  .phone{width:min(220px,58vw);border-radius:30px;padding:7px;animation-name:float-m}
+  .phone .screen{border-radius:24px}
+  .phone::before{top:13px;width:60px;height:15px;border-radius:9px}
+
+  .tabs{gap:8px}
+  .tab{padding:8px 4px 6px;font-size:.68rem;border-radius:14px}
+  .tab img{width:100%;max-width:60px}
+  .hero-panel{padding:20px;gap:20px;text-align:center}
+  .hero-panel .portrait{width:96px;margin:0 auto}
+  .hero-panel .chips{justify-content:center}
+  .hero-panel .shot{width:min(190px,62%)}
+  .mech article{grid-template-columns:36px 1fr;padding:14px}
+  .mech svg{width:36px;height:36px}
+
+  .world{flex-basis:70vw;min-height:190px}
+  .cycle{display:block}
+  .boss{padding:18px}
+  .panel{padding:22px}
+  .timer{font-size:2rem}
+
+  .gallery{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:12px;padding-bottom:12px;
+    margin-left:calc(-1 * max(16px,env(safe-area-inset-left,0px)));margin-right:calc(-1 * max(16px,env(safe-area-inset-right,0px)));
+    padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));scroll-padding-inline:16px}
+  .gallery figure{flex:0 0 58vw;scroll-snap-align:start}
+  .gallery figure:hover{transform:none}
+
+  .dl .embleme{width:110px}
+  .dl .cta{flex-direction:column;align-items:stretch;width:100%;max-width:320px}
+  .steps li{padding:50px 18px 18px}
+  .beta-notes{padding:18px}
+  footer .wrap{flex-direction:column;align-items:flex-start}
+}
+@keyframes float-m{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
 </style>
 </head>
 <body>
