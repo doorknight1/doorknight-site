@@ -7,6 +7,7 @@
 <meta name="description" content="Politique de confidentialité du site doorknight.games et du jeu Door Knight : données traitées, bases légales, durées de conservation et droits RGPD.">
 <meta name="theme-color" content="#0d0b1c">
 <link rel="icon" type="image/png" href="favicon.png">
+<link rel="alternate" hreflang="fr" href="https://doorknight.games/politique-confidentialite.html"><link rel="alternate" hreflang="en" href="https://doorknight.games/politique-confidentialite-en.html"><link rel="alternate" hreflang="es" href="https://doorknight.games/politique-confidentialite-es.html"><link rel="alternate" hreflang="de" href="https://doorknight.games/politique-confidentialite-de.html">
 <style>
 @font-face{font-family:"Cinzel";font-weight:700;font-display:swap;src:url(fonts/cinzel-latin-700-normal.woff2) format("woff2")}
 @font-face{font-family:"Inter";font-weight:400;font-display:swap;src:url(fonts/inter-latin-400-normal.woff2) format("woff2")}
@@ -36,13 +37,14 @@ nav.toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}
 nav.toc a{font-size:.85rem;text-decoration:none;padding:6px 12px;border:1px solid var(--line);border-radius:999px;color:var(--ink)}
 footer{margin-top:48px;padding-top:18px;border-top:1px solid var(--line);font-size:.85rem;color:var(--ink-dim);display:flex;flex-wrap:wrap;gap:8px 18px}
 footer a{color:var(--ink-dim)}
+.top{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px}.langs{display:flex;gap:4px}.langs a{font-size:.78rem;font-weight:600;letter-spacing:.04em;text-decoration:none;padding:5px 9px;border:1px solid var(--line);border-radius:8px;color:var(--ink-dim)}.langs a[aria-current]{color:var(--gold);border-color:rgba(240,196,90,.5)}.tr-note{font-size:.85rem;color:var(--ink-dim);padding:10px 14px;border:1px dashed var(--line);border-radius:10px;margin:0 0 20px}
 </style>
 </head>
 <body>
 <div class="wrap">
-  <a class="back" href="./">← Retour au site</a>
+  <div class="top"><a class="back" href="./">← Retour au site</a><nav class="langs" aria-label="Language"><a href="politique-confidentialite.html" hreflang="fr" lang="fr" title="Français" aria-current="page" data-l="fr">FR</a><a href="politique-confidentialite-en.html" hreflang="en" lang="en" title="English" data-l="en">EN</a><a href="politique-confidentialite-es.html" hreflang="es" lang="es" title="Español" data-l="es">ES</a><a href="politique-confidentialite-de.html" hreflang="de" lang="de" title="Deutsch" data-l="de">DE</a></nav></div>
   <h1>Politique de confidentialité</h1>
-  <p class="upd">Dernière mise à jour : 25 octobre 2026</p>
+  <p class="upd">Dernière mise à jour : 26 octobre 2026</p>
 
   <nav class="toc" aria-label="Sommaire">
     <a href="#responsable">Responsable</a><a href="#site">Le site</a><a href="#jeu">Le jeu</a><a href="#communaute">Communauté et bêta</a><a href="#tableau">Récapitulatif</a><a href="#droits">Tes droits</a>
@@ -57,7 +59,7 @@ footer a{color:var(--ink-dim)}
     <li><strong>Aucun cookie, aucune mesure d'audience, aucune publicité.</strong> Le site ne dépose aucun traceur soumis à consentement, c'est pourquoi aucun bandeau cookies ne s'affiche.</li>
     <li><strong>Hébergement.</strong> Le site est hébergé par GitHub Pages (GitHub, Inc., États-Unis). Comme tout hébergeur, GitHub reçoit ton adresse IP et les informations techniques de ta visite (navigateur, page demandée) pour afficher le site et le protéger contre les abus. Voir la <a href="https://docs.github.com/fr/site-policy/privacy-policies/github-general-privacy-statement" rel="noopener" target="_blank">déclaration de confidentialité de GitHub</a>.</li>
     <li><strong>Polices, images et vidéos</strong> sont hébergées sur le site lui-même : aucune donnée n'est envoyée à Google Fonts ou à un autre service tiers pendant ta visite.</li>
-    <li><strong>Mémoire de ton navigateur.</strong> Le site garde dans ton navigateur, le temps de la visite (sessionStorage), une simple indication : si tu as coupé ou activé la musique. Elle ne quitte jamais ton appareil et s'efface à la fermeture de l'onglet.</li>
+    <li><strong>Mémoire de ton navigateur.</strong> Le site garde dans ton navigateur deux indications : la langue que tu as choisie (localStorage, jusqu'à ce que tu effaces les données du site) et, le temps de la visite (sessionStorage), si tu as coupé ou activé la musique. Elles ne quittent jamais ton appareil.</li>
     <li><strong>Liens externes.</strong> Les boutons vers TestFlight, l'App Store et Discord t'emmènent sur ces services, qui appliquent leurs propres politiques de confidentialité.</li>
   </ul>
 
@@ -129,5 +131,6 @@ footer a{color:var(--ink-dim)}
     <a href="mentions-legales.html">Mentions légales</a>
   </footer>
 </div>
+<script>document.querySelectorAll('.langs a').forEach(function(a){a.addEventListener('click',function(){try{localStorage.setItem('dkLang',a.dataset.l)}catch(e){}})})</script>
 </body>
 </html>
