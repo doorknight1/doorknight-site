@@ -466,6 +466,8 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
 .sndb{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink-dim);font:600 .8rem var(--font-body);cursor:pointer;transition:color .2s,border-color .2s}
 .sndb svg{width:18px;height:18px}.sndb .w{display:none}.sndb.on .w{display:inline}.sndb.on .x{display:none}
 .sndb.on{color:var(--gold);border-color:rgba(240,196,90,.5)}
+.sndb.nudge{color:#2a1a08;background:var(--gold);border-color:var(--gold);animation:nudge 1.1s ease-in-out infinite}
+@keyframes nudge{50%{box-shadow:0 0 0 6px rgba(240,196,90,.25);transform:scale(1.06)}}
 .sndb.on svg .w{animation:sndw 1.4s ease-in-out infinite}
 @keyframes sndw{50%{opacity:.35}}
 @media(max-width:420px){.sndb span{display:none}.sndb{padding:0 9px}}
@@ -943,7 +945,9 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
     // à appeler pendant un geste ; door = true : depuis la porte (le fondu du fichier fait arriver la musique avec le logo)
     function start(door){on=true;save();ui();music();
       if(!door&&mus.currentTime<LEAD){try{mus.currentTime=LEAD;}catch(e){}}
-      if(volOK)mus.volume=duckN>0?.22:1;play();ctx();}
+      if(volOK)mus.volume=duckN>0?.22:1;play();ctx();
+      // filet de sécurité : si le téléphone n'a toujours rien lancé, le bouton Son clignote pour la lancer d'un toucher
+      clearTimeout(start.chk);start.chk=setTimeout(function(){if(on&&mus&&(mus.paused||mus.currentTime<.3)){on=false;save();ui();if(btn)btn.classList.add('nudge');}},door?6000:2500);}
     function stop(){on=false;save();ui();if(mus)mus.pause();}
     function sfx(name,delay,vol){if(!on)return;var a=ctx();if(!a)return;
       function go(b){var s=a.createBufferSource(),g=a.createGain();s.buffer=b;g.gain.value=vol||.7;s.connect(g);g.connect(a.destination);s.start(a.currentTime+Math.max(0,delay||0));}
@@ -952,7 +956,7 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
       fetch('audio/sfx/'+name+'.mp3').then(function(r){return r.arrayBuffer();}).then(function(d){return new Promise(function(ok,ko){a.decodeAudioData(d,ok,ko);});})
         .then(function(b){bufs[name]=b;}).catch(function(){delete bufs[name];});}
     function duck(d){duckN=Math.max(0,duckN+(d?1:-1));apply();}
-    if(btn)btn.addEventListener('click',function(){if(on)stop();else start(false);});
+    if(btn)btn.addEventListener('click',function(){btn.classList.remove('nudge');if(on)stop();else start(false);});
     document.addEventListener('visibilitychange',apply);
     return {start:start,stop:stop,sfx:sfx,duck:duck,warm:function(){music();try{mus.load();}catch(e){}},
       resume:function(){if(on){music();retry();ui();}}};
