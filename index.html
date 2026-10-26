@@ -461,6 +461,24 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
 .camp-shots img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:50% 50%;border-radius:12px;border:1px solid var(--line)}
 .gq{display:block;margin-top:6px;padding-left:10px;border-left:2px solid rgba(240,196,90,.55);font-style:italic;font-size:.76rem;line-height:1.4;color:#e8dcc0;quotes:"« " " »"}
 
+/* son du jeu */
+.navr{display:flex;align-items:center;gap:10px}
+.sndb{display:inline-flex;align-items:center;gap:6px;height:36px;padding:0 12px;border-radius:10px;border:1px solid var(--line);background:rgba(255,255,255,.04);color:var(--ink-dim);font:600 .8rem var(--font-body);cursor:pointer;transition:color .2s,border-color .2s}
+.sndb svg{width:18px;height:18px}.sndb .w{display:none}.sndb.on .w{display:inline}.sndb.on .x{display:none}
+.sndb.on{color:var(--gold);border-color:rgba(240,196,90,.5)}
+.sndb.on svg .w{animation:sndw 1.4s ease-in-out infinite}
+@keyframes sndw{50%{opacity:.35}}
+@media(max-width:420px){.sndb span{display:none}.sndb{padding:0 9px}}
+.gv{display:flex;flex-wrap:wrap;gap:6px;margin-top:9px}
+.gvoice{display:inline-flex;align-items:center;gap:6px;padding:6px 10px;border-radius:999px;border:1px solid rgba(240,196,90,.45);background:rgba(240,196,90,.1);color:var(--gold);font:600 .72rem var(--font-body);cursor:pointer;transition:background .2s,transform .15s}
+.gvoice.alt{border-color:var(--line);background:rgba(255,255,255,.04);color:var(--ink-dim)}
+.gvoice svg{width:14px;height:14px}
+.gvoice:hover{transform:translateY(-1px)}
+.gvoice.play{background:var(--gold);color:#2a1a08;border-color:var(--gold)}
+.gvoice.play svg path:last-child{animation:sndw .8s ease-in-out infinite}
+.gq.say{color:#fff3cf;border-left-color:var(--gold)}
+.gq.mq{border-left-color:rgba(190,170,255,.6)}
+
 /* campement illustré */
 .camp-panel{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr);gap:22px 30px;align-items:start}
 @media(max-width:860px){.camp-panel{grid-template-columns:1fr}}
@@ -557,7 +575,7 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
       <li><a href="#camp">Campement</a></li>
       <li><a href="#communaute">Communauté</a></li>
     </ul>
-    <a class="mini" href="#telecharger">Bêta</a>
+    <div class="navr"><button class="sndb" id="sndBtn" type="button" aria-pressed="false" aria-label="Musique et sons du jeu" title="Musique et sons du jeu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path class="w" d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12"/><path class="x" d="m16 9 6 6m0-6-6 6"/></svg><span>Son</span></button><a class="mini" href="#telecharger">Bêta</a></div>
   </div>
 </nav>
 
@@ -688,43 +706,43 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
     <div class="g-grid">
       <article class="gcard rv" style="--img:url(img/zone-0.webp)">
         <div class="gport"><img src="img/boss-0.webp" alt="Portrait peint : Roi Gluant" loading="lazy"><span class="gdoor">Porte 10</span></div>
-        <div class="gtxt"><span class="gzone">Forêt de Brume</span><h3>Roi Gluant</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 5 : Chef Troll</p><q class="gq">Glou… Personne ne traverse mon royaume gluant. Incline-toi devant ton roi !</q></div>
+        <div class="gtxt"><span class="gzone">Forêt de Brume</span><h3>Roi Gluant</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 5 : Chef Troll</p><q class="gq">Glou… Personne ne traverse mon royaume gluant. Incline-toi devant ton roi !</q><q class="gq mq" hidden>Personne ne traverse ma forêt… La brume va engloutir tes os !</q><span class="gv"><button type="button" class="gvoice" data-v="gardien_01"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Écouter le gardien</button><button type="button" class="gvoice alt" data-v="mini_01"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Le mini-boss</button></span></div>
       </article>
       <article class="gcard rv" style="--img:url(img/zone-1.webp)">
         <div class="gport"><img src="img/boss-1.webp" alt="Portrait peint : Seigneur des Os" loading="lazy"><span class="gdoor">Porte 20</span></div>
-        <div class="gtxt"><span class="gzone">Grottes d'Écho</span><h3>Seigneur des Os</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 15 : Capitaine Squelette</p><q class="gq">Tes os rejoindront ma collection. Il me manquait justement un héros.</q></div>
+        <div class="gtxt"><span class="gzone">Grottes d'Écho</span><h3>Seigneur des Os</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 15 : Capitaine Squelette</p><q class="gq">Tes os rejoindront ma collection. Il me manquait justement un héros.</q><q class="gq mq" hidden>Écoute l’écho, mortel… c’est le dernier son que tu entendras.</q><span class="gv"><button type="button" class="gvoice" data-v="gardien_02"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Écouter le gardien</button><button type="button" class="gvoice alt" data-v="mini_02"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Le mini-boss</button></span></div>
       </article>
       <article class="gcard rv" style="--img:url(img/zone-2.webp)">
         <div class="gport"><img src="img/boss-2.webp" alt="Portrait peint : Mère des Crapauds" loading="lazy"><span class="gdoor">Porte 30</span></div>
-        <div class="gtxt"><span class="gzone">Marais Putride</span><h3>Mère des Crapauds</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 25 : Sorcière des Marais</p><q class="gq">Mes enfants ont faim… et toi, tu sens bon le festin.</q></div>
+        <div class="gtxt"><span class="gzone">Marais Putride</span><h3>Mère des Crapauds</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 25 : Sorcière des Marais</p><q class="gq">Mes enfants ont faim… et toi, tu sens bon le festin.</q><q class="gq mq" hidden>Hé hé… encore un héros pour mon chaudron. Le marais n’oublie jamais !</q><span class="gv"><button type="button" class="gvoice" data-v="gardien_03"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Écouter le gardien</button><button type="button" class="gvoice alt" data-v="mini_03"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Le mini-boss</button></span></div>
       </article>
       <article class="gcard rv" style="--img:url(img/zone-3.webp)">
         <div class="gport"><img src="img/boss-3.webp" alt="Portrait peint : Pharaon Maudit" loading="lazy"><span class="gdoor">Porte 40</span></div>
-        <div class="gtxt"><span class="gzone">Désert d'Ambre</span><h3>Pharaon Maudit</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 35 : Gardien Anubis</p><q class="gq">Mon tombeau ne s’ouvre qu’une fois. Tu n’en ressortiras pas.</q></div>
+        <div class="gtxt"><span class="gzone">Désert d'Ambre</span><h3>Pharaon Maudit</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 35 : Gardien Anubis</p><q class="gq">Mon tombeau ne s’ouvre qu’une fois. Tu n’en ressortiras pas.</q><q class="gq mq" hidden>Le sable a pesé ton cœur. Il est trop léger pour franchir cette porte.</q><span class="gv"><button type="button" class="gvoice" data-v="gardien_04"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Écouter le gardien</button><button type="button" class="gvoice alt" data-v="mini_04"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Le mini-boss</button></span></div>
       </article>
       <article class="gcard rv" style="--img:url(img/zone-4.webp)">
         <div class="gport"><img src="img/boss-4.webp" alt="Portrait peint : Colosse des Cimes" loading="lazy"><span class="gdoor">Porte 50</span></div>
-        <div class="gtxt"><span class="gzone">Pics Gelés</span><h3>Colosse des Cimes</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 45 : Loup Alpha</p><q class="gq">La montagne ne recule devant personne. Tu vas être enseveli !</q></div>
+        <div class="gtxt"><span class="gzone">Pics Gelés</span><h3>Colosse des Cimes</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 45 : Loup Alpha</p><q class="gq">La montagne ne recule devant personne. Tu vas être enseveli !</q><q class="gq mq" hidden>Grrr… La meute a faim. Et la glace garde bien la viande.</q><span class="gv"><button type="button" class="gvoice" data-v="gardien_05"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Écouter le gardien</button><button type="button" class="gvoice alt" data-v="mini_05"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Le mini-boss</button></span></div>
       </article>
       <article class="gcard rv" style="--img:url(img/zone-5.webp)">
         <div class="gport"><img src="img/boss-5.webp" alt="Portrait peint : Minotaure de Lave" loading="lazy"><span class="gdoor">Porte 60</span></div>
-        <div class="gtxt"><span class="gzone">Forge Volcanique</span><h3>Minotaure de Lave</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 55 : Colosse de Magma</p><q class="gq">Ma lave a forgé des armes plus dures que toi. À genoux !</q></div>
+        <div class="gtxt"><span class="gzone">Forge Volcanique</span><h3>Minotaure de Lave</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 55 : Colosse de Magma</p><q class="gq">Ma lave a forgé des armes plus dures que toi. À genoux !</q><q class="gq mq" hidden>La forge a soif d’acier. Ton armure fondra comme de la cire !</q><span class="gv"><button type="button" class="gvoice" data-v="gardien_06"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Écouter le gardien</button><button type="button" class="gvoice alt" data-v="mini_06"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Le mini-boss</button></span></div>
       </article>
       <article class="gcard rv" style="--img:url(img/zone-6.webp)">
         <div class="gport"><img src="img/boss-6.webp" alt="Portrait peint : Kraken des Abysses" loading="lazy"><span class="gdoor">Porte 70</span></div>
-        <div class="gtxt"><span class="gzone">Cité Engloutie</span><h3>Kraken des Abysses</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 65 : Sirène Noire</p><q class="gq">La marée monte, petit héros… Personne ne remonte des abysses.</q></div>
+        <div class="gtxt"><span class="gzone">Cité Engloutie</span><h3>Kraken des Abysses</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 65 : Sirène Noire</p><q class="gq">La marée monte, petit héros… Personne ne remonte des abysses.</q><q class="gq mq" hidden>Approche… Écoute mon chant. Les abysses t’attendent.</q><span class="gv"><button type="button" class="gvoice" data-v="gardien_07"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Écouter le gardien</button><button type="button" class="gvoice alt" data-v="mini_07"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Le mini-boss</button></span></div>
       </article>
       <article class="gcard rv" style="--img:url(img/zone-7.webp)">
         <div class="gport"><img src="img/boss-7.webp" alt="Portrait peint : Chevalier Noir" loading="lazy"><span class="gdoor">Porte 80</span></div>
-        <div class="gtxt"><span class="gzone">Château Hanté</span><h3>Chevalier Noir</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 75 : Gargouille Ancienne</p><q class="gq">Je garde ce château depuis mille ans. Croise le fer, si tu l’oses.</q></div>
+        <div class="gtxt"><span class="gzone">Château Hanté</span><h3>Chevalier Noir</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 75 : Gargouille Ancienne</p><q class="gq">Je garde ce château depuis mille ans. Croise le fer, si tu l’oses.</q><q class="gq mq" hidden>Mille ans de pierre… et je ne m’éveille que pour toi.</q><span class="gv"><button type="button" class="gvoice" data-v="gardien_08"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Écouter le gardien</button><button type="button" class="gvoice alt" data-v="mini_08"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Le mini-boss</button></span></div>
       </article>
       <article class="gcard rv" style="--img:url(img/zone-8.webp)">
         <div class="gport"><img src="img/boss-8.webp" alt="Portrait peint : Griffon Tonnerre" loading="lazy"><span class="gdoor">Porte 90</span></div>
-        <div class="gtxt"><span class="gzone">Cieux d'Orage</span><h3>Griffon Tonnerre</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 85 : Reine Déchue</p><q class="gq">Le ciel gronde pour toi… La foudre sera ta dernière lumière.</q></div>
+        <div class="gtxt"><span class="gzone">Cieux d'Orage</span><h3>Griffon Tonnerre</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 85 : Reine Déchue</p><q class="gq">Le ciel gronde pour toi… La foudre sera ta dernière lumière.</q><q class="gq mq" hidden>J’ai perdu ma couronne dans l’orage… Je prendrai ta tête à la place.</q><span class="gv"><button type="button" class="gvoice" data-v="gardien_09"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Écouter le gardien</button><button type="button" class="gvoice alt" data-v="mini_09"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Le mini-boss</button></span></div>
       </article>
       <article class="gcard rv" style="--img:url(img/zone-9.webp)">
         <div class="gport"><img src="img/boss-9.webp" alt="Portrait peint : Dragon Ancestral" loading="lazy"><span class="gdoor">Porte 100</span></div>
-        <div class="gtxt"><span class="gzone">Antre du Dragon</span><h3>Dragon Ancestral</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 95 : Drake Écarlate</p><q class="gq">Cent portes… et tu crois pouvoir me défier ? Brûle, mortel !</q></div>
+        <div class="gtxt"><span class="gzone">Antre du Dragon</span><h3>Dragon Ancestral</h3><p><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 18h18l-1-10-5 4-3-6-3 6-5-4z"/></svg>Mini-boss porte 95 : Drake Écarlate</p><q class="gq">Cent portes… et tu crois pouvoir me défier ? Brûle, mortel !</q><q class="gq mq" hidden>Tu sens cette chaleur ? Mon maître dort plus loin… tu n’iras pas jusqu’à lui.</q><span class="gv"><button type="button" class="gvoice" data-v="gardien_10"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Écouter le gardien</button><button type="button" class="gvoice alt" data-v="mini_10"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M11 5 6 9H3v6h3l5 4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M19 6a8 8 0 0 1 0 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>Le mini-boss</button></span></div>
       </article>
     </div>
     <div class="bestiary rv">
@@ -897,6 +915,50 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
     {n:'Le Mage',d:"Lance des orbes arcaniques qui explosent en zone. Fragile, mais dévastateur.",c:['Feu','Glace','Foudre','Spéciale : Nova',"Bâton d'apprenti → Bâton stellaire"],img:'img/cls-mage.webp'},
     {n:'Le Samouraï',d:"Enchaîne les coups de katana et traverse les hordes d'une ruée Iaijutsu.",c:['Lame','Ki','Sakura','Spéciale : Ruée Iaijutsu','Bokken → Nodachi'],img:'img/cls-samourai.webp'}
   ];
+
+  // ===== Son du jeu : musique « theme » (Suno), bruitages des sorts, voix des gardiens =====
+  var DKA=(function(){
+    var on=false,ac=null,mg=null,mus=null,bufs={},duckN=0,btn=document.getElementById('sndBtn'),MV=.34;
+    try{on=sessionStorage.getItem('dkSnd')==='1';}catch(e){}
+    function ctx(){if(!ac){var AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;ac=new AC();}
+      if(ac.state==='suspended'&&ac.resume)ac.resume();return ac;}
+    function music(){var a=ctx();if(!a)return null;if(!mus){mus=new Audio('audio/theme.mp3');mus.loop=true;mus.preload='auto';mus.crossOrigin='anonymous';
+      try{var src=a.createMediaElementSource(mus);mg=a.createGain();mg.gain.value=0;src.connect(mg);mg.connect(a.destination);}catch(e){mg=null;}}
+      return mus;}
+    function level(v,sec){if(!mg||!ac)return;var t=ac.currentTime;mg.gain.cancelScheduledValues(t);mg.gain.setValueAtTime(mg.gain.value,t);mg.gain.linearRampToValueAtTime(v,t+(sec||.6));}
+    function target(){return on&&!document.hidden?(duckN>0?MV*.25:MV):0;}
+    function ui(){if(btn){btn.classList.toggle('on',on);btn.setAttribute('aria-pressed',String(on));}}
+    function save(){try{sessionStorage.setItem('dkSnd',on?'1':'0');}catch(e){}}
+    // à appeler pendant un geste (toucher, clic) : démarre la musique à zéro puis la fait monter après « wait » secondes
+    function start(wait){on=true;save();ui();var m=music();if(!m)return;var p=m.play();if(p&&p.catch)p.catch(function(){});
+      if(mg){level(0,.05);setTimeout(function(){level(target(),2.2);},(wait||0)*1000);}}
+    function stop(){on=false;save();ui();if(mg)level(0,.5);setTimeout(function(){if(!on&&mus)mus.pause();},600);}
+    function sfx(name,delay,vol){if(!on)return;var a=ctx();if(!a)return;
+      function go(b){var s=a.createBufferSource(),g=a.createGain();s.buffer=b;g.gain.value=vol||.7;s.connect(g);g.connect(a.destination);s.start(a.currentTime+Math.max(0,delay||0));}
+      if(bufs[name]&&bufs[name].duration){go(bufs[name]);return;}
+      if(bufs[name])return;bufs[name]=1;
+      fetch('audio/sfx/'+name+'.mp3').then(function(r){return r.arrayBuffer();}).then(function(d){return new Promise(function(ok,ko){a.decodeAudioData(d,ok,ko);});})
+        .then(function(b){bufs[name]=b;}).catch(function(){delete bufs[name];});}
+    function duck(d){duckN=Math.max(0,duckN+(d?1:-1));level(target(),.4);}
+    if(btn)btn.addEventListener('click',function(){if(on)stop();else start(0);});
+    // musique déjà choisie plus tôt dans la visite : elle reprend au premier toucher
+    if(on){ui();on=false;ui();var resume=function(){removeEventListener('pointerdown',resume,true);removeEventListener('keydown',resume,true);if(!on)start(0);};
+      addEventListener('pointerdown',resume,true);addEventListener('keydown',resume,true);}
+    document.addEventListener('visibilitychange',function(){if(!mus)return;if(document.hidden)level(0,.3);else if(on){var p=mus.play();if(p&&p.catch)p.catch(function(){});level(target(),.8);}});
+    return {start:start,stop:stop,sfx:sfx,duck:duck,isOn:function(){return on;},preload:function(n){if(on&&!bufs[n])sfx(n,99,0);}};
+  })();
+  // voix des gardiens et des mini-boss (fichiers du jeu, en français)
+  (function(){var cur=null,curB=null;
+    function end(){if(curB){curB.classList.remove('play');var c=curB.closest('.gtxt');c.querySelectorAll('.gq').forEach(function(q){q.classList.remove('say');});
+      var mq=c.querySelector('.mq'),gq=c.querySelector('.gq:not(.mq)');if(mq){mq.hidden=true;gq.hidden=false;}}
+      if(cur){cur.pause();cur=null;DKA.duck(false);}curB=null;}
+    [].forEach.call(document.querySelectorAll('.gvoice'),function(b){b.addEventListener('click',function(){
+      var same=curB===b;end();if(same)return;
+      var c=b.closest('.gtxt'),mq=c.querySelector('.mq'),gq=c.querySelector('.gq:not(.mq)'),mini=b.classList.contains('alt');
+      if(mq){mq.hidden=!mini;gq.hidden=mini;(mini?mq:gq).classList.add('say');}
+      cur=new Audio('audio/voice/'+b.dataset.v+'.mp3');curB=b;b.classList.add('play');DKA.duck(true);
+      cur.addEventListener('ended',end);cur.addEventListener('error',end);var p=cur.play();if(p&&p.catch)p.catch(end);});});
+  })();
   // sorts filmés dans le jeu : [fichier, nom, école, couleur]
   var SPELLS=[
     [['knight-s8','Jugement dernier','Sacré','#ffe28a'],['knight-w4','Lames tournoyantes','Guerre','#ff8a6a'],['knight-t4','Séisme','Terre','#d9b27a']],
@@ -925,6 +987,8 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
     spell(0);
   }
   vid.addEventListener('timeupdate',function(){if(vid.duration)spBar.style.width=(vid.currentTime/vid.duration*100)+'%';});
+  var SFX={'Sacré':'sp_holy','Guerre':'sp_war','Terre':'sp_earth','Nature':'sp_leaf','Vent':'sp_wind','Ombre':'sp_shadow','Feu':'sp_fire','Glace':'sp_ice','Foudre':'sp_thunder','Lame':'sp_blade','Ki':'sp_ki','Sakura':'sp_petal'};
+  vid.addEventListener('playing',function(){var s=SPELLS[hero][cur];if(vid.currentTime<.15&&s)DKA.sfx(SFX[s[2]],.22-vid.currentTime,.75);});
   vid.addEventListener('ended',function(){spell((cur+1)%3);});
   // ne lancer les vidéos que lorsqu'elles sont visibles
   if('IntersectionObserver' in window){
@@ -1000,8 +1064,8 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
       '<div class="start"><button class="btn" type="button">Lancer la cinématique</button><button class="ib" type="button" style="position:static">Entrer sur le site</button></div>'+
       '<div class="ibar"></div>';
     document.body.appendChild(o);document.body.classList.add('intro-on');
-    var v=o.querySelector('video'),bar=o.querySelector('.ibar'),snd=o.querySelector('.snd'),closed=false;
-    function close(){if(closed)return;closed=true;v.pause();o.classList.add('out');document.body.classList.remove('intro-on');
+    var v=o.querySelector('video'),bar=o.querySelector('.ibar'),snd=o.querySelector('.snd'),closed=false;DKA.duck(true);
+    function close(){if(closed)return;closed=true;v.pause();DKA.duck(false);o.classList.add('out');document.body.classList.remove('intro-on');
       setTimeout(function(){o.remove();},750);introDone();}
     function go(){o.classList.remove('blocked');var pr=v.play();if(pr&&pr.catch)pr.catch(function(){o.classList.add('blocked');});}
     o.querySelector('.skip').addEventListener('click',close);
@@ -1059,6 +1123,7 @@ nav::after{content:"";position:absolute;left:0;bottom:-1px;height:2px;width:calc
       if(snd){if(skip)snd.stop();else setTimeout(snd.stop,1800);}document.body.classList.remove('intro-on');introDone();setTimeout(function(){alive=false;o.remove();},1100);}
     function start(){if(started||ended)return;started=true;
       try{var AC=window.AudioContext||window.webkitAudioContext;if(AC){var ac=new AC();if(ac.resume)ac.resume();snd=epicSound(ac);}}catch(e){}
+      try{DKA.start(2.6);}catch(e){}
       o.classList.add('s-go');
       at(1100,function(){o.classList.add('s-leak','s-shake');});
       at(1750,function(){o.classList.remove('s-shake');o.classList.add('s-open');burst();});
