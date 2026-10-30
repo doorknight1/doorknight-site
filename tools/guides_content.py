@@ -3,14 +3,14 @@
 # tel que le site le présente : pas de chiffre inventé.
 
 UI = {
-    'fr': {'heroes': 'Héros', 'guides': 'Guides', 'beta': 'Bêta', 'home': 'Accueil', 'legal': 'Mentions légales',
+    'fr': {'heroes': 'Héros', 'guides': 'Guides', 'news': 'Nouveautés', 'beta': 'Bêta', 'home': 'Accueil', 'legal': 'Mentions légales',
            'privacy': 'Confidentialité', 'updated': 'Mis à jour le', 'by': 'par', 'more': 'Les autres guides',
            'cta_title': 'Prêt à ouvrir la première porte ?', 'cta_text': 'Door Knight est gratuit, en bêta ouverte sur iPhone et iPad via TestFlight. Android arrive sur Google Play.',
            'cta_btn': 'Rejoindre la bêta', 'cta_discord': 'Rejoindre le Discord',
            'index_title': 'Guides Door Knight : débuter, choisir son héros, battre les gardiens',
            'index_desc': "Les guides officiels de Door Knight : bien débuter, choisir entre chevalier, archer, mage et samouraï, comprendre les 10 gardiens et installer la bêta sur iPhone.",
            'index_h1': 'Les guides Door Knight', 'index_lede': "Tout ce qu'il faut savoir avant d'ouvrir la première porte, écrit par l'équipe du jeu."},
-    'en': {'heroes': 'Heroes', 'guides': 'Guides', 'beta': 'Beta', 'home': 'Home', 'legal': 'Legal notice',
+    'en': {'heroes': 'Heroes', 'guides': 'Guides', 'news': "What's new", 'beta': 'Beta', 'home': 'Home', 'legal': 'Legal notice',
            'privacy': 'Privacy', 'updated': 'Updated', 'by': 'by', 'more': 'More guides',
            'cta_title': 'Ready to open the first door?', 'cta_text': 'Door Knight is free, in open beta on iPhone and iPad via TestFlight. Android is coming to Google Play.',
            'cta_btn': 'Join the beta', 'cta_discord': 'Join the Discord',

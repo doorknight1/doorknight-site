@@ -1,0 +1,226 @@
+{
+  "entries": [
+    {
+      "id": "NV-2026-10-25-titre-iphone",
+      "date": "2026-10-25",
+      "categorie": "interface",
+      "titre": "Un écran d'accueil plus net sur iPhone",
+      "description": "Sur certains iPhone, le titre **Door Knight** de l'écran d'accueil apparaissait coupé ou dédoublé. Dans le prochain patch, il s'adapte automatiquement à la taille de ton écran et s'affiche toujours en entier.\n\nL'ensemble de l'accueil a aussi été remonté, pour accéder plus vite aux boutons sans espace vide.",
+      "commits": [
+        "df39019"
+      ]
+    },
+    {
+      "id": "NV-2026-10-25-menus-forge",
+      "date": "2026-10-25",
+      "categorie": "correctif",
+      "titre": "Des menus qui répondent enfin comme prévu",
+      "description": "L'onglet **Grimoire** de la Forge pouvait se vider et ne plus réagir quand on y revenait : c'est réparé. Les flèches de retour te ramènent maintenant là d'où tu viens : du Vestiaire ou du Grimoire ouverts depuis le menu Héros, tu reviens au menu Héros, et de la Boutique, tu reviens à l'écran que tu avais quitté.",
+      "commits": [
+        "28c6374"
+      ]
+    },
+    {
+      "id": "NV-2026-10-25-monstres-plus-grands",
+      "date": "2026-10-25",
+      "categorie": "decors",
+      "titre": "Des monstres plus faciles à repérer",
+      "description": "Les monstres de base sont plus grands et leur ombre au sol est plus marquée : on les distingue bien mieux, même sur les sols clairs comme le **Désert d'Ambre**. Leur zone de contact grandit avec eux, pour que chaque coup touche ce que tu vois.",
+      "commits": [
+        "28c6374"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-grande-mise-a-jour",
+      "date": "2026-10-26",
+      "categorie": "evenement",
+      "titre": "Door Knight fait peau neuve !",
+      "description": "La plus grosse mise à jour depuis le début de la bêta est en route. Héros, monstres, décors, boss, musiques, campement : presque tout a été redessiné ou enrichi.\n\nVoici, message par message, tout ce qui t'attend dans le jeu 👇",
+      "image": "nouveautes/images/peau-neuve.jpg",
+      "commits": []
+    },
+    {
+      "id": "NV-2026-10-26-heros-v3",
+      "date": "2026-10-26",
+      "categorie": "classes",
+      "titre": "Des héros redessinés",
+      "description": "Le **chevalier**, l'**archer**, le **mage** et le **samouraï** passent à un tout nouveau style illustré : contour encré, visage expressif qui cligne des yeux et réagit à l'action, frappes plus nerveuses avec traînées.\n\nToute ta personnalisation est conservée : sexe, teint, cheveux, couvre-chefs, armures, capes et armes.",
+      "image": "nouveautes/images/heros.jpg",
+      "commits": [
+        "dac5860"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-monstres-sorts",
+      "date": "2026-10-26",
+      "categorie": "gameplay",
+      "titre": "Chaque monstre a son propre sort",
+      "description": "Les **30 monstres**, les **10 mini-boss** et les **10 gardiens** ont été entièrement redessinés, avec leurs animations de marche, d'attaque et de chute.\n\nSurtout, chacun a désormais **son propre sort** : il est annoncé au sol (cercle, ligne ou cône qui se remplit), puis lancé avec un effet à son image. Poison, brûlure, lenteur, entrave ou attraction : observe le sol et esquive au bon moment !",
+      "image": "nouveautes/images/sorts-monstres.jpg",
+      "commits": [
+        "36caf4e",
+        "3fe7956"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-zones-peintes",
+      "date": "2026-10-26",
+      "categorie": "decors",
+      "titre": "10 zones peintes à la main",
+      "description": "De la **Forêt de Brume** à l'**Antre du Dragon**, chaque zone a désormais un sol peint, avec des détails propres à chaque monde : glace, fissures de lave, dalles, sable…\n\nL'écran titre a lui aussi droit à sa nouvelle illustration : une porte dorée au cœur de la forêt.",
+      "image": "nouveautes/images/zones.jpg",
+      "commits": [
+        "56de834",
+        "1a37089",
+        "b79ee5f"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-gardiens-portraits",
+      "date": "2026-10-26",
+      "categorie": "decors",
+      "titre": "Les 10 gardiens ont leur portrait",
+      "description": "Toutes les 10 portes, quand le gardien de la zone apparaît, son **portrait peint** s'affiche sous la bannière de son nom. Du **Roi Gluant** au **Dragon Ancestral**, chacun a sa propre illustration.",
+      "image": "nouveautes/images/gardiens.jpg",
+      "commits": [
+        "56de834",
+        "1a37089"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-voix-boss",
+      "date": "2026-10-26",
+      "categorie": "gameplay",
+      "titre": "Les boss prennent la parole",
+      "description": "Chaque **gardien** et chaque **mini-boss** lance une réplique à son arrivée, avec une **vraie voix** en français, anglais, espagnol et allemand. La musique baisse pendant qu'il parle, et sa phrase s'affiche à l'écran pour qu'on puisse la lire.\n\nLe Chevalier Noir t'attend à la porte 80… si tu l'oses.",
+      "image": "nouveautes/images/voix-boss.jpg",
+      "commits": [
+        "bc83bea",
+        "bb77ad1",
+        "999b36e",
+        "ec6aa2f",
+        "0801ba0",
+        "bab51ef",
+        "9473fd9",
+        "1dab718"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-combat",
+      "date": "2026-10-26",
+      "categorie": "gameplay",
+      "titre": "Un combat plus lisible",
+      "description": "• **Vue élargie** : environ 19 % de terrain en plus dans chaque direction, pour voir les vagues arriver plus tôt.\n• **Décors solides** : héros et monstres contournent arbres, rochers, piliers et statues au lieu de passer au travers.\n• **Boutons redessinés** : attaque, tourbillon, défense, sort et potion disposés en arc, sous le pouce, avec un anneau lumineux pour la recharge.",
+      "image": "nouveautes/images/combat.jpg",
+      "commits": [
+        "05efa96",
+        "b4f76ad",
+        "931e579",
+        "54d4fdf",
+        "4ac5542"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-musiques",
+      "date": "2026-10-26",
+      "categorie": "decors",
+      "titre": "19 musiques et 39 nouveaux bruitages",
+      "description": "Chaque lieu a sa **musique orchestrale** : l'accueil, le campement, les 10 mondes, les mini-boss, les gardiens, l'arène… avec un fondu enchaîné d'une scène à l'autre.\n\nCôté bruitages, tout a été refait : l'épée du chevalier, le katana du samouraï, l'arc, l'orbe du mage, les 12 écoles de sorts, l'esquive, la parade, les pièces, la victoire et bien d'autres.",
+      "commits": [
+        "219f48f",
+        "fd2cd31"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-equipement-visible",
+      "date": "2026-10-26",
+      "categorie": "classes",
+      "titre": "Ton équipement se voit sur ton héros",
+      "description": "Le casque, l'armure, les bottes et le talisman que tu équipes se dessinent maintenant **sur ton héros**. Leur couleur suit la rareté, avec des ornements qui montent en gamme : gemme dès rare, lueur dès épique, liseré d'or et bottes ailées pour le légendaire, étincelles pour le mythique.\n\nNouveau : la **teinture royale**, pour donner à une pièce l'une des 12 couleurs, essayées en direct sur ton héros depuis le Vestiaire. Elle est **offerte pendant la bêta** !",
+      "image": "nouveautes/images/equipement.jpg",
+      "commits": [
+        "0334823"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-campement",
+      "date": "2026-10-26",
+      "categorie": "decors",
+      "titre": "Un campement tout neuf",
+      "description": "Le campement change de visage : **11 bâtiments** qui évoluent en trois étapes selon leur niveau, **23 décorations** illustrées et **4 sols** au choix (prairie, automne, neige ou arcane).\n\nLa palissade grandit avec toi, des pieux de bois jusqu'au muret de pierre crénelé, et les archers des tours ont été redessinés.",
+      "image": "nouveautes/images/campement.jpg",
+      "commits": [
+        "548b406"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-carte-portes",
+      "date": "2026-10-26",
+      "categorie": "interface",
+      "titre": "Chaque monde a son tableau",
+      "description": "Sur la carte des portes, chaque zone a son **bandeau illustré**, et l'emblème du monde apparaît en filigrane, en couleur, derrière chaque numéro de porte. Quand tu entres dans une porte, l'illustration de la zone s'affiche derrière son numéro.",
+      "image": "nouveautes/images/carte-portes.jpg",
+      "commits": [
+        "b79ee5f",
+        "14811f5",
+        "a975f31",
+        "2f87165"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-cinematique",
+      "date": "2026-10-26",
+      "categorie": "decors",
+      "titre": "Une cinématique plus spectaculaire",
+      "description": "La cinématique d'ouverture a été refaite : une porte runique qui s'embrase, une horde de vrais monstres du jeu qui charge vers toi, un plan d'action pour chacun des quatre héros, puis tous réunis devant le couloir des portes. Le tout sur une nouvelle musique.",
+      "image": "nouveautes/images/cinematique.jpg",
+      "commits": [
+        "216ac08",
+        "72f6f56"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-menus",
+      "date": "2026-10-26",
+      "categorie": "interface",
+      "titre": "Des menus plus clairs",
+      "description": "• **Apparence** : désormais purement cosmétique ; l'arme et la classe se choisissent ailleurs.\n• **Forge > Armes** : seulement les armes de ta classe, avec l'amélioration Puissance en tête.\n• **Forge > Grimoire** : l'école de sorts liée à ta spécialisation.\n• **Forge > Atelier** : le premier onglet change de nom, et la potion offerte contre une vidéo passe dans l'Alchimie.\n• L'écran **Spécialisation** tient maintenant entièrement sur le téléphone.",
+      "commits": [
+        "1dab718",
+        "a4e15b5"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-talents",
+      "date": "2026-10-26",
+      "categorie": "equilibrage",
+      "titre": "Talents : un plafond qui grandit avec toi",
+      "description": "Chaque talent de spécialisation monte jusqu'au niveau **10** tant que tu n'as pas dépassé la porte 50. Ensuite, tu gagnes **un niveau de plus toutes les 7 portes** de ton record. Au-delà du niveau 10, chaque niveau compte moitié moins. L'écran indique ton plafond actuel et le prochain palier.\n\nLes monstres ont été recalés en conséquence, pour que la difficulté reste juste.",
+      "commits": [
+        "a4e15b5"
+      ]
+    },
+    {
+      "id": "NV-2026-10-26-icone",
+      "date": "2026-10-26",
+      "categorie": "interface",
+      "titre": "Une nouvelle icône",
+      "description": "Door Knight change d'icône sur ton écran d'accueil : elle apparaîtra avec la prochaine version de l'app.",
+      "commits": [
+        "56de834"
+      ]
+    },
+    {
+      "id": "NV-2026-10-28-mentions-legales",
+      "date": "2026-10-28",
+      "categorie": "correctif",
+      "titre": "Mentions légales et confidentialité complétées",
+      "description": "Les pages **Mentions légales** et **Politique de confidentialité** sont maintenant complètes : éditeur, hébergeur du site et adresse de contact (**fda.doorknight@gmail.com**). Une question sur tes données ? Écris-nous !",
+      "commits": [
+        "d8f4b78",
+        "c3774b3",
+        "5570bc3"
+      ]
+    }
+  ]
+}

@@ -66,11 +66,16 @@ JS = r"""
     const v = el.getAttribute(a); if (v && D[key(v)]) { el.setAttribute(a, T(v)); nAttrs++; } }));
   const md = document.querySelector('meta[name="description"]'); md.setAttribute('content', T(md.getAttribute('content')));
   document.querySelectorAll('img[src]').forEach(im => { const s = im.getAttribute('src'), n2 = img(s); if (n2 !== s) im.setAttribute('src', n2); });
-  document.querySelectorAll('a[href*="mentions-legales"],a[href*="politique-confidentialite"]').forEach(a => {
+  document.querySelectorAll('a[href^="/mentions-legales"],a[href^="/politique-confidentialite"]').forEach(a => {
     a.setAttribute('href', a.getAttribute('href').replace(/(-(en|es|de))?\.html$/, '') + '-' + l + '.html'); });
   // guides : français → anglais pour /en/ (espagnol et allemand renvoient aussi vers l'anglais)
   const G = {'/guide/':'/en/guide/','/guide/bien-commencer.html':'/en/guide/getting-started.html','/guide/quel-heros-choisir.html':'/en/guide/which-hero.html','/guide/gardiens.html':'/en/guide/guardians.html','/guide/installer-la-beta-testflight.html':'/en/guide/install-beta-testflight.html'};
   document.querySelectorAll('a[href^="/guide/"]').forEach(a => { const h = a.getAttribute('href'); if (G[h]) a.setAttribute('href', G[h]); });
+  // nouveautés : la page anglaise sert aussi l'espagnol et l'allemand
+  document.querySelectorAll('a[href^="/nouveautes/"]').forEach(a => { a.setAttribute('href', a.getAttribute('href').replace(/^\/nouveautes\//, '/en/nouveautes/')); });
+  // bande-annonce de l'accueil dans la langue de la page
+  document.querySelectorAll('video[data-src]').forEach(v => { const src = v.getAttribute('data-src').replace(/\.mp4$/, '-' + l + '.mp4');
+    v.setAttribute('data-src', src); v.setAttribute('poster', src.replace(/\.mp4$/, '.jpg')); const so = v.querySelector('source'); if (so) so.setAttribute('src', src); });
   // en-tête propre à la langue
   const h = document.documentElement; h.setAttribute('lang', l); h.setAttribute('data-lang', l);
   document.title = meta.title;

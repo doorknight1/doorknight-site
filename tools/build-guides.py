@@ -132,6 +132,7 @@ def layout(lang, title, desc, url, alt_url, body, ld, og_image, crumbs):
   <div class="r">
     <a class="hide" href="{home}#heros">{esc(u['heroes'])}</a>
     <a class="hide" href="{'/guide/' if lang == 'fr' else '/en/guide/'}">{esc(u['guides'])}</a>
+    <a class="hide" href="{'/nouveautes/' if lang == 'fr' else '/en/nouveautes/'}">{esc(u['news'])}</a>
     <a class="hide" href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Discord</a>
     <a class="lang" href="{alt_url}" hreflang="{other}" lang="{other}">{other.upper()}</a>
     <a class="cta" href="{home}#telecharger">{esc(u['beta'])}</a>
