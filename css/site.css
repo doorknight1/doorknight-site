@@ -68,6 +68,8 @@ nav .mini{font-family:var(--font-display);font-weight:700;font-size:.78rem;lette
 .hero{padding-block:56px 72px}
 .hero .wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"top trailer" "copy trailer";gap:0 40px;align-items:center}
 .hero .htop{grid-area:top;align-self:end}.hero .hcopy{grid-area:copy;align-self:start}.hero .trailer{grid-area:trailer}
+/* ordinateur : la colonne de gauche est centrée, comme le logo */
+@media(min-width:1001px){.hero .htop,.hero .hcopy{text-align:center}.hero .logo{margin-inline:auto}.hero .lede{margin-inline:auto}.hero .cta,.hero .social,.hero .slogos,.hero .counter{justify-content:center}.hero .social>span{text-align:center}}
 @media(max-width:1000px){.hero .wrap{grid-template-columns:1fr;grid-template-areas:"top" "trailer" "copy";text-align:center;gap:0}.hero .htop{margin-bottom:22px}.hero .hcopy{margin-top:26px}.hero .cta{justify-content:center}.hero .lede{margin-inline:auto}.hero .social{justify-content:center}.hero .trailer{max-width:760px;margin:8px auto 0}}
 .logo{width:min(520px,100%);margin:0;line-height:0;filter:drop-shadow(0 10px 40px rgba(240,196,90,.25))}
 .logo svg{display:block;width:100%;height:auto;overflow:visible;animation:logoFloat 5.5s ease-in-out infinite}
