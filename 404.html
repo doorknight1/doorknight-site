@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Porte introuvable · Door Knight</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#0d0b1c">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<style>
+@font-face{font-family:"Cinzel";font-weight:700;font-display:swap;src:url(/fonts/cinzel-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:400;font-display:swap;src:url(/fonts/inter-latin-400-normal.woff2) format("woff2")}
+:root{color-scheme:dark;--night:#0d0b1c;--ink:#f3eefc;--ink-dim:#a9a2c8;--gold:#f0c45a;--line:rgba(190,170,255,.14)}
+body{margin:0;min-height:100vh;display:grid;place-items:center;background:radial-gradient(ellipse 90% 70% at 50% 35%,#33276e 0%,#1c1745 45%,var(--night) 85%);color:var(--ink);font-family:Inter,system-ui,sans-serif;text-align:center;padding:24px 16px}
+main{max-width:560px}
+img{width:96px;height:auto;filter:drop-shadow(0 10px 30px rgba(240,196,90,.25))}
+h1{font-family:Cinzel,serif;font-size:clamp(1.6rem,5vw,2.4rem);margin:18px 0 8px}
+p{color:var(--ink-dim);line-height:1.6;margin:0 0 10px}
+.cta{display:flex;flex-wrap:wrap;justify-content:center;gap:12px;margin-top:26px}
+a.btn{font-family:Cinzel,serif;font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:14px 22px;border-radius:14px;color:#2a1a08;background:linear-gradient(180deg,#ffe9a8,#f0c45a 55%,#d19a33)}
+a.ghost{background:rgba(22,19,48,.7);color:var(--ink);border:1px solid var(--line)}
+small{display:block;margin-top:40px;color:var(--ink-dim)}
+</style>
+</head>
+<body>
+<main>
+  <img src="/img/icon.webp" alt="Icône de Door Knight">
+  <h1>Cette porte ne mène nulle part</h1>
+  <p>La page que tu cherches n'existe pas ou a été déplacée. Reviens à l'entrée du donjon.</p>
+  <p lang="en">This page doesn't exist. Head back to the start of the dungeon.</p>
+  <div class="cta">
+    <a class="btn" href="/">Retour à l'accueil</a>
+    <a class="btn ghost" href="/#telecharger">Rejoindre la bêta</a>
+    <a class="btn ghost" href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Discord</a>
+  </div>
+  <small>Door Knight · <a href="/en/" style="color:inherit">English</a> · <a href="/es/" style="color:inherit">Español</a> · <a href="/de/" style="color:inherit">Deutsch</a></small>
+</main>
+</body>
+</html>

@@ -1,0 +1,13 @@
+# Door Knight
+
+> Door Knight est un jeu mobile d'action-aventure gratuit (iPhone et iPad, bêta ouverte via TestFlight ; Android à venir) créé par FDA, studio français. Quatre héros (chevalier, archer, mage, samouraï), des portes à l'infini, 10 mondes, 10 gardiens, 96 sorts, un campement à bâtir et une arène. Classement en ligne mondial.
+
+- Site (français) : https://doorknight.games/
+- English: https://doorknight.games/en/
+- Español: https://doorknight.games/es/
+- Deutsch: https://doorknight.games/de/
+- Rejoindre la bêta (TestFlight) : https://testflight.apple.com/join/Jhxx6gj1
+- Discord : https://discord.gg/GNWHbMUqP3
+- Instagram : https://www.instagram.com/doorknight.games/
+- Mentions légales : https://doorknight.games/mentions-legales.html
+- Confidentialité : https://doorknight.games/politique-confidentialite.html

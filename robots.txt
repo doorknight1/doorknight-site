@@ -1,0 +1,5 @@
+# Door Knight — doorknight.games
+User-agent: *
+Allow: /
+
+Sitemap: https://doorknight.games/sitemap.xml
