@@ -1,4 +1,7 @@
 (function(){
+  // anti-cadre : le site refuse d'être affiché dans un cadre d'un autre site (clickjacking)
+  try{if(window.top!==window.self){window.top.location=window.self.location;}}catch(e){document.documentElement.style.display='none';}
+
   // les animations, la porte et la musique sont le cœur du site : elles restent actives même si l'ordinateur demande moins d'animations
   var reduce=false;
 

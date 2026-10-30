@@ -101,6 +101,9 @@ def layout(lang, title, desc, url, alt_url, body, ld, og_image, crumbs):
 <html lang="{lang}">
 <head>
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self'; media-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'none'; frame-src 'none'; manifest-src 'self'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>{esc(title)}</title>
 <meta name="description" content="{esc(desc)}">
@@ -149,6 +152,7 @@ def layout(lang, title, desc, url, alt_url, body, ld, og_image, crumbs):
   <div>© {TODAY[:4]} FDA · Door Knight</div>
   <div><a href="{home}">{esc(u['home'])}</a> · <a href="/{legal[0]}">{esc(u['legal'])}</a> · <a href="/{legal[1]}">{esc(u['privacy'])}</a></div>
 </div></footer>
+<script src="/js/legal.js" defer></script>
 </body>
 </html>
 """

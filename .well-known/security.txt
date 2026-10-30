@@ -1,0 +1,7 @@
+# Door Knight — signalement de faille de sécurité / security vulnerability disclosure
+Contact: mailto:fda.doorknight@gmail.com
+Contact: https://discord.gg/GNWHbMUqP3
+Expires: 2027-10-31T00:00:00.000Z
+Preferred-Languages: fr, en
+Canonical: https://doorknight.games/.well-known/security.txt
+Policy: https://doorknight.games/politique-confidentialite.html
