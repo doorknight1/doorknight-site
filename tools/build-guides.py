@@ -130,7 +130,7 @@ def layout(lang, title, desc, url, alt_url, body, ld, og_image, crumbs):
 </div></main>
 <footer><div class="wrap">
   <div>© {TODAY[:4]} FDA · Door Knight</div>
-  <div><a href="{home}">{esc(u['home'])}</a> · <a href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Discord</a> · <a href="https://www.instagram.com/doorknight.games/" target="_blank" rel="noopener">Instagram</a> · <a href="/{legal[0]}">{esc(u['legal'])}</a> · <a href="/{legal[1]}">{esc(u['privacy'])}</a></div>
+  <div><a href="{home}">{esc(u['home'])}</a> · <a href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Discord</a> · <a href="https://www.instagram.com/doorknight.games/" target="_blank" rel="noopener">Instagram</a> · <a href="https://www.youtube.com/@doorknightgames" target="_blank" rel="noopener">YouTube</a> · <a href="https://www.tiktok.com/@doorknight.games" target="_blank" rel="noopener">TikTok</a> · <a href="https://www.facebook.com/profile.php?id=61596186564868" target="_blank" rel="noopener">Facebook</a> · <a href="/{legal[0]}">{esc(u['legal'])}</a> · <a href="/{legal[1]}">{esc(u['privacy'])}</a></div>
 </div></footer>
 </body>
 </html>
