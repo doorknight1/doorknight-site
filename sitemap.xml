@@ -132,4 +132,96 @@
     <xhtml:link rel="alternate" hreflang="de" href="https://doorknight.games/politique-confidentialite-de.html"/>
     <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/politique-confidentialite.html"/>
   </url>
+  <!-- guides -->
+  <url>
+    <loc>https://doorknight.games/guide/bien-commencer.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/bien-commencer.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/getting-started.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/bien-commencer.html"/>
+  </url>
+  <url>
+    <loc>https://doorknight.games/en/guide/getting-started.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/getting-started.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/bien-commencer.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/bien-commencer.html"/>
+  </url>
+  <url>
+    <loc>https://doorknight.games/guide/quel-heros-choisir.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/quel-heros-choisir.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/which-hero.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/quel-heros-choisir.html"/>
+  </url>
+  <url>
+    <loc>https://doorknight.games/en/guide/which-hero.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/which-hero.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/quel-heros-choisir.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/quel-heros-choisir.html"/>
+  </url>
+  <url>
+    <loc>https://doorknight.games/guide/gardiens.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/gardiens.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/guardians.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/gardiens.html"/>
+  </url>
+  <url>
+    <loc>https://doorknight.games/en/guide/guardians.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/guardians.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/gardiens.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/gardiens.html"/>
+  </url>
+  <url>
+    <loc>https://doorknight.games/guide/installer-la-beta-testflight.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/installer-la-beta-testflight.html"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/install-beta-testflight.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/installer-la-beta-testflight.html"/>
+  </url>
+  <url>
+    <loc>https://doorknight.games/en/guide/install-beta-testflight.html</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/install-beta-testflight.html"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/installer-la-beta-testflight.html"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/installer-la-beta-testflight.html"/>
+  </url>
+  <url>
+    <loc>https://doorknight.games/guide/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/"/>
+  </url>
+  <url>
+    <loc>https://doorknight.games/en/guide/</loc>
+    <lastmod>2026-10-30</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/"/>
+    <xhtml:link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/"/>
+  </url>
+  <!-- /guides -->
 </urlset>

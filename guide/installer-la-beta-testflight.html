@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Installer la bêta de Door Knight sur iPhone et iPad avec TestFlight</title>
+<meta name="description" content="Pas à pas : installer TestFlight, ouvrir le lien de la bêta Door Knight, installer le jeu, recevoir les mises à jour et signaler un bug. Gratuit, sur iPhone et iPad.">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="theme-color" content="#0d0b1c">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="canonical" href="https://doorknight.games/guide/installer-la-beta-testflight.html">
+<link rel="alternate" hreflang="fr" href="https://doorknight.games/guide/installer-la-beta-testflight.html">
+<link rel="alternate" hreflang="en" href="https://doorknight.games/en/guide/install-beta-testflight.html">
+<link rel="alternate" hreflang="x-default" href="https://doorknight.games/guide/installer-la-beta-testflight.html">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="Door Knight">
+<meta property="og:locale" content="fr_FR">
+<meta property="og:url" content="https://doorknight.games/guide/installer-la-beta-testflight.html">
+<meta property="og:title" content="Installer la bêta de Door Knight sur iPhone et iPad avec TestFlight">
+<meta property="og:description" content="Pas à pas : installer TestFlight, ouvrir le lien de la bêta Door Knight, installer le jeu, recevoir les mises à jour et signaler un bug. Gratuit, sur iPhone et iPad.">
+<meta property="og:image" content="https://doorknight.games/img/shot-title.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Installer la bêta de Door Knight sur iPhone et iPad avec TestFlight">
+<meta name="twitter:description" content="Pas à pas : installer TestFlight, ouvrir le lien de la bêta Door Knight, installer le jeu, recevoir les mises à jour et signaler un bug. Gratuit, sur iPhone et iPad.">
+<meta name="twitter:image" content="https://doorknight.games/img/shot-title.webp">
+<script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": "Article", "@id": "https://doorknight.games/guide/installer-la-beta-testflight.html#article", "headline": "Installer la bêta de Door Knight sur iPhone et iPad avec TestFlight", "description": "Pas à pas : installer TestFlight, ouvrir le lien de la bêta Door Knight, installer le jeu, recevoir les mises à jour et signaler un bug. Gratuit, sur iPhone et iPad.", "inLanguage": "fr", "image": "https://doorknight.games/img/shot-title.webp", "datePublished": "2026-10-30", "dateModified": "2026-10-30", "author": {"@type": "Organization", "@id": "https://doorknight.games/#org", "name": "FDA", "url": "https://doorknight.games/", "logo": "https://doorknight.games/img/icon.webp"}, "publisher": {"@type": "Organization", "@id": "https://doorknight.games/#org", "name": "FDA", "url": "https://doorknight.games/", "logo": "https://doorknight.games/img/icon.webp"}, "mainEntityOfPage": "https://doorknight.games/guide/installer-la-beta-testflight.html", "about": {"@id": "https://doorknight.games/#game"}, "isPartOf": {"@id": "https://doorknight.games/#site"}}, {"@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Door Knight", "item": "https://doorknight.games/"}, {"@type": "ListItem", "position": 2, "name": "Guides", "item": "https://doorknight.games/guide/"}, {"@type": "ListItem", "position": 3, "name": "Installer la bêta de Door Knight sur iPhone et iPad avec TestFlight", "item": "https://doorknight.games/guide/installer-la-beta-testflight.html"}]}, {"@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Door Knight est-il sur l'App Store ?", "acceptedAnswer": {"@type": "Answer", "text": "Pas encore. Le jeu est en bêta ouverte, gratuite, via TestFlight sur iPhone et iPad. La sortie sur l'App Store et Google Play sera annoncée sur le Discord et sur Instagram."}}, {"@type": "Question", "name": "Les achats dans la bêta sont-ils payants ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Pendant la bêta, les achats intégrés sont en mode test : rien n'est débité."}}, {"@type": "Question", "name": "Combien de temps dure une version de test ?", "acceptedAnswer": {"@type": "Answer", "text": "90 jours. TestFlight t'avertit à chaque nouvelle version ; il suffit de l'installer pour continuer."}}]}]}</script>
+<style>
+@font-face{font-family:"Cinzel";font-weight:700;font-display:swap;src:url(/fonts/cinzel-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:400;font-display:swap;src:url(/fonts/inter-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:"Inter";font-weight:600;font-display:swap;src:url(/fonts/inter-latin-600-normal.woff2) format("woff2")}
+:root{color-scheme:dark;--night:#0d0b1c;--night-2:#161330;--line:rgba(190,170,255,.14);--ink:#f3eefc;--ink-dim:#a9a2c8;--gold:#f0c45a;--mint:#5fe0d0}
+*{box-sizing:border-box}
+body{margin:0;background:var(--night);color:var(--ink);font:17px/1.7 "Inter",system-ui,-apple-system,"Segoe UI",sans-serif;overflow-x:hidden}
+a{color:var(--gold)}
+.wrap{max-width:760px;margin:0 auto;padding:0 20px}
+nav{position:sticky;top:0;z-index:9;background:rgba(13,11,28,.85);backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+nav .wrap{max-width:1120px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding-block:12px}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink);font-family:"Cinzel",serif;font-weight:700;letter-spacing:.06em;font-size:.95rem}
+.brand img{width:34px;height:34px}
+nav .r{display:flex;align-items:center;gap:10px}
+nav .r a{text-decoration:none;color:var(--ink-dim);font-size:.92rem;font-weight:600}
+nav .r a.lang{border:1px solid var(--line);border-radius:10px;padding:6px 10px;color:var(--ink);font-size:.8rem}
+nav .r a.cta{background:var(--gold);color:#2a1a08;border-radius:10px;padding:8px 14px;font-family:"Cinzel",serif;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase}
+.hero{padding:56px 0 28px;background:radial-gradient(ellipse 90% 70% at 50% 0%,#33276e 0%,#1c1745 45%,var(--night) 85%)}
+.crumbs{font-size:.85rem;color:var(--ink-dim);margin-bottom:14px}
+.crumbs a{color:var(--ink-dim);text-decoration:none}
+.crumbs a:hover{color:var(--ink)}
+.eyebrow{font-size:.78rem;letter-spacing:.18em;text-transform:uppercase;color:var(--mint);font-weight:600;margin:0 0 10px}
+h1{font-family:"Cinzel",serif;font-size:clamp(1.7rem,4.5vw,2.6rem);line-height:1.15;margin:0 0 14px}
+.lede{font-size:1.15rem;color:var(--ink-dim);margin:0}
+.meta{font-size:.85rem;color:var(--ink-dim);margin-top:18px}
+article{padding:28px 0 60px}
+article h2{font-family:"Cinzel",serif;font-size:1.35rem;margin:38px 0 12px;padding-top:6px}
+article h2::after{content:"";display:block;height:3px;width:70px;margin-top:10px;border-radius:2px;background:linear-gradient(90deg,var(--gold),transparent)}
+article h3{font-size:1.05rem;margin:24px 0 8px}
+article p{margin:0 0 14px}
+article ul,article ol{padding-left:22px;margin:0 0 14px}
+article li{margin-bottom:6px}
+article figure{margin:22px 0}
+article figure img{width:100%;height:auto;max-height:420px;object-fit:cover;object-position:top;border-radius:16px;border:1px solid var(--line)}
+.tbl{overflow-x:auto;margin:0 0 18px}
+.tbl table{margin:0;min-width:520px}
+article figcaption{font-size:.85rem;color:var(--ink-dim);margin-top:8px;text-align:center}
+.tip{border:1px solid rgba(240,196,90,.4);background:rgba(240,196,90,.07);border-radius:14px;padding:14px 18px;margin:18px 0}
+.tip b{color:var(--gold)}
+table{width:100%;border-collapse:collapse;font-size:.95rem;margin:0 0 18px}
+th,td{text-align:left;padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+th{color:var(--gold);font-family:"Cinzel",serif;font-size:.85rem;letter-spacing:.04em}
+.cta-box{text-align:center;border:1px solid var(--line);background:var(--night-2);border-radius:20px;padding:28px 22px;margin:40px 0 0}
+.cta-box h2{margin:0 0 8px;font-size:1.3rem}.cta-box h2::after{display:none}
+.cta-box p{color:var(--ink-dim);margin:0 0 16px}
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:"Cinzel",serif;font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;text-decoration:none;padding:14px 22px;border-radius:14px;color:#2a1a08;background:linear-gradient(180deg,#ffe9a8,#f0c45a 55%,#d19a33);box-shadow:0 8px 24px rgba(240,196,90,.25);margin:4px}
+.btn.ghost{background:rgba(22,19,48,.7);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.cards{display:grid;gap:14px;margin:30px 0 0}
+.card{display:block;text-decoration:none;color:var(--ink);border:1px solid var(--line);background:var(--night-2);border-radius:18px;padding:20px 22px;transition:border-color .2s,transform .15s}
+.card:hover{border-color:var(--gold);transform:translateY(-2px)}
+.card b{font-family:"Cinzel",serif;font-size:1.05rem;display:block;margin-bottom:6px}
+.card span{color:var(--ink-dim);font-size:.95rem}
+.more{margin-top:40px}
+.more h2{font-size:1.2rem}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--ink-dim);font-size:.9rem}
+footer .wrap{max-width:1120px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:10px}
+footer a{color:var(--ink-dim)}
+@media(max-width:600px){nav .r a.hide{display:none}.brand span{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="wrap">
+  <a class="brand" href="/"><img src="/img/icon.webp" alt=""><span>Door Knight</span></a>
+  <div class="r">
+    <a class="hide" href="/#heros">Héros</a>
+    <a class="hide" href="/guide/">Guides</a>
+    <a class="hide" href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Discord</a>
+    <a class="lang" href="https://doorknight.games/en/guide/install-beta-testflight.html" hreflang="en" lang="en">EN</a>
+    <a class="cta" href="/#telecharger">Bêta</a>
+  </div>
+</div></nav>
+<header class="hero"><div class="wrap">
+  <p class="crumbs"><a href="https://doorknight.games/">Door Knight</a> › <a href="https://doorknight.games/guide/">Guides</a> › Installer la bêta Door Knight sur iPhone et iPad (TestFlight)</p>
+  <p class="eyebrow">Installation</p>
+  <h1>Installer la bêta Door Knight sur iPhone et iPad (TestFlight)</h1>
+  <p class="lede">Trois étapes, cinq minutes. Et tout ce qu&#x27;il faut savoir sur les mises à jour, les achats en mode test et Android.</p>
+  <p class="meta">Mis à jour le 2026-10-30 · par FDA</p>
+</div></header>
+<main><div class="wrap">
+<article>
+<figure><img src="/img/shot-title.webp" alt="L&#x27;écran titre de Door Knight"></figure>
+
+<p>Door Knight n'est pas encore sur l'App Store. En attendant, le jeu est ouvert à tous via <strong>TestFlight</strong>, l'application officielle d'Apple pour tester les applications avant leur sortie. Tu joues à la vraie version du jeu, et tes retours aident à la finir.</p>
+
+<h2>Étape 1 · Installe TestFlight</h2>
+<p>Ouvre l'App Store sur ton iPhone ou ton iPad, cherche <strong>TestFlight</strong> (éditeur : Apple) et installe-le. C'est gratuit. Si tu l'as déjà, passe à l'étape 2.</p>
+
+<h2>Étape 2 · Ouvre le lien de la bêta</h2>
+<p>Depuis ton iPhone ou iPad, ouvre ce lien : <a href="https://testflight.apple.com/join/Jhxx6gj1" target="_blank" rel="noopener">testflight.apple.com/join/Jhxx6gj1</a>. TestFlight s'ouvre et te propose de rejoindre la bêta de Door Knight. Accepte.</p>
+
+<h2>Étape 3 · Installe et joue</h2>
+<p>Appuie sur <strong>Installer</strong> dans TestFlight. L'icône de Door Knight apparaît sur ton écran d'accueil comme n'importe quel jeu. Lance-le, crée ton héros avec un pseudo, et ouvre la première porte.</p>
+
+<h2>Les mises à jour</h2>
+<p>TestFlight t'avertit à chaque nouvelle version. Installe-la pour continuer à jouer : chaque version de test dure 90 jours. Les nouveautés de chaque mise à jour sont publiées dans le salon #nouveautés du Discord.</p>
+
+<h2>Les achats dans la bêta</h2>
+<p>Les achats intégrés sont en <strong>mode test</strong> pendant la bêta : rien n'est débité, jamais. Tu peux les essayer librement.</p>
+
+<h2>Signaler un bug</h2>
+<p>Deux façons : fais une capture d'écran dans le jeu et envoie-la depuis TestFlight (il le propose automatiquement après une capture), ou poste-la dans le forum <strong>#bugs</strong> du Discord avec ton modèle de téléphone et ton pseudo. Un post par bug, en vérifiant d'abord qu'il n'existe pas déjà.</p>
+
+<h2>Et sur Android ?</h2>
+<p>La bêta est pour l'instant réservée à l'iPhone et à l'iPad. La version Android est en préparation et sortira sur Google Play ; la date sera annoncée en premier sur le Discord et sur Instagram.</p>
+
+<div class="tip"><b>Ça ne marche pas ?</b> Vérifie que tu ouvres le lien depuis l'appareil où TestFlight est installé (pas depuis un ordinateur), et que ton iPhone ou iPad est à jour. Sinon, demande dans #taverne sur le Discord.</div>
+
+<div class="cta-box">
+  <h2>Prêt à ouvrir la première porte ?</h2>
+  <p>Door Knight est gratuit, en bêta ouverte sur iPhone et iPad via TestFlight. Android arrive sur Google Play.</p>
+  <a class="btn" href="https://testflight.apple.com/join/Jhxx6gj1" target="_blank" rel="noopener">Rejoindre la bêta</a>
+  <a class="btn ghost" href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Rejoindre le Discord</a>
+</div>
+</article>
+<section class="more"><h2>Les autres guides</h2><div class="cards"><a class="card" href="/guide/bien-commencer.html"><b>Door Knight : le guide du débutant pour bien commencer</b><span>Comment débuter Door Knight : les contrôles à un pouce, le choix du premier héros, les sorts dès le niveau 10, le butin, le campement et le premier gardien à la porte 10.</span></a><a class="card" href="/guide/quel-heros-choisir.html"><b>Chevalier, Archer, Mage ou Samouraï : quel héros choisir dans Door Knight ?</b><span>Comparatif des 4 classes de Door Knight : style de combat, écoles de sorts, attaque spéciale, armes, et pour quel type de joueur chacune est faite.</span></a><a class="card" href="/guide/gardiens.html"><b>Les 10 gardiens de Door Knight : qui ils sont et comment les aborder</b><span>Du Roi Gluant au Dragon Ancestral : les 10 gardiens de Door Knight, leur monde, leur mini-boss, leur réplique, et les règles qui valent contre tous.</span></a></div></section>
+</div></main>
+<footer><div class="wrap">
+  <div>© 2026 FDA · Door Knight</div>
+  <div><a href="/">Accueil</a> · <a href="https://discord.gg/GNWHbMUqP3" target="_blank" rel="noopener">Discord</a> · <a href="https://www.instagram.com/doorknight.games/" target="_blank" rel="noopener">Instagram</a> · <a href="/mentions-legales.html">Mentions légales</a> · <a href="/politique-confidentialite.html">Confidentialité</a></div>
+</div></footer>
+</body>
+</html>

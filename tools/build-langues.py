@@ -68,6 +68,9 @@ JS = r"""
   document.querySelectorAll('img[src]').forEach(im => { const s = im.getAttribute('src'), n2 = img(s); if (n2 !== s) im.setAttribute('src', n2); });
   document.querySelectorAll('a[href*="mentions-legales"],a[href*="politique-confidentialite"]').forEach(a => {
     a.setAttribute('href', a.getAttribute('href').replace(/(-(en|es|de))?\.html$/, '') + '-' + l + '.html'); });
+  // guides : français → anglais pour /en/ (espagnol et allemand renvoient aussi vers l'anglais)
+  const G = {'/guide/':'/en/guide/','/guide/bien-commencer.html':'/en/guide/getting-started.html','/guide/quel-heros-choisir.html':'/en/guide/which-hero.html','/guide/gardiens.html':'/en/guide/guardians.html','/guide/installer-la-beta-testflight.html':'/en/guide/install-beta-testflight.html'};
+  document.querySelectorAll('a[href^="/guide/"]').forEach(a => { const h = a.getAttribute('href'); if (G[h]) a.setAttribute('href', G[h]); });
   // en-tête propre à la langue
   const h = document.documentElement; h.setAttribute('lang', l); h.setAttribute('data-lang', l);
   document.title = meta.title;
