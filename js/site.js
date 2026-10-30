@@ -218,9 +218,12 @@
 
   // poussière magique
   var c=document.getElementById('dust'),ctx=c.getContext('2d'),P=[],W,H2;
-  function size(){W=c.width=c.offsetWidth*devicePixelRatio;H2=c.height=c.offsetHeight*devicePixelRatio;}
+  var ddpr=Math.min(matchMedia('(hover:none)').matches?1.5:2,devicePixelRatio||1),dW=0,dH=0,dustOn=true;
+  function size(){var w=c.offsetWidth,h=c.offsetHeight;if(w===dW&&Math.abs(h-dH)<160)return;dW=w;dH=h;W=c.width=Math.round(w*ddpr);H2=c.height=Math.round(h*ddpr);}
   size();addEventListener('resize',size);
-  function spawn(){return{x:Math.random()*W,y:H2+10,r:(.8+Math.random()*1.8)*devicePixelRatio,v:(.15+Math.random()*.4)*devicePixelRatio,d:(Math.random()-.5)*.3,a:.3+Math.random()*.6,g:Math.random()<.3};}
+  if('IntersectionObserver' in window)new IntersectionObserver(function(en){var was=dustOn;dustOn=en[0].isIntersecting;document.querySelector('.hero').classList.toggle('off',!dustOn);if(dustOn&&!was)startDust();}).observe(c);
+  var dRun=false;function startDust(){if(!dRun&&!reduce&&dustOn&&!document.hidden){dRun=true;requestAnimationFrame(tick);}}
+  function spawn(){return{x:Math.random()*W,y:H2+10,r:(.8+Math.random()*1.8)*ddpr,v:(.15+Math.random()*.4)*ddpr,d:(Math.random()-.5)*.3,a:.3+Math.random()*.6,g:Math.random()<.3};}
   for(var i=0;i<70;i++){var p=spawn();p.y=Math.random()*H2;P.push(p);}
   function tick(){
     ctx.clearRect(0,0,W,H2);
@@ -230,9 +233,10 @@
       p.y-=p.v;p.x+=p.d;p.a-=.001;
       if(p.y<-10||p.a<=0)P[i]=spawn();
     }
-    if(!reduce)requestAnimationFrame(tick);
+    if(!reduce&&dustOn&&!document.hidden)requestAnimationFrame(tick);else dRun=false;
   }
-  tick();
+  dRun=true;tick();
+  document.addEventListener('visibilitychange',startDust);
 
   // cinématique d'ouverture : une fois par visite (bouton « Voir la cinématique » pour la revoir)
   var done=[];function introDone(){var f=done;done=null;if(f)f.forEach(function(fn){fn()});}
@@ -371,7 +375,10 @@
       setTimeout(function(){try{ac.close&&ac.close();}catch(e){}},900);}catch(e){}}};
   }
   // la porte s'affiche à chaque arrivée ; en revenant des pages légales du site, on entre directement
-  var seen=false;try{var ref=document.referrer||'';seen=(ref.indexOf(location.origin)===0&&/(mentions-legales|politique-confidentialite)/.test(ref))||sessionStorage.getItem('dkPortal')==='skip';}catch(e){}
+  // la porte ne se rejoue pas : ni après un rechargement (l'iPhone recharge parfois l'onglet en plein défilement), ni au retour arrière, ni une 2e fois dans le même onglet
+  var seen=false;try{var ref=document.referrer||'';var nav=(performance.getEntriesByType&&performance.getEntriesByType('navigation')[0]||{}).type||'';
+    seen=(ref.indexOf(location.origin)===0&&/(mentions-legales|politique-confidentialite)/.test(ref))||/^(reload|back_forward)$/.test(nav)||/^(skip|seen)$/.test(sessionStorage.getItem('dkPortal')||'');}catch(e){}
+  if(!seen){try{sessionStorage.setItem('dkPortal','seen');}catch(e){}}
   if(seen)DKA.resume();
   if(!reduce&&!seen)playPortal();else introDone();
   var rp=document.getElementById('replayIntro');
@@ -415,7 +422,7 @@
   if(!reduce){
     var sc=document.createElement('canvas');sc.id='sparks';sc.setAttribute('aria-hidden','true');document.body.appendChild(sc);
     var sx=sc.getContext('2d'),S=[],run=false,dpr=Math.min(2,devicePixelRatio||1);
-    function ss(){sc.width=innerWidth*dpr;sc.height=innerHeight*dpr;}ss();addEventListener('resize',ss);
+    var sw=0;function ss(){if(innerWidth===sw&&sc.height>=innerHeight*dpr)return;sw=innerWidth;sc.width=innerWidth*dpr;sc.height=Math.max(innerHeight,screen.height||0)*dpr;}ss();addEventListener('resize',ss);
     function frame(){
       sx.clearRect(0,0,sc.width,sc.height);
       for(var i=S.length-1;i>=0;i--){var q=S[i];q.x+=q.vx;q.y+=q.vy;q.vy+=.12*dpr;q.l-=1;
