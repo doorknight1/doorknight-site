@@ -1,5 +1,5 @@
 {
   "_info": "Version minimale du jeu Door Knight. Si le build installé est plus petit que minBuild, le jeu est bloqué avec un bouton de mise à jour. 0 = pas de blocage.",
-  "ios": { "minBuild": 0, "url": "https://testflight.apple.com/join/Jhxx6gj1" },
+  "ios": { "minBuild": 21, "url": "https://testflight.apple.com/join/Jhxx6gj1" },
   "android": { "minBuild": 0, "url": "https://play.google.com/store/apps/details?id=fr.doorknight.app" }
 }
